@@ -299,7 +299,7 @@ public class Asset extends javax.swing.JPanel {
     	assetName_asset.setText(data.get(1));
     	
     	try {
-			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.get(4));
+			java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(4));
 			buyDate_asset.setDate(date);
 		} catch (ParseException e) {
 			

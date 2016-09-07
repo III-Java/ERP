@@ -460,7 +460,7 @@ public class Admin extends javax.swing.JPanel {
         adminPanel.add(pickingN_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 382, 59, 31));
 
         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        jLabel3.setText("最新消息");
+        jLabel3.setText("網站新聞");
         jLabel3.setPreferredSize(new java.awt.Dimension(75, 21));
         adminPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 385, -1, -1));
 
@@ -597,14 +597,18 @@ public class Admin extends javax.swing.JPanel {
     	//get remark content
     	note = note_admin.getText();    	
     	//combobox get selected & use combobox get empName----->apply in actionListener  
-    	if(employee.equals("")||attendance.equals("")||achieve.equals("")||payroll.equals("")||purchase.equals("")||
-    			attendance.equals("")||achieve.equals("")||payroll.equals("")||purchase.equals("")||product.equals("")||
-    			material.equals("")||orderlist.equals("")||orderitem.equals("")||issue.equals("")||payablelist.equals("")||
-    			asset.equals("")||member.equals("")||vendor.equals("")||admin.equals("")||billboard.equals("")){
-    		isRightData = false;
-    	}
-    	else{
-    		isRightData = true;
+    	try{
+	    	if(employee.equals("")||attendance.equals("")||achieve.equals("")||payroll.equals("")||purchase.equals("")||
+	    			attendance.equals("")||achieve.equals("")||payroll.equals("")||purchase.equals("")||product.equals("")||
+	    			material.equals("")||orderlist.equals("")||orderitem.equals("")||issue.equals("")||payablelist.equals("")||
+	    			asset.equals("")||member.equals("")||vendor.equals("")||admin.equals("")||billboard.equals("")){
+	    		isRightData = false;
+	    	}
+	    	else{
+	    		isRightData = true;
+	    	}
+    	}catch(Exception a){
+    		System.out.println("getSelect null xx");
     	}
     	return isRightData;
     }

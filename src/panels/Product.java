@@ -33,7 +33,6 @@ public class Product extends javax.swing.JPanel {
 	private String price;
 	private String category;
 	private String note;
-
 	private Properties prop;
 	private Connection con;
 	private PreparedStatement pstmt = null;
@@ -307,6 +306,7 @@ public class Product extends javax.swing.JPanel {
 	}
 
 	protected LinkedList<String[]> queryData() {
+		clearInput();
 		LinkedList<String[]> data = new LinkedList<>();
 		try {
 			pstmt = con.prepareStatement("SELECT * FROM product");

@@ -192,7 +192,7 @@ public class erp_frame extends JFrame {
 		setLocationRelativeTo(null);// 置中
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
-		setTitle("公司名稱 : 休閒小棧  使用者代碼 : "+userID);
+		setTitle("公司名稱 : 心飲茗茶  使用者代碼 : "+userID);
 
 		DefaultTableCellRenderer tableAlign = (DefaultTableCellRenderer) table_firmData.getTableHeader()
 				.getDefaultRenderer(); // 欄位置中
@@ -618,7 +618,7 @@ public class erp_frame extends JFrame {
 			btnInsert.setVisible(false);
 			btnModify.setVisible(false);
 			btnClear.setToolTipText("顯示報表");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/table.jpg")));
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/table.png")));
 		} else {
 			text_search.setVisible(true);
 			label_search.setVisible(true);
@@ -1618,22 +1618,22 @@ public class erp_frame extends JFrame {
 		}
 	}
 	//宜宏
-		private void CreateOutputDir() {
-			File theDir = new File("D:/ERPOutputFile");
-			// if the directory does not exist, create it
-			if (!theDir.exists()) {
-				String directoryName = "D:/ERP_Output";
-				System.out.println("creating directory: " + directoryName);
-				boolean result = false;
+	private void CreateOutputDir() {
+		File theDir = new File("D:/ERPOutputFile");
+		// if the directory does not exist, create it
+		if (!theDir.exists()) {
+			String directoryName = "D:/ERP_Output";
+			System.out.println("creating directory: " + directoryName);
+			boolean result = false;
 
-				try {
-					theDir.mkdir();
-					result = true;
-				} catch (SecurityException se) {
-					System.out.println(se.toString());
-				}
+			try {
+				theDir.mkdir();
+				result = true;
+			} catch (SecurityException se) {
+				System.out.println(se.toString());
 			}
 		}
+	}
 
 	// Generate an Microsoft Excel file form table data
 	// This need Jakarta POI library
@@ -1948,6 +1948,7 @@ public class erp_frame extends JFrame {
 	// Change the input view area
 	//9/4 add authority
 	private void treeFolderValueChanged(javax.swing.event.TreeSelectionEvent evt) {// GEN-FIRST:event_treeFolderValueChanged
+		try{
 		if (treeFolder.getSelectionPath().getLastPathComponent().toString() != null) {
 			setButtonVisible();
 			path = treeFolder.getSelectionPath().getLastPathComponent().toString();
@@ -2173,20 +2174,35 @@ public class erp_frame extends JFrame {
 		     		break;
 		     		//宜宏
 				case "營利報表":
-					nowLayout.show(panel_dataInput, "profit");
-					profit.getYears();
+					if((_emp_autority.get("profit")).equals("yes")){
+						enableBtn();
+						nowLayout.show(panel_dataInput, "profit");
+						profit.getYears();
+					}else{
+						disableBtn();
+					}
 					break;
 				//宜宏
 				case "銷售報表":
-					nowLayout.show(panel_dataInput, "salesReport");
+					if((_emp_autority.get("sales")).equals("yes")){
+						enableBtn();
+						nowLayout.show(panel_dataInput, "salesReport");
+					}else{
+						disableBtn();					
+					}
 					break;
 				//宜宏
 				case "網站新聞表":
-					nowLayout.show(panel_dataInput, "webNews");
-					tableModel = new myTableModel(webNewsFields);
-					table_firmData.setModel(tableModel);
-					data = webNews.queryData();
-					tableModel.fireTableDataChanged();
+					if((_emp_autority.get("webnews")).equals("yes")){
+						enableBtn();
+						nowLayout.show(panel_dataInput, "webNews");
+						tableModel = new myTableModel(webNewsFields);
+						table_firmData.setModel(tableModel);
+						data = webNews.queryData();
+						tableModel.fireTableDataChanged();
+					}else{
+						disableBtn();					
+					}
 					break;
 				case "人事資料庫":case "採購資料庫":case "產品資料庫":
 		    	case "庫存資料庫":case "銷售資料庫":case "會計資料庫":
@@ -2200,7 +2216,9 @@ public class erp_frame extends JFrame {
 		    		break;
 			}
 		}
-
+		}catch(Exception a){
+			System.out.println("path null");
+		}
 	}
 
 	// Display user select table data in input area

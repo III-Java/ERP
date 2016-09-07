@@ -234,7 +234,7 @@ public class Picking extends javax.swing.JPanel {
     	pickingqty.setValue(Integer.parseInt(data.get(2)));		
     	pickingUnit.setSelectedItem(data.get(3));
 		try {
-			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.get(5));
+			java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(5));
 			pickingDate.setDate(date);
 		} catch (ParseException e) {
 			

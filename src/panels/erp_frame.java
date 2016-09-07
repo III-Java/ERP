@@ -2358,7 +2358,7 @@ public class erp_frame extends JFrame {
 					data = vendor.queryData();
 					tableModel.fireTableDataChanged();
 				}
-
+				break;
 			case "帳號管理表":
 				if (text_search.getText() != "") {
 					data.clear();

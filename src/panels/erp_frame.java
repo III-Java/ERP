@@ -114,59 +114,7 @@ public class erp_frame extends JFrame {
 		checkAuthority();//確認登入員工權限(9/4)
 		disableBtn();//權限未判定前按鈕失效(9/4)
 		table_firmData.setRowHeight(30);
-		// 宜宏
-		empty = new EmptyPanel();
-		employee = new Employee();
-		attendance = new Attendance();
-		payRoll = new PayRoll();
-		achievement = new Achievement();
-		material = new Material();
-		profit = new ProfitReport();
-		// 振明
-		product = new Product();
-		member = new Member();
-		// 哲浩
-		orderlist = new OrderList();
-		orderitem = new OrderItem();
-		issue = new Issue();
-		vendor = new Vendor();
-		salesReport = new SalesReport();
-		// Veronica edit(9/4)
-//		admin = new Admin();
-//		asset = new Asset();
-//		billboard = new Billboard();
-//		payableList = new PayableList();
-//		purchase = new Purchase();
-//		department = new Department();
-//		picking = new Picking();
-		// 宜宏
-		panel_dataInput.add("empty", empty);
-		panel_dataInput.add("employee", employee);
-		panel_dataInput.add("attendance", attendance);
-		panel_dataInput.add("payRoll", payRoll);
-		panel_dataInput.add("achievement", achievement);
-		panel_dataInput.add("material", material);
-		panel_dataInput.add("profit", profit);
-		// 振明
-		panel_dataInput.add("product", product);
-		panel_dataInput.add("member", member);
-		// 哲浩
-		panel_dataInput.add("orderList", orderlist);
-		panel_dataInput.add("orderItem", orderitem);
-		panel_dataInput.add("issue", issue);
-		panel_dataInput.add("vendor", vendor);
-		panel_dataInput.add("salesReport", salesReport);
-		// Veronica edit
-		panel_dataInput.add(admin, "admin");
-		panel_dataInput.add(asset, "asset");
-		panel_dataInput.add(billboard, "billboard");
-		panel_dataInput.add(payableList, "payableList");
-		panel_dataInput.add(purchase, "purchase");
-		panel_dataInput.add(department, "department");
-		panel_dataInput.add(picking,"picking");
-		// setExtendedState(JFrame.MAXIMIZED_BOTH);
-		data = new LinkedList<>();
-
+		
 	}
 
 	public erp_frame(String loginID,Connection connection) {	
@@ -179,21 +127,21 @@ public class erp_frame extends JFrame {
 		table_firmData.setRowHeight(30);
 		// 宜宏
 		empty = new EmptyPanel();
-		employee = new Employee();
-		attendance = new Attendance();
-		payRoll = new PayRoll();
-		achievement = new Achievement();
-		material = new Material();
-		profit = new ProfitReport();
+		employee = new Employee(conn);
+		attendance = new Attendance(conn);
+		payRoll = new PayRoll(conn);
+		achievement = new Achievement(conn);
+		material = new Material(conn);
+		profit = new ProfitReport(conn);
 		// 振明
-		product = new Product();
-		member = new Member();
+		product = new Product(conn);
+		member = new Member(conn);
 		// 哲浩
-		orderlist = new OrderList();
-		orderitem = new OrderItem();
-		issue = new Issue();
-		vendor = new Vendor();
-		salesReport = new SalesReport();
+		orderlist = new OrderList(conn);
+		orderitem = new OrderItem(conn);
+		issue = new Issue(conn);
+		vendor = new Vendor(conn);
+		salesReport = new SalesReport(conn);
 		// Veronica edit 9/4
 		admin = new Admin(conn);
 		asset = new Asset(conn);
@@ -238,7 +186,7 @@ public class erp_frame extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);// 置中
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/drink.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
 		setTitle("公司名稱 : 休閒小棧  使用者代碼 : "+userID);
 
 		DefaultTableCellRenderer tableAlign = (DefaultTableCellRenderer) table_firmData.getTableHeader()
@@ -428,7 +376,7 @@ public class erp_frame extends JFrame {
 		JToolBar.setPreferredSize(new java.awt.Dimension(80, 50));
 
 		btnFirstData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnFirstData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/left-arrow-2.png"))); // NOI18N
+		btnFirstData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/left-arrow-2.png"))); // NOI18N
 		btnFirstData.setToolTipText("第一筆");
 		btnFirstData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnFirstData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -439,7 +387,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnFirstData);
 
 		btnPreData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnPreData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/left-arrow.png"))); // NOI18N
+		btnPreData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/left-arrow.png"))); // NOI18N
 		btnPreData.setToolTipText("上一筆");
 		btnPreData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnPreData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -450,7 +398,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnPreData);
 
 		btnNextData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnNextData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/right-arrow.png"))); // NOI18N
+		btnNextData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/right-arrow.png"))); // NOI18N
 		btnNextData.setToolTipText("下一筆");
 		btnNextData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnNextData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -461,7 +409,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnNextData);
 
 		btnInsert.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/insert.png"))); // NOI18N
+		btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/insert.png"))); // NOI18N
 		btnInsert.setToolTipText("新增資料");
 		btnInsert.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnInsert.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -472,7 +420,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnInsert);
 
 		btnModify.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
+		btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/edit.png"))); // NOI18N
 		btnModify.setToolTipText("修改資料");
 		btnModify.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnModify.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -484,7 +432,7 @@ public class erp_frame extends JFrame {
 		btnModify.getAccessibleContext().setAccessibleDescription("");
 
 		btnClear.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png"))); // NOI18N
+		btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png"))); // NOI18N
 		btnClear.setToolTipText("清空輸入");
 		btnClear.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -495,7 +443,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnClear);
 
 		btnExport.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/export.png"))); // NOI18N
+		btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/export.png"))); // NOI18N
 		btnExport.setToolTipText("匯出");
 		btnExport.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnExport.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -506,7 +454,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnExport);
 
 		btnDelete.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
+		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/delete.png"))); // NOI18N
 		btnDelete.setToolTipText("刪除資料");
 		btnDelete.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -516,7 +464,7 @@ public class erp_frame extends JFrame {
 		});
 		JToolBar.add(btnDelete);
 
-		btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Logout.png"))); // NOI18N
+		btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/Logout.png"))); // NOI18N
 		btnLogout.setToolTipText("登出");
 		btnLogout.setFocusable(false);
 		btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -662,7 +610,7 @@ public class erp_frame extends JFrame {
 			btnInsert.setVisible(false);
 			btnModify.setVisible(false);
 			btnClear.setToolTipText("顯示報表");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/table.png")));//(9/4)改table.png
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/table.png")));//(9/4)改table.png
 		} else {
 			text_search.setVisible(true);
 			label_search.setVisible(true);
@@ -672,7 +620,7 @@ public class erp_frame extends JFrame {
 			btnInsert.setVisible(true);
 			btnModify.setVisible(true);
 			btnClear.setToolTipText("清空輸入");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png")));
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png")));
 		}
 
 	}

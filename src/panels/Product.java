@@ -65,7 +65,6 @@ public class Product extends javax.swing.JPanel {
         label_productNum.setText("產品編號");
 
         label_pNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        label_pNum.setText("show test");
 
         label_productName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_productName.setText("品名");
@@ -88,7 +87,7 @@ public class Product extends javax.swing.JPanel {
         label_category.setText("類別");
 
         CBcategory.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        CBcategory.setModel(new DefaultComboBoxModel(new String[] {"原味茶系列", "鮮奶茶系列", "拿鐵系列", "美味抹茶系列", "100%鮮果系列"}));
+        CBcategory.setModel(new DefaultComboBoxModel(new String[] {"","原味茶系列", "鮮奶茶系列", "拿鐵系列", "美味抹茶系列", "100%鮮果系列"}));
 
         text_productName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 
@@ -233,7 +232,6 @@ public class Product extends javax.swing.JPanel {
 		text_productName.setText("");
 		text_price.setText("");
 		CBcategory.setSelectedIndex(0);
-		;
 		text_note.setText("");
 	}
 

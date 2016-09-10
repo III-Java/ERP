@@ -79,6 +79,7 @@ public class Picking extends javax.swing.JPanel {
         pickingid.setForeground(new java.awt.Color(0, 0, 153));
         jPanel1.add(pickingid, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 53, 180, 30));
 
+        pickingDate.setDateFormatString("yyyy/MM/dd");
         pickingDate.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         jPanel1.add(pickingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 282, 30));
 

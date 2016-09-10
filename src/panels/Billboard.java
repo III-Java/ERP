@@ -69,6 +69,7 @@ public class Billboard extends javax.swing.JPanel {
         billboardLabel03.setText("公告維護者");
         add(billboardLabel03, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 189, -1, 30));
 
+        issueDate_billboard.setDateFormatString("yyyy/MM/dd");
         issueDate_billboard.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(issueDate_billboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 123, 180, 30));
 

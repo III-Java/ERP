@@ -80,6 +80,7 @@ public class Asset extends javax.swing.JPanel {
         assetLabel04.setText("使用部門");
         add(assetLabel04, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 264, -1, 30));
 
+        buyDate_asset.setDateFormatString("yyyy/MM/dd");
         buyDate_asset.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
         add(buyDate_asset, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 194, 180, 30));
 

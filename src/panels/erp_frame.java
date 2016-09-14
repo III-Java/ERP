@@ -3,6 +3,7 @@
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,6 +49,7 @@ public class erp_frame extends JFrame {
 	private Achievement achievement;
 	private Material material;
 	private ProfitReport profit;
+	private WebNews webNews;
 	// 振明
 	private Product product;
 	private Member member;
@@ -76,10 +78,12 @@ public class erp_frame extends JFrame {
 	String[] attendanceFields = { "編號", "員工編號", "上班打卡", "下班打卡", "假別", "部門", "備註" };
 	String[] achivevmentFields = { "編號", "員工編號", "年月份", "考績", "備註" };
 	String[] payRollFields = { "員工編號", "薪資", "備註" };
-	String[] materialFields = { "原料編號", "原料名稱", "數量","單位","進貨廠商編號", "備註" };
+	String[] materialFields = { "原料編號", "原料名稱", "數量", "單位", "進貨廠商編號", "備註" };
 	String[] salesFields = { "訂單編號", "產品編號", "產品名稱", "數量", "單價", "小計" };
-	String[] expendFields = { "下單日期", "訂單編號", "原料編號", "廠商編號", "數量", "價格","小計" ,"打單員工", "備註" };
-	// 振明
+	String[] expendFields = { "下單日期", "訂單編號", "原料編號", "廠商編號", "數量", "價格", "小計", "打單員工", "備註" };
+	String[] webNewsFields = { "編號", "標題", "內容", "圖檔名", "發布", "備註" };
+	String[] emptyProfitFields = {""};  // 宜宏 0908
+		// 振明
 	String[] memberFields = { "客戶編號", "客戶密碼", "客戶名稱", "電話", "性別", "地址", "備註" };
 	String[] productFields = { "產品編號", "品名", "單價", "類別", "備註" };
 
@@ -108,66 +112,14 @@ public class erp_frame extends JFrame {
 	private Map<String, String> _emp_autority = new HashMap<>();
 	
 
-	public erp_frame() {		
-		initComponents();
-		init();
-		checkAuthority();//確認登入員工權限(9/4)
-		disableBtn();//權限未判定前按鈕失效(9/4)
-		table_firmData.setRowHeight(30);
-		// 宜宏
-		empty = new EmptyPanel();
-		employee = new Employee();
-		attendance = new Attendance();
-		payRoll = new PayRoll();
-		achievement = new Achievement();
-		material = new Material();
-		profit = new ProfitReport();
-		// 振明
-		product = new Product();
-		member = new Member();
-		// 哲浩
-		orderlist = new OrderList();
-		orderitem = new OrderItem();
-		issue = new Issue();
-		vendor = new Vendor();
-		salesReport = new SalesReport();
-		// Veronica edit(9/4)
-//		admin = new Admin();
-//		asset = new Asset();
-//		billboard = new Billboard();
-//		payableList = new PayableList();
-//		purchase = new Purchase();
-//		department = new Department();
-//		picking = new Picking();
-		// 宜宏
-		panel_dataInput.add("empty", empty);
-		panel_dataInput.add("employee", employee);
-		panel_dataInput.add("attendance", attendance);
-		panel_dataInput.add("payRoll", payRoll);
-		panel_dataInput.add("achievement", achievement);
-		panel_dataInput.add("material", material);
-		panel_dataInput.add("profit", profit);
-		// 振明
-		panel_dataInput.add("product", product);
-		panel_dataInput.add("member", member);
-		// 哲浩
-		panel_dataInput.add("orderList", orderlist);
-		panel_dataInput.add("orderItem", orderitem);
-		panel_dataInput.add("issue", issue);
-		panel_dataInput.add("vendor", vendor);
-		panel_dataInput.add("salesReport", salesReport);
-		// Veronica edit
-		panel_dataInput.add(admin, "admin");
-		panel_dataInput.add(asset, "asset");
-		panel_dataInput.add(billboard, "billboard");
-		panel_dataInput.add(payableList, "payableList");
-		panel_dataInput.add(purchase, "purchase");
-		panel_dataInput.add(department, "department");
-		panel_dataInput.add(picking,"picking");
-		// setExtendedState(JFrame.MAXIMIZED_BOTH);
-		data = new LinkedList<>();
-
-	}
+//	public erp_frame() {		
+//		initComponents();
+//		init();
+//		checkAuthority();//確認登入員工權限(9/4)
+//		disableBtn();//權限未判定前按鈕失效(9/4)
+//		table_firmData.setRowHeight(30);
+//		
+//	}
 
 	public erp_frame(String loginID,Connection connection) {	
 		this.conn =connection;		
@@ -179,21 +131,22 @@ public class erp_frame extends JFrame {
 		table_firmData.setRowHeight(30);
 		// 宜宏
 		empty = new EmptyPanel();
-		employee = new Employee();
-		attendance = new Attendance();
-		payRoll = new PayRoll();
-		achievement = new Achievement();
-		material = new Material();
-		profit = new ProfitReport();
+		employee = new Employee(conn);
+		attendance = new Attendance(conn);
+		payRoll = new PayRoll(conn);
+		achievement = new Achievement(conn);
+		material = new Material(conn);
+		profit = new ProfitReport(conn);
+		webNews = new WebNews(conn);
 		// 振明
-		product = new Product();
-		member = new Member();
+		product = new Product(conn);
+		member = new Member(conn);
 		// 哲浩
-		orderlist = new OrderList();
-		orderitem = new OrderItem();
-		issue = new Issue();
-		vendor = new Vendor();
-		salesReport = new SalesReport();
+		orderlist = new OrderList(conn);
+		orderitem = new OrderItem(conn);
+		issue = new Issue(conn);
+		vendor = new Vendor(conn);
+		salesReport = new SalesReport(conn);
 		// Veronica edit 9/4
 		admin = new Admin(conn);
 		asset = new Asset(conn);
@@ -211,6 +164,7 @@ public class erp_frame extends JFrame {
 		panel_dataInput.add("achievement", achievement);
 		panel_dataInput.add("material", material);
 		panel_dataInput.add("profit", profit);
+		panel_dataInput.add("webNews", webNews);
 		// 振明
 		panel_dataInput.add("product", product);
 		panel_dataInput.add("member", member);
@@ -231,14 +185,21 @@ public class erp_frame extends JFrame {
 
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 		data = new LinkedList<>();
-
+		checkAuthority();//確認登入員工權限(9/4)
+		disableBtn();//權限未判定前按鈕失效(9/4)
+		table_firmData.setRowHeight(30);
+		
+	    //this.setExtendedState(JFrame.MAXIMIZED_BOTH); //最大化
+	    //this.setAlwaysOnTop(true); //總在最前面
+	    //this.setResizable(false); //不能改變大小
+	   
 	}
 	
 	private void init() {
 		setResizable(false);
 		setLocationRelativeTo(null);// 置中
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/drink.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
 		setTitle("公司名稱 : 休閒小棧  使用者代碼 : "+userID);
 
 		DefaultTableCellRenderer tableAlign = (DefaultTableCellRenderer) table_firmData.getTableHeader()
@@ -346,7 +307,7 @@ public class erp_frame extends JFrame {
         javax.swing.tree.DefaultMutableTreeNode admin = new javax.swing.tree.DefaultMutableTreeNode("帳號管理表");
         javax.swing.tree.DefaultMutableTreeNode billboard = new javax.swing.tree.DefaultMutableTreeNode("公告管理表");
         javax.swing.tree.DefaultMutableTreeNode department = new javax.swing.tree.DefaultMutableTreeNode("部門管理表");
-        javax.swing.tree.DefaultMutableTreeNode webnews = new javax.swing.tree.DefaultMutableTreeNode("最新消息表");
+        javax.swing.tree.DefaultMutableTreeNode webnews = new javax.swing.tree.DefaultMutableTreeNode("網站新聞表");
         DB_System.add(admin);
         DB_System.add(billboard);  
         DB_System.add(department);
@@ -428,7 +389,7 @@ public class erp_frame extends JFrame {
 		JToolBar.setPreferredSize(new java.awt.Dimension(80, 50));
 
 		btnFirstData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnFirstData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/left-arrow-2.png"))); // NOI18N
+		btnFirstData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/left-arrow-2.png"))); // NOI18N
 		btnFirstData.setToolTipText("第一筆");
 		btnFirstData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnFirstData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -439,7 +400,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnFirstData);
 
 		btnPreData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnPreData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/left-arrow.png"))); // NOI18N
+		btnPreData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/left-arrow.png"))); // NOI18N
 		btnPreData.setToolTipText("上一筆");
 		btnPreData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnPreData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -450,7 +411,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnPreData);
 
 		btnNextData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnNextData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/right-arrow.png"))); // NOI18N
+		btnNextData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/right-arrow.png"))); // NOI18N
 		btnNextData.setToolTipText("下一筆");
 		btnNextData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnNextData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -461,7 +422,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnNextData);
 
 		btnInsert.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/insert.png"))); // NOI18N
+		btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/insert.png"))); // NOI18N
 		btnInsert.setToolTipText("新增資料");
 		btnInsert.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnInsert.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -472,7 +433,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnInsert);
 
 		btnModify.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/edit.png"))); // NOI18N
+		btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/edit.png"))); // NOI18N
 		btnModify.setToolTipText("修改資料");
 		btnModify.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnModify.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -484,7 +445,7 @@ public class erp_frame extends JFrame {
 		btnModify.getAccessibleContext().setAccessibleDescription("");
 
 		btnClear.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png"))); // NOI18N
+		btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png"))); // NOI18N
 		btnClear.setToolTipText("清空輸入");
 		btnClear.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -495,7 +456,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnClear);
 
 		btnExport.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/export.png"))); // NOI18N
+		btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/export.png"))); // NOI18N
 		btnExport.setToolTipText("匯出");
 		btnExport.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnExport.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -506,7 +467,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnExport);
 
 		btnDelete.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
+		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/delete.png"))); // NOI18N
 		btnDelete.setToolTipText("刪除資料");
 		btnDelete.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -516,7 +477,7 @@ public class erp_frame extends JFrame {
 		});
 		JToolBar.add(btnDelete);
 
-		btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Logout.png"))); // NOI18N
+		btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/Logout.png"))); // NOI18N
 		btnLogout.setToolTipText("登出");
 		btnLogout.setFocusable(false);
 		btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -566,15 +527,23 @@ public class erp_frame extends JFrame {
 				case "原料庫存資料表":
 					length = materialFields.length;
 					break;
+				//宜宏 0908
 				case "營利報表":
 					String report = profit.getSelectReport();
 					if (report.equals("銷售報表")) {
 						length = salesFields.length;
-					} else {
+					} 
+					else if(report.equals("支出報表")){
 						length = expendFields.length;
 					}
+					else{
+						length = emptyProfitFields.length;
+					}
 					break;
-				// 振明
+				case "網站新聞表":
+					length = webNewsFields.length;
+					break;
+			// 振明
 				case "產品資料表":
 					length = productFields.length;
 					break;
@@ -652,8 +621,8 @@ public class erp_frame extends JFrame {
 	}
 	
 	private void setButtonVisible() {
-		if (treeFolder.getSelectionPath().getLastPathComponent().toString().equals("營利報表")||
-				treeFolder.getSelectionPath().getLastPathComponent().toString().equals("銷售報表")) {
+		if (treeFolder.getSelectionPath().getLastPathComponent().toString().equals("營利報表")
+				|| treeFolder.getSelectionPath().getLastPathComponent().toString().equals("銷售報表")) {
 			text_search.setVisible(false);
 			label_search.setVisible(false);
 			btnFirstData.setVisible(false);
@@ -662,7 +631,7 @@ public class erp_frame extends JFrame {
 			btnInsert.setVisible(false);
 			btnModify.setVisible(false);
 			btnClear.setToolTipText("顯示報表");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/table.png")));//(9/4)改table.png
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/table.png")));
 		} else {
 			text_search.setVisible(true);
 			label_search.setVisible(true);
@@ -672,7 +641,7 @@ public class erp_frame extends JFrame {
 			btnInsert.setVisible(true);
 			btnModify.setVisible(true);
 			btnClear.setToolTipText("清空輸入");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png")));
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png")));
 		}
 
 	}
@@ -699,16 +668,16 @@ public class erp_frame extends JFrame {
 					cell.setCellType(HSSFCell.CELL_TYPE_STRING);
 					cell.setCellValue(fields[k]);
 				}
-				for (int i = 1; i < data.size()+1; i++) {
-					
-						// Insert table data in next row
-						row = sheet.createRow((short) i);
-						for (int k = 0; k < fields.length; k++) {
-							cell = row.createCell((short) k);
-							cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-							cell.setCellValue(data.get(i - 1)[k]);
-						}
-					
+				for (int i = 1; i < data.size() + 1; i++) {
+
+					// Insert table data in next row
+					row = sheet.createRow((short) i);
+					for (int k = 0; k < fields.length; k++) {
+						cell = row.createCell((short) k);
+						cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+						cell.setCellValue(data.get(i - 1)[k]);
+					}
+
 				}
 
 				// Create a excel file
@@ -759,6 +728,11 @@ public class erp_frame extends JFrame {
 				break;
 			case "原料庫存資料表":
 				material.setInputValue(tableSelData(0));
+				table_firmData.setRowSelectionInterval(0, 0);
+				break;
+			//宜宏
+			case "網站新聞表":
+				webNews.setInputValue(tableSelData(0));
 				table_firmData.setRowSelectionInterval(0, 0);
 				break;
 
@@ -906,7 +880,18 @@ public class erp_frame extends JFrame {
 					table_firmData.setRowSelectionInterval(0, 0);
 				}
 				break;
-
+				//宜宏
+			case "網站新聞表":
+				if (table_firmData.getSelectedRow() - 1 >= 0) {
+					webNews.setInputValue(tableSelData(table_firmData.getSelectedRow() - 1));
+					table_firmData.setRowSelectionInterval(table_firmData.getSelectedRow() - 1,
+							table_firmData.getSelectedRow() - 1);
+				} else {
+					webNews.setInputValue(tableSelData(0));
+					table_firmData.setRowSelectionInterval(0, 0);
+				}
+				break;
+	
 			// hsu
 
 			case "訂單資料表":
@@ -1099,6 +1084,20 @@ public class erp_frame extends JFrame {
 							table_firmData.getRowCount() - 1);
 				}
 				break;
+			//宜宏
+			case "網站新聞表":
+				if (table_firmData.getSelectedRow() >= 0
+						&& table_firmData.getRowCount() - table_firmData.getSelectedRow() > 1) {
+					webNews.setInputValue(tableSelData(table_firmData.getSelectedRow() + 1));
+					table_firmData.setRowSelectionInterval(table_firmData.getSelectedRow() + 1,
+							table_firmData.getSelectedRow() + 1);
+				} else {
+					webNews.setInputValue(tableSelData(table_firmData.getRowCount() - 1));
+					table_firmData.setRowSelectionInterval(table_firmData.getRowCount() - 1,
+							table_firmData.getRowCount() - 1);
+				}
+				break;
+		
 			case "產品資料表":
 				if (table_firmData.getSelectedRow() >= 0
 						&& table_firmData.getRowCount() - table_firmData.getSelectedRow() > 1) {
@@ -1309,6 +1308,12 @@ public class erp_frame extends JFrame {
 				data = member.queryData();
 				tableModel.fireTableDataChanged();
 				break;
+			//宜宏
+			case "網站新聞表":
+				isInsert = webNews.insertData();
+				data = webNews.queryData();
+				tableModel.fireTableDataChanged();
+				break;
 
 			// Hsu
 			case "訂單資料表":
@@ -1429,7 +1434,13 @@ public class erp_frame extends JFrame {
 				data = material.queryData();
 				tableModel.fireTableDataChanged();
 				break;
-
+			//宜宏
+			case "網站新聞表":
+				isUpdate = webNews.updateData();
+				data = webNews.queryData();
+				tableModel.fireTableDataChanged();
+				break;
+		
 			case "產品資料表":
 				isUpdate = product.updateData();
 				data = product.queryData();
@@ -1581,25 +1592,26 @@ public class erp_frame extends JFrame {
 			case "領料記錄表":
 	    		picking.getDefault();
 	     		break;
-			case "營利報表":
-				salesData = profit.querySales();
-				extendData = profit.queryExpend();
+	     	//宜宏 0908
+			case "營利報表":	
 				data.clear();
 				String report = profit.getSelectReport();
-				if (report.equals("銷售報表")) {
+				salesData = profit.querySales();
+				extendData = profit.queryExpend();
+				if (report.equals("銷售報表")) {	
 					tableModel = new myTableModel(salesFields);
 					data = salesData;
-//					System.out.println("銷售" + data.size());
-				} else {
+					profit.setLableDetail();
+				} else if(report.equals("支出報表")) {
 					tableModel = new myTableModel(expendFields);
 					data = extendData;
-//					System.out.println("支出" + data.size());
+					profit.setLableDetail();	
+				}
+				else{
+					tableModel = new myTableModel(emptyProfitFields);
 				}
 				table_firmData.setModel(tableModel);
-
 				tableModel.fireTableDataChanged();
-				profit.setLableDetail();
-				
 				break;
 			case "銷售報表":
 	    		data = salesReport.getData();
@@ -1607,6 +1619,10 @@ public class erp_frame extends JFrame {
 	    		table_firmData.setModel(tableModel);
 	    		tableModel.fireTableDataChanged();
 	     		break;
+	    		//宜宏
+			case "網站新聞表":
+				webNews.clearInput();
+				break;
 			default:
 				JOptionPane.showMessageDialog(JToolBar, "未選擇一個資料表");
 				break;
@@ -1615,10 +1631,28 @@ public class erp_frame extends JFrame {
 			JOptionPane.showMessageDialog(JToolBar, "未選擇一個資料表");
 		}
 	}
+	//宜宏
+		private void CreateOutputDir() {
+			File theDir = new File("D:/ERPOutputFile");
+			// if the directory does not exist, create it
+			if (!theDir.exists()) {
+				String directoryName = "D:/ERP_Output";
+				System.out.println("creating directory: " + directoryName);
+				boolean result = false;
+
+				try {
+					theDir.mkdir();
+					result = true;
+				} catch (SecurityException se) {
+					System.out.println(se.toString());
+				}
+			}
+		}
 
 	// Generate an Microsoft Excel file form table data
 	// This need Jakarta POI library
 	private void btnExportMouseClicked(java.awt.event.MouseEvent evt) {
+		CreateOutputDir();
 		String outputFile = "D:/ERPOutputFile/" + path + ".xls"; 
 		switch (path) {
 		case "員工資料表":
@@ -1681,10 +1715,16 @@ public class erp_frame extends JFrame {
 		case "銷售報表":
     		fields = salesReporterFields;
      		break;
+     	//宜宏
+		case "網站新聞表":
+			fields = webNewsFields;
+			break;
+	     		
 		default:
 			JOptionPane.showMessageDialog(JToolBar, "未選擇一個資料表");
 			break;
 		}
+		//宜宏
 		if (!path.equals("營利報表")) {
 			try {
 
@@ -1726,6 +1766,7 @@ public class erp_frame extends JFrame {
 			}
 		}
 	}
+
 
 	private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {
 		int isDel = 0;
@@ -1824,6 +1865,13 @@ public class erp_frame extends JFrame {
                		data = picking.queryData();
                		tableModel.fireTableDataChanged();
              		break;
+            	//宜宏
+				case "網站新聞表":
+					isDel = webNews.delData();
+					data = webNews.queryData();
+					tableModel.fireTableDataChanged();
+					break;
+		             		
 				default:
 					JOptionPane.showMessageDialog(JToolBar, "未選擇一個資料表");
 					break;
@@ -1928,6 +1976,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = employee.queryData();
 						tableModel.fireTableDataChanged();
+						employee.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1940,6 +1989,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = attendance.queryData();
 						tableModel.fireTableDataChanged();
+						attendance.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1952,6 +2002,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = payRoll.queryData();
 						tableModel.fireTableDataChanged();
+						payRoll.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1964,6 +2015,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = achievement.queryData();
 						tableModel.fireTableDataChanged();
+						achievement.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1976,6 +2028,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = material.queryData();
 						tableModel.fireTableDataChanged();
+						material.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1988,6 +2041,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = product.queryData();
 						tableModel.fireTableDataChanged();
+						product.clearInput();
 					}else{
 						disableBtn();
 					}
@@ -2000,6 +2054,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = member.queryData();
 						tableModel.fireTableDataChanged();
+						member.clearInput();
 					}else{
 						disableBtn();
 					}
@@ -2137,22 +2192,45 @@ public class erp_frame extends JFrame {
 						disableBtn();
 					}
 		     		break;
+		     		//宜宏 0908
 				case "營利報表":
 					if((_emp_autority.get("profit")).equals("yes")){
 						enableBtn();
 						nowLayout.show(panel_dataInput, "profit");
+						profit.setReportSelectFirst();
+						tableModel = new myTableModel(emptyProfitFields);
+						table_firmData.setModel(tableModel);
+						tableModel.fireTableDataChanged();
 						profit.getYears();
-					}else{
+						profit.clearInput();
+					}
+					else{
 						disableBtn();
 					}
 					break;
 				case "銷售報表":
 					if((_emp_autority.get("sales")).equals("yes")){
 						enableBtn();
-						nowLayout.show(panel_dataInput, "salesReport");	
-					}else{
+						nowLayout.show(panel_dataInput, "salesReport");
+					}
+					else{
 						disableBtn();
 					}
+					
+					break;
+				//宜宏 0908
+				case "網站新聞表":
+					if((_emp_autority.get("webnews")).equals("yes")){
+						enableBtn();
+						nowLayout.show(panel_dataInput, "webNews");
+						tableModel = new myTableModel(webNewsFields);
+						table_firmData.setModel(tableModel);
+						data = webNews.queryData();
+						tableModel.fireTableDataChanged();
+					}
+					else{
+						disableBtn();
+					}			
 					break;
 				case "人事資料庫":case "採購資料庫":case "產品資料庫":
 		    	case "庫存資料庫":case "銷售資料庫":case "會計資料庫":
@@ -2226,6 +2304,17 @@ public class erp_frame extends JFrame {
 		case "領料記錄表":
     		picking.setInputValue(tableSelData(table_firmData.getSelectedRow()));
      		break;
+     		//宜宏
+		case "營利報表":
+			break;
+		//宜宏
+		case "銷售報表":
+			break;
+		//宜宏
+		case "網站新聞表":
+			webNews.setInputValue(tableSelData(table_firmData.getSelectedRow()));
+			break;
+
 		default:
 			JOptionPane.showMessageDialog(JToolBar, "未選擇一個資料表");
 			break;
@@ -2358,7 +2447,7 @@ public class erp_frame extends JFrame {
 					data = vendor.queryData();
 					tableModel.fireTableDataChanged();
 				}
-
+				break;
 			case "帳號管理表":
 				if (text_search.getText() != "") {
 					data.clear();
@@ -2437,7 +2526,20 @@ public class erp_frame extends JFrame {
                		tableModel.fireTableDataChanged();
            		}
            		break;
+        		//宜宏
+			case "網站新聞表":
+				if (text_search.getText() != "") {
+					data.clear();
+					data = webNews.search(text_search.getText());
+					tableModel.fireTableDataChanged();
+				} else {
+					data.clear();
+					data = webNews.queryData();
+					tableModel.fireTableDataChanged();
+				}
+				break;
 			}
+			
 		}
 
 	}
@@ -2456,30 +2558,30 @@ public class erp_frame extends JFrame {
 
 	
 	public static void main(String args[]) {		
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		// </editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new erp_frame().setVisible(true);
-			}
-		});
+//		try {
+//			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//				if ("Nimbus".equals(info.getName())) {
+//					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//					break;
+//				}
+//			}
+//		} catch (ClassNotFoundException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		} catch (InstantiationException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		} catch (IllegalAccessException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		}
+//		// </editor-fold>
+//
+//		/* Create and display the form */
+//		java.awt.EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				new erp_frame().setVisible(true);
+//			}
+//		});
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

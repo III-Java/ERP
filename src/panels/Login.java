@@ -35,7 +35,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);//置中
         
         //title
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/drink.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
         setTitle("---ERP LOGIN---");
      }
     

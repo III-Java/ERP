@@ -82,6 +82,7 @@ public class erp_frame extends JFrame {
 	String[] salesFields = { "訂單編號", "產品編號", "產品名稱", "數量", "單價", "小計" };
 	String[] expendFields = { "下單日期", "訂單編號", "原料編號", "廠商編號", "數量", "價格", "小計", "打單員工", "備註" };
 	String[] webNewsFields = { "編號", "標題", "內容", "圖檔名", "發布", "備註" };
+	String[] emptyProfitFields = {""};  // 宜宏 0908
 		// 振明
 	String[] memberFields = { "客戶編號", "客戶密碼", "客戶名稱", "電話", "性別", "地址", "備註" };
 	String[] productFields = { "產品編號", "品名", "單價", "類別", "備註" };
@@ -103,7 +104,7 @@ public class erp_frame extends JFrame {
 	String[] assetFields = { "資產編號", "資產名稱", "數量", "購入金額", "採購日期", "使用部門", "折舊年限", "備註" };
 	String[] billboardFields = { "公告編號", "公告日期", "公告內容", "下架日期", "公告維護者", "備註" };
 	String[] departFields = { "部門ID", "部門名稱","職銜" };
-    String[] pickingFields ={"領料單ID","原料編號","領料數量","單位","領料人員","領料日期","備註"};
+    String[] pickingFields ={"領料單ID","原料編號","領料數量","領料人員","領料日期","備註"};
     String[] salesReporterFields = new String[]{"訂單編號","訂購日期","客戶編號","產品編號","產品數量","訂單狀態","配送方式","備註1","備註2"};
 	String userID=null;
 	String path = null;
@@ -111,14 +112,14 @@ public class erp_frame extends JFrame {
 	private Map<String, String> _emp_autority = new HashMap<>();
 	
 
-	public erp_frame() {		
-		initComponents();
-		init();
-		checkAuthority();//確認登入員工權限(9/4)
-		disableBtn();//權限未判定前按鈕失效(9/4)
-		table_firmData.setRowHeight(30);
-		
-	}
+//	public erp_frame() {		
+//		initComponents();
+//		init();
+//		checkAuthority();//確認登入員工權限(9/4)
+//		disableBtn();//權限未判定前按鈕失效(9/4)
+//		table_firmData.setRowHeight(30);
+//		
+//	}
 
 	public erp_frame(String loginID,Connection connection) {	
 		this.conn =connection;		
@@ -184,7 +185,14 @@ public class erp_frame extends JFrame {
 
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 		data = new LinkedList<>();
-
+		checkAuthority();//確認登入員工權限(9/4)
+		disableBtn();//權限未判定前按鈕失效(9/4)
+		table_firmData.setRowHeight(30);
+		
+	    //this.setExtendedState(JFrame.MAXIMIZED_BOTH); //最大化
+	    //this.setAlwaysOnTop(true); //總在最前面
+	    //this.setResizable(false); //不能改變大小
+	   
 	}
 	
 	private void init() {
@@ -192,7 +200,7 @@ public class erp_frame extends JFrame {
 		setLocationRelativeTo(null);// 置中
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
-		setTitle("公司名稱 : 心飲茗茶  使用者代碼 : "+userID);
+		setTitle("公司名稱 : 休閒小棧  使用者代碼 : "+userID);
 
 		DefaultTableCellRenderer tableAlign = (DefaultTableCellRenderer) table_firmData.getTableHeader()
 				.getDefaultRenderer(); // 欄位置中
@@ -519,12 +527,17 @@ public class erp_frame extends JFrame {
 				case "原料庫存資料表":
 					length = materialFields.length;
 					break;
+				//宜宏 0908
 				case "營利報表":
 					String report = profit.getSelectReport();
 					if (report.equals("銷售報表")) {
 						length = salesFields.length;
-					} else {
+					} 
+					else if(report.equals("支出報表")){
 						length = expendFields.length;
+					}
+					else{
+						length = emptyProfitFields.length;
 					}
 					break;
 				case "網站新聞表":
@@ -1579,25 +1592,26 @@ public class erp_frame extends JFrame {
 			case "領料記錄表":
 	    		picking.getDefault();
 	     		break;
-			case "營利報表":
-				salesData = profit.querySales();
-				extendData = profit.queryExpend();
+	     	//宜宏 0908
+			case "營利報表":	
 				data.clear();
 				String report = profit.getSelectReport();
-				if (report.equals("銷售報表")) {
+				salesData = profit.querySales();
+				extendData = profit.queryExpend();
+				if (report.equals("銷售報表")) {	
 					tableModel = new myTableModel(salesFields);
 					data = salesData;
-//					System.out.println("銷售" + data.size());
-				} else {
+					profit.setLableDetail();
+				} else if(report.equals("支出報表")) {
 					tableModel = new myTableModel(expendFields);
 					data = extendData;
-//					System.out.println("支出" + data.size());
+					profit.setLableDetail();	
+				}
+				else{
+					tableModel = new myTableModel(emptyProfitFields);
 				}
 				table_firmData.setModel(tableModel);
-
 				tableModel.fireTableDataChanged();
-				profit.setLableDetail();
-				
 				break;
 			case "銷售報表":
 	    		data = salesReport.getData();
@@ -1618,22 +1632,22 @@ public class erp_frame extends JFrame {
 		}
 	}
 	//宜宏
-	private void CreateOutputDir() {
-		File theDir = new File("D:/ERPOutputFile");
-		// if the directory does not exist, create it
-		if (!theDir.exists()) {
-			String directoryName = "D:/ERP_Output";
-			System.out.println("creating directory: " + directoryName);
-			boolean result = false;
+		private void CreateOutputDir() {
+			File theDir = new File("D:/ERPOutputFile");
+			// if the directory does not exist, create it
+			if (!theDir.exists()) {
+				String directoryName = "D:/ERP_Output";
+				System.out.println("creating directory: " + directoryName);
+				boolean result = false;
 
-			try {
-				theDir.mkdir();
-				result = true;
-			} catch (SecurityException se) {
-				System.out.println(se.toString());
+				try {
+					theDir.mkdir();
+					result = true;
+				} catch (SecurityException se) {
+					System.out.println(se.toString());
+				}
 			}
 		}
-	}
 
 	// Generate an Microsoft Excel file form table data
 	// This need Jakarta POI library
@@ -1948,7 +1962,6 @@ public class erp_frame extends JFrame {
 	// Change the input view area
 	//9/4 add authority
 	private void treeFolderValueChanged(javax.swing.event.TreeSelectionEvent evt) {// GEN-FIRST:event_treeFolderValueChanged
-		try{
 		if (treeFolder.getSelectionPath().getLastPathComponent().toString() != null) {
 			setButtonVisible();
 			path = treeFolder.getSelectionPath().getLastPathComponent().toString();
@@ -1963,6 +1976,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = employee.queryData();
 						tableModel.fireTableDataChanged();
+						employee.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1975,6 +1989,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = attendance.queryData();
 						tableModel.fireTableDataChanged();
+						attendance.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1987,6 +2002,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = payRoll.queryData();
 						tableModel.fireTableDataChanged();
+						payRoll.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -1999,6 +2015,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = achievement.queryData();
 						tableModel.fireTableDataChanged();
+						achievement.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -2011,6 +2028,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = material.queryData();
 						tableModel.fireTableDataChanged();
+						material.clearInput(); //0908宜宏
 					}else{
 						disableBtn();
 					}
@@ -2023,6 +2041,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = product.queryData();
 						tableModel.fireTableDataChanged();
+						product.clearInput();
 					}else{
 						disableBtn();
 					}
@@ -2035,6 +2054,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = member.queryData();
 						tableModel.fireTableDataChanged();
+						member.clearInput();
 					}else{
 						disableBtn();
 					}
@@ -2172,26 +2192,33 @@ public class erp_frame extends JFrame {
 						disableBtn();
 					}
 		     		break;
-		     		//宜宏
+		     		//宜宏 0908
 				case "營利報表":
 					if((_emp_autority.get("profit")).equals("yes")){
 						enableBtn();
 						nowLayout.show(panel_dataInput, "profit");
+						profit.setReportSelectFirst();
+						tableModel = new myTableModel(emptyProfitFields);
+						table_firmData.setModel(tableModel);
+						tableModel.fireTableDataChanged();
 						profit.getYears();
-					}else{
+						profit.clearInput();
+					}
+					else{
 						disableBtn();
 					}
 					break;
-				//宜宏
 				case "銷售報表":
 					if((_emp_autority.get("sales")).equals("yes")){
 						enableBtn();
 						nowLayout.show(panel_dataInput, "salesReport");
-					}else{
-						disableBtn();					
 					}
+					else{
+						disableBtn();
+					}
+					
 					break;
-				//宜宏
+				//宜宏 0908
 				case "網站新聞表":
 					if((_emp_autority.get("webnews")).equals("yes")){
 						enableBtn();
@@ -2200,9 +2227,10 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = webNews.queryData();
 						tableModel.fireTableDataChanged();
-					}else{
-						disableBtn();					
 					}
+					else{
+						disableBtn();
+					}			
 					break;
 				case "人事資料庫":case "採購資料庫":case "產品資料庫":
 		    	case "庫存資料庫":case "銷售資料庫":case "會計資料庫":
@@ -2216,9 +2244,7 @@ public class erp_frame extends JFrame {
 		    		break;
 			}
 		}
-		}catch(Exception a){
-			System.out.println("path null");
-		}
+
 	}
 
 	// Display user select table data in input area
@@ -2532,30 +2558,30 @@ public class erp_frame extends JFrame {
 
 	
 	public static void main(String args[]) {		
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		// </editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new erp_frame().setVisible(true);
-			}
-		});
+//		try {
+//			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//				if ("Nimbus".equals(info.getName())) {
+//					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//					break;
+//				}
+//			}
+//		} catch (ClassNotFoundException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		} catch (InstantiationException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		} catch (IllegalAccessException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//			java.util.logging.Logger.getLogger(erp_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//		}
+//		// </editor-fold>
+//
+//		/* Create and display the form */
+//		java.awt.EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				new erp_frame().setVisible(true);
+//			}
+//		});
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,10 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="JAR_Pool"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/workspace_JavaEE/ERP/JAR_Pool/AbsoluteLayout.jar"/>
+	<classpathentry kind="lib" path="D:/workspace_JavaEE/ERP/JAR_Pool/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/workspace_JavaEE/ERP/JAR_Pool/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="D:/workspace_JavaEE/ERP/JAR_Pool/poi-3.15-beta2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/erplib"/>
-	<classpathentry kind="lib" path="D:/Users/user/Desktop/ERP-Jar/AbsoluteLayout.jar"/>
-	<classpathentry kind="lib" path="D:/Users/user/Desktop/ERP-Jar/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/Users/user/Desktop/ERP-Jar/mysql-connector-java-5.1.39-bin.jar"/>
-	<classpathentry kind="lib" path="D:/Users/user/Desktop/ERP-Jar/poi-3.15-beta2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

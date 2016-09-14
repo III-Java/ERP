@@ -1,37 +1,30 @@
 package panels;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Properties;
-
-import javax.swing.JOptionPane;
 
 public class PayRoll extends javax.swing.JPanel {
 
-	private Properties prop;
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-
 	private String employeeNum;
 	private String payRoll;
 	private String note;
 
 	public PayRoll(Connection con) {
-		initComponents();
-		setDBProp();
 		this.con = con;
+		initComponents();
 	}
 
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		  jLabel1 = new javax.swing.JLabel();
+		   jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel7 = new javax.swing.JLabel();
 	        jLabel10 = new javax.swing.JLabel();
@@ -60,7 +53,7 @@ public class PayRoll extends javax.swing.JPanel {
 	        txtPay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
 	        txtPay.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 
-	        txtEmpoyeeNum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+	        txtEmpoyeeNum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 	        txtEmpoyeeNum.setToolTipText("");
 	        txtEmpoyeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        txtEmpoyeeNum.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -88,9 +81,8 @@ public class PayRoll extends javax.swing.JPanel {
 	                        .addGap(28, 28, 28)
 	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 	                            .addComponent(lbName, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-	                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                                .addComponent(txtPay, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-	                                .addComponent(txtEmpoyeeNum)))
+	                            .addComponent(txtPay, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+	                            .addComponent(txtEmpoyeeNum))
 	                        .addGap(198, 198, 198)
 	                        .addComponent(jLabel10)))
 	                .addGap(18, 18, 18)
@@ -121,21 +113,6 @@ public class PayRoll extends javax.swing.JPanel {
 	        );
 	}// </editor-fold>
 
-	private void setDBProp() {
-
-		prop = new Properties();
-		prop.setProperty("user", "root");
-		prop.setProperty("password", "");
-		prop.setProperty("characterEncoding", "UTF-8");
-		prop.setProperty("useUnicode", "true");
-		prop.setProperty("useSSL", "False");
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	private void setName() {
 		String name = "";
 		try {
@@ -169,7 +146,6 @@ public class PayRoll extends javax.swing.JPanel {
 		} else {
 			isRightData = true;
 		}
-
 		return isRightData;
 	}
 
@@ -210,6 +186,7 @@ public class PayRoll extends javax.swing.JPanel {
 				System.out.println(ee.toString());
 			}
 		}
+		employeeNum = "";
 		clearInput();
 		return isUpdate;
 	}
@@ -242,7 +219,6 @@ public class PayRoll extends javax.swing.JPanel {
 				row[2] = rs.getString("note");
 				data.add(row);
 			}
-
 		} catch (SQLException ee) {
 			System.out.println(ee.toString());
 		}
@@ -285,12 +261,10 @@ public class PayRoll extends javax.swing.JPanel {
 			System.out.println(ee.toString());
 		}
 		if (employeeNum.equals("")) {
-			//JOptionPane.showMessageDialog(txtEmpoyeeNum, "查無此員工");
 			lbName.setText("查無此員工");
 		}
 	}
 
-	// Variables declaration - do not modify
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel2;
@@ -300,5 +274,4 @@ public class PayRoll extends javax.swing.JPanel {
 	private javax.swing.JFormattedTextField txtEmpoyeeNum;
 	private javax.swing.JEditorPane txtNote;
 	private javax.swing.JFormattedTextField txtPay;
-	// End of variables declaration
 }

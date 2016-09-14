@@ -1,6 +1,5 @@
 package panels;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,24 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import java.awt.Font;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.GroupLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
-
-/**
- *
- * @author Elite2615
- */
 
 public class Product extends javax.swing.JPanel {
 	private String productNum;
@@ -33,17 +20,14 @@ public class Product extends javax.swing.JPanel {
 	private String price;
 	private String category;
 	private String note;
-	private Properties prop;
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-
 	private List<String> checkRp;
 	public Product(Connection conn) {
 		this.con = conn;
 		initComponents();
 		checkRp = new ArrayList<String>(); //產生List裝key過的單
-
 	}
 
 	private void initComponents() {
@@ -159,9 +143,7 @@ public class Product extends javax.swing.JPanel {
 		productName = text_productName.getText();
 		price = text_price.getText();
 		category = CBcategory.getSelectedItem().toString();
-		// category = text_category.getText();
 		note = text_note.getText();
-		// productName = text_productName.getText();
 		if (productName.equals("")) {
 			isRightData = false;
 		} else {
@@ -217,8 +199,7 @@ public class Product extends javax.swing.JPanel {
 			CBcategory.setSelectedIndex(4);
 		case "100%鮮果系列":
 			CBcategory.setSelectedIndex(5);
-			break;
-			
+			break;		
 		default:
 			CBcategory.setSelectedIndex(0);
 			break;
@@ -276,9 +257,7 @@ public class Product extends javax.swing.JPanel {
 				pstmt.setString(3, category);
 				pstmt.setString(4, note);
 				pstmt.setString(5, productNum);
-
 				isUpdate = pstmt.executeUpdate();
-
 				clearInput();
 
 			} catch (SQLException e) {
@@ -306,7 +285,6 @@ public class Product extends javax.swing.JPanel {
 	}
 
 	protected LinkedList<String[]> queryData() {
-		clearInput();
 		LinkedList<String[]> data = new LinkedList<>();
 		try {
 			pstmt = con.prepareStatement("SELECT * FROM product");
@@ -353,24 +331,6 @@ public class Product extends javax.swing.JPanel {
 		return data;
 	}
 
-	private void txtVendorNumKeyReleased(java.awt.event.KeyEvent evt) {
-		String productNum = "";
-		try {
-			pstmt = con.prepareStatement("SELECT productNum FROM product Where productNum = ?");
-			pstmt.setString(1, label_pNum.getText());
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				productNum = rs.getString("productNum");
-			}
-		} catch (SQLException ee) {
-			System.out.println(ee.toString());
-		}
-		if (productNum.equals("")) {
-			JOptionPane.showMessageDialog(label_pNum, "查無此商品");
-		}
-	}
-
-	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JLabel label_category;
 	private javax.swing.JLabel label_note;
 	private javax.swing.JLabel label_price;
@@ -381,5 +341,4 @@ public class Product extends javax.swing.JPanel {
 	private javax.swing.JTextField text_productName;
 	private JComboBox CBcategory;
 	private JLabel label_pNum;
-	private JFormattedTextField formattedTextField;
 }

@@ -1,6 +1,5 @@
 package panels;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Properties;
-
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Employee extends javax.swing.JPanel {
-	private int employeeNum;
+	
 	private String name;
 	private String address;
 	private String tel;
@@ -29,28 +26,11 @@ public class Employee extends javax.swing.JPanel {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	private void setDBProp() {
-
-		prop = new Properties();
-		prop.setProperty("user", "root");
-		prop.setProperty("password", "");
-		prop.setProperty("characterEncoding", "UTF-8");
-		prop.setProperty("useUnicode", "true");
-		prop.setProperty("useSSL", "False");
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public Employee(Connection con) {
-		
+		this.con = con;
 		initComponents();
-		setDBProp();
 		getDepartments();
 		cbDepartment.setModel(new DefaultComboBoxModel(getDepartments()));
-		this.con = con;
 	}
 	
 	
@@ -115,7 +95,7 @@ public class Employee extends javax.swing.JPanel {
 	        jLabel6.setText("出生年月日");
 
 	        dateBirthday.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-
+	        dateBirthday.setDateFormatString("yyyy/MM/dd");
 	        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
 
 	        jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
@@ -338,6 +318,7 @@ public class Employee extends javax.swing.JPanel {
 			}
 		}
 		clearInput();
+		strEmployeeNum = "";
 		return isUpdate;
 	}
 	
@@ -363,8 +344,12 @@ public class Employee extends javax.swing.JPanel {
 		txtAddress.setText("");
 		txtTel.setText("");
 		bgGender.clearSelection();
-		cbPosition.setSelectedIndex(0);
-		cbDepartment.setSelectedIndex(0);
+		if(cbPosition.getItemCount() > 0){
+			cbPosition.setSelectedIndex(0);
+		}
+		if(cbDepartment.getItemCount() > 0){
+			cbDepartment.setSelectedIndex(0);
+		}
 		txtNote.setText("");
 		dateBirthday.setCalendar(null);
 	}
@@ -432,7 +417,7 @@ public class Employee extends javax.swing.JPanel {
 			rbFemale.setSelected(true);
 		}
 		try {
-			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.get(5));
+			java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(5));
 			dateBirthday.setDate(date);
 		} catch (ParseException e) {
 			

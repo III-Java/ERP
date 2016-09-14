@@ -175,7 +175,7 @@ public class Login extends javax.swing.JFrame {
     private void onduty_logActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	getInput();    	
     	if(!noInput){    
-    		checkRecord();//今天是否打過卡
+    		checkRecord();
 	    	dutyCheck();//check account passwd pwOk ok
 	    	if(idOk & pwOk & !hasOnDutyRecord){ //帳密正確
 	    		onduty = "on";

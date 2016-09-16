@@ -1,3 +1,4 @@
+package panels;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +19,8 @@ public class Issue extends javax.swing.JPanel {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	HashMap<String, String[]> member = new HashMap<>();
-
+	private String issueId = new String();
+	
 	public Issue() {
 		initComponents();
 		setDBProp();
@@ -100,8 +102,8 @@ public class Issue extends javax.swing.JPanel {
 		int isDel = 0;
 		if (!combo_customerId.getSelectedItem().toString().equals("")) {
 			try {
-				pstmt = conn.prepareStatement("DELETE FROM issue WHERE customerId = ?");
-				pstmt.setString(1, combo_customerId.getSelectedItem().toString());
+				pstmt = conn.prepareStatement("DELETE FROM issue WHERE id = ?");
+				pstmt.setString(1, issueId);
 				isDel = pstmt.executeUpdate();
 				
 				
@@ -120,11 +122,12 @@ public class Issue extends javax.swing.JPanel {
 		int isUpdate = 0;
 		if (getUserInputParm() == true) {
 			try {
-				pstmt = conn.prepareStatement("UPDATE issue SET complaint=?,price=?,note=? WHERE customerId=?");
+				pstmt = conn.prepareStatement("UPDATE issue SET complaint=?,price=?,note=?customerId=? WHERE id=?");
 				pstmt.setString(1, text_complaint.getText());
 				pstmt.setString(2, text_price.getText());
 				pstmt.setString(3, text_note.getText());
 				pstmt.setString(4, strCustomerNum);
+				pstmt.setString(5,issueId);
 				isUpdate = pstmt.executeUpdate();
 				
 				
@@ -145,11 +148,12 @@ public class Issue extends javax.swing.JPanel {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				String[] row = new String[4];
-				row[0] = rs.getString("customerId");
-				row[1] = rs.getString("complaint");
-				row[2] = rs.getString("price");
-				row[3] = rs.getString("note");
+				String[] row = new String[5];
+				row[0] = rs.getString("id");
+				row[1] = rs.getString("customerId");
+				row[2] = rs.getString("complaint");
+				row[3] = rs.getString("price");
+				row[4] = rs.getString("note");	
 				rows.add(row);
 			}
 			
@@ -211,10 +215,11 @@ public class Issue extends javax.swing.JPanel {
 	}
 
 	protected void setInputValue(HashMap<Integer, String> data) {
-		combo_customerId.setSelectedItem(data.get(0));
-		text_complaint.setText(data.get(1));
-		text_price.setText(data.get(2));
-		text_note.setText(data.get(3));
+		issueId = data.get(0);
+		combo_customerId.setSelectedItem(data.get(1));
+		text_complaint.setText(data.get(2));
+		text_price.setText(data.get(3));
+		text_note.setText(data.get(4));	
 	}
 
 	protected void clearInput() {

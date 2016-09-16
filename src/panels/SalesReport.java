@@ -1,3 +1,4 @@
+package panels;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -107,13 +108,15 @@ public class SalesReport extends javax.swing.JPanel {
     private void setItem(JComboBox<String> cbox , String[] fields){        
         cbox.setModel(new javax.swing.DefaultComboBoxModel<>(fields));
     }
-    private void setDefault(){
+    protected void setDefault(){
         setItem(year, getDateFields(yearfields));
-        month.setVisible(false);
+        setItem(month, new String[]{});
+        setItem(product, new String[]{});
+        label_total.setText("");
+//        month.setVisible(false);
 //        shift.setVisible(false);
 //        employee.setVisible(false);
-        product.setVisible(false);
-
+//        product.setVisible(false);
     }
 
     private LinkedList selectProduct(LinkedList<String> proNums){
@@ -251,9 +254,10 @@ public class SalesReport extends javax.swing.JPanel {
         return data;
     }
     private String[] getDateFields(LinkedList<String> date){
-        String[] strDate = new String[date.size()];
-        for(int i = 0; i < date.size();i++){
-            strDate[i] = date.get(i);
+        String[] strDate = new String[date.size()+1];
+        strDate[0] = "";
+        for(int i = 1; i < strDate.length;i++){
+            strDate[i] = date.get(i-1);
         }
         return strDate;
     }
@@ -312,9 +316,10 @@ public class SalesReport extends javax.swing.JPanel {
     private void setProduct(){
         if(isYearSelected == isMonthSelected == true){
             getProductNum();
-            String pfields[] = new String[productfields.size()];
-            for(int i = 0; i < productfields.size();i++){
-                pfields[i] = productfields.get(i);
+            String pfields[] = new String[productfields.size()+1];
+            pfields[0] = "";
+            for(int i = 1; i < pfields.length;i++){
+                pfields[i] = productfields.get(i-1);
             }       
             setItem(product,pfields);
             product.setVisible(true);
@@ -417,10 +422,10 @@ public class SalesReport extends javax.swing.JPanel {
 
     private void yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearActionPerformed
         isYearSelected = true;
+        orderList = selectOrderList();
         javax.swing.JComboBox cb = (javax.swing.JComboBox)evt.getSource();
         sltYear = cb.getSelectedItem().toString();
         monthfields.clear();    //選擇後將之前的清空
-        monthfields.add("");
         //取得訂單資訊中該年存在的月份
         for(int i = 0; i < orderList.size();i++){
             if(orderList.get(i)[1].equals(cb.getSelectedItem())){
@@ -457,13 +462,18 @@ public class SalesReport extends javax.swing.JPanel {
     private void productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productActionPerformed
         isProductSelected = true;
         javax.swing.JComboBox cb = (javax.swing.JComboBox)evt.getSource();
-        String strSlt = cb.getSelectedItem().toString().substring(0, 5);
+        
+        String strSlt = new String();
+        if(!cb.getSelectedItem().toString().equals(""))
+        	strSlt = cb.getSelectedItem().toString().substring(0, 5);
         sltProduct = strSlt;
         int total = 0;
         if(strSlt.equals("---全部")){
             for(int i = 0; i < cb.getItemCount();i++){
-                String all = cb.getItemAt(i).toString().substring(0, 5);
-                total += getTotal(all);
+            	if(!cb.getItemAt(i).equals("")){
+	                String all = cb.getItemAt(i).toString().substring(0, 5);
+	                total += getTotal(all);
+                }
             }
         }else{
             total = getTotal(strSlt);

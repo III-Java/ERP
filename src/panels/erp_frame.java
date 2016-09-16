@@ -104,7 +104,7 @@ public class erp_frame extends JFrame {
 			"沖帳折讓金額", "結案Y/N", "備註" };
 	String[] assetFields = { "資產編號", "資產名稱", "數量", "購入金額", "採購日期", "使用部門", "折舊年限", "備註" };
 	String[] billboardFields = { "公告編號", "公告日期", "公告內容", "下架日期", "公告維護者", "備註" };
-	String[] departFields = { "部門ID", "部門名稱","職銜" };
+	String[] departFields = { "部門ID", "部門名稱","職銜","備註" };
     String[] pickingFields ={"領料單ID","原料編號","領料數量","單位","領料人員","領料日期","備註"};   
     String[] salesReporterFields = new String[]{"訂單編號","訂購日期","客戶編號","產品編號","產品數量","訂單狀態","配送方式","備註1","備註2"};
 	String userID=null;

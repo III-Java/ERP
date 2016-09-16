@@ -1,4 +1,5 @@
 package panels;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -71,9 +72,8 @@ public class Vendor extends javax.swing.JPanel {
     	String strContactPerson = text_contactPerson.getText();
     	String strPaymentTerm = text_paymentTerm.getText();
     	String strNote = text_note.getText();
-    	
         try{
-	        	if(isNameCorrect(strVendorName)){
+	        	if(isNameCorrect(strVendorName) && isTaxIdCorrect(strTaxId) && checkTel()){
 			            pstmt = conn.prepareStatement(
 			                    "INSERT INTO vendor(vendorName,tel,address,taxId,contactPerson,paymentTerm,note)"
 			                    + " VALUES(?,?,?,?,?,?,?)");
@@ -116,7 +116,7 @@ public class Vendor extends javax.swing.JPanel {
 	protected int updateData() {
 		String strVendorName = text_vendorName.getText();
 		int isUpdate = 0;
-		if (getUserInputParm() == true) {
+		if (getUserInputParm() == true && checkTel()) {
 			try {
 				pstmt = conn.prepareStatement(
 						"UPDATE vendor SET tel=?,address=?,taxId=?,contactPerson=?,paymentTerm=?,note=? WHERE vendorName=?" );
@@ -240,7 +240,15 @@ public class Vendor extends javax.swing.JPanel {
     	}
     	return true;
     }
-    
+	//檢查統編名稱有無重複
+    private boolean isTaxIdCorrect(String taxId){
+    	LinkedList<String[]> qdata = queryData();
+    	for(int i = 0; i < qdata.size();i++){
+    		if(qdata.get(i)[4].equals(taxId))
+    			return false;
+    	}
+    	return true;
+    }
     
     private void text_taxIdKeyTyped(java.awt.event.KeyEvent evt) {                                       
         String re = "\\d*?";
@@ -248,14 +256,22 @@ public class Vendor extends javax.swing.JPanel {
             text_taxId.setText("");
     }       
     private void text_vendorTelKeyTyped(java.awt.event.KeyEvent evt) {                                           
-        String re = "\\d*?";
-        String phoneNum = "\\(0\\d+?\\)\\d*?";
+        String re = "[\\d*\\-]*?";
+        String phoneNum = "^\\d*?-\\d*?-\\d*?";
         String cellPhone = "^\\d{4}-\\d{6}\\d*?";
-        if(!text_vendorTel.getText().matches(phoneNum)&&
-        		!text_vendorTel.getText().matches(re)&&
-        			!text_vendorTel.getText().matches(cellPhone)){text_vendorTel.setText("");}
-
+//        if(!text_vendorTel.getText().matches(phoneNum)&&!text_vendorTel.getText().matches(cellPhone)){text_vendorTel.setText("");}
+        if(!text_vendorTel.getText().matches(re)){text_vendorTel.setText("");}
     } 
+    //檢查電話號碼格式
+    private boolean  checkTel(){
+        String phoneNum = "^\\d+?\\-\\d*?\\-\\d*?";
+        String cellPhone = "^\\d{4}\\-\\d{6}\\d*?";
+    	if(!text_vendorTel.getText().matches(phoneNum)&&!text_vendorTel.getText().matches(cellPhone)) return false;
+    	return true;
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -275,6 +291,7 @@ public class Vendor extends javax.swing.JPanel {
         text_paymentTerm = new javax.swing.JTextField();
         scroll_note = new javax.swing.JScrollPane();
         text_note = new javax.swing.JTextArea();
+        label_hint = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(980, 470));
         setPreferredSize(new java.awt.Dimension(980, 470));
@@ -314,7 +331,7 @@ public class Vendor extends javax.swing.JPanel {
         text_vendorTel.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
         text_vendorTel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                text_vendorTelKeyTyped(evt);
+            	text_vendorTelKeyTyped(evt);
             }
         });
         add(text_vendorTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 75, 200, 35));
@@ -342,11 +359,18 @@ public class Vendor extends javax.swing.JPanel {
         scroll_note.setViewportView(text_note);
 
         add(scroll_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 660, -1));
-    }// </editor-fold>                              
+
+        label_hint.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
+        label_hint.setForeground(java.awt.Color.red);
+        label_hint.setText("格式 : 地區碼- XXXX-XXXX");
+        label_hint.setToolTipText("");
+        add(label_hint, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 200, -1));
+    }// </editor-fold>           
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel label_contactPerson;
+    private javax.swing.JLabel label_hint;
     private javax.swing.JLabel label_note;
     private javax.swing.JLabel label_paymentTerm;
     private javax.swing.JLabel label_taxId;

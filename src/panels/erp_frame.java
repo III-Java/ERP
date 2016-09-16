@@ -25,6 +25,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+
 //import erp_frame.myTableModel;
 
 /*
@@ -1977,7 +1978,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = employee.queryData();
 						tableModel.fireTableDataChanged();
-						employee.clearInput(); //0908宜宏
+						employee.clearInput(); 
 					}else{
 						disableBtn();
 					}
@@ -1990,7 +1991,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = attendance.queryData();
 						tableModel.fireTableDataChanged();
-						attendance.clearInput(); //0908宜宏
+						attendance.clearInput(); 
 					}else{
 						disableBtn();
 					}
@@ -2003,7 +2004,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = payRoll.queryData();
 						tableModel.fireTableDataChanged();
-						payRoll.clearInput(); //0908宜宏
+						payRoll.clearInput(); 
 					}else{
 						disableBtn();
 					}
@@ -2016,7 +2017,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = achievement.queryData();
 						tableModel.fireTableDataChanged();
-						achievement.clearInput(); //0908宜宏
+						achievement.clearInput(); 
 					}else{
 						disableBtn();
 					}
@@ -2029,7 +2030,7 @@ public class erp_frame extends JFrame {
 						table_firmData.setModel(tableModel);
 						data = material.queryData();
 						tableModel.fireTableDataChanged();
-						material.clearInput(); //0908宜宏
+						material.clearInput(); 
 					}else{
 						disableBtn();
 					}
@@ -2211,15 +2212,20 @@ public class erp_frame extends JFrame {
 					break;
 				case "銷售報表":
 					if((_emp_autority.get("sales")).equals("yes")){
-						enableBtn();
-						nowLayout.show(panel_dataInput, "salesReport");
+						enableBtn();					
+						salesReport.setDefault();
+						nowLayout.show(panel_dataInput, "salesReport");	
+		        		tableModel = new myTableModel(salesReporterFields);
+		    			table_firmData.setModel(tableModel);
+		    			data = new LinkedList<String[]>();
+		    			tableModel.fireTableDataChanged();
+						break;
 					}
 					else{
 						disableBtn();
 					}
 					
 					break;
-				//宜宏 0908
 				case "網站新聞表":
 					if((_emp_autority.get("webnews")).equals("yes")){
 						enableBtn();
@@ -2235,8 +2241,8 @@ public class erp_frame extends JFrame {
 					break;
 				case "人事資料庫":case "採購資料庫":case "產品資料庫":
 		    	case "庫存資料庫":case "銷售資料庫":case "會計資料庫":
-		    	case "客戶資料庫":case "系統管理庫":case "ERP":  //(9/4)改系統管理庫+ERP
-		    		disableBtn(); //(9/4)預設按鈕失效
+		    	case "客戶資料庫":case "系統管理庫":case "ERP":  
+		    		disableBtn(); 
 					nowLayout.show(panel_dataInput, "empty");
 //					tableModel = new myTableModel(new String[]{""});
 //					data.clear();

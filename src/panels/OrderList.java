@@ -1,4 +1,5 @@
 package panels;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -163,9 +164,8 @@ public class OrderList extends javax.swing.JPanel {
 		String strOrderNum = text_orderNum.getText();
         java.util.Date date = date_orderDate.getDate();        
         String strDate =DateFormat.getDateInstance().format(date);   
-        String strStatus =  combo_status.getSelectedItem().toString();	//已出貨訂單不給修改
 		int isUpdate = 0;
-		if (getUserInputParm() == true && (!strStatus.equals("已出貨"))) {
+		if (getUserInputParm() == true && !isShipped(strOrderNum)) {
 			try {
 				pstmt = conn.prepareStatement(
 						"UPDATE orderList SET customerId=?,orderDate=?,status=?,dispatch=?,note=? WHERE orderNum = ?" );
@@ -254,7 +254,20 @@ public class OrderList extends javax.swing.JPanel {
 		}
 		return data;
 	}  
-    
+	//已出貨訂單不給修改
+    private boolean isShipped(String orderNum){
+        try{
+            pstmt = conn.prepareStatement("SELECT * FROM orderlist WHERE orderNum=?");
+            pstmt.setString(1, orderNum);
+            rs =  pstmt.executeQuery();
+            while(rs.next()){
+            	if(rs.getString("status").equals("已出貨")) return true;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    	return false;
+    }
     
     
 	protected void setInputValue(HashMap<Integer, String> data) {

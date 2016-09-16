@@ -228,6 +228,16 @@ public class Billboard extends javax.swing.JPanel {
 		return isUpdate;
     }
     
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	empList.clear();
+    	empList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	employeeNum_billboard.setModel(new DefaultComboBoxModel(empArray));    	
+    	
+    }
+    
     protected  LinkedList<String[]> search(String value){
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
@@ -257,6 +267,7 @@ public class Billboard extends javax.swing.JPanel {
     
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM billboard");

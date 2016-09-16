@@ -122,7 +122,7 @@ public class Issue extends javax.swing.JPanel {
 		int isUpdate = 0;
 		if (getUserInputParm() == true) {
 			try {
-				pstmt = conn.prepareStatement("UPDATE issue SET complaint=?,price=?,note=?customerId=? WHERE id=?");
+				pstmt = conn.prepareStatement("UPDATE issue SET complaint=?,price=?,note=?,customerId=? WHERE id=?");
 				pstmt.setString(1, text_complaint.getText());
 				pstmt.setString(2, text_price.getText());
 				pstmt.setString(3, text_note.getText());

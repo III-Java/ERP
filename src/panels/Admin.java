@@ -535,7 +535,7 @@ public class Admin extends javax.swing.JPanel {
     	
     }
     
-    private void generateInfo(){ //帶出對應名稱
+    protected void generateInfo(){ //帶出對應名稱
     	//select * from employee where employeeNum = employID
     	try {
 			PreparedStatement getEmp = conn.prepareStatement("select * from employee where employeeNum='"+employID+"'");
@@ -636,8 +636,19 @@ public class Admin extends javax.swing.JPanel {
     	
     }
     
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	empList.clear();    	
+    	empList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	employeeNum_admin.setModel(new DefaultComboBoxModel(empArray));  
+    }
+    
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
+    	generateInfo();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM admin");

@@ -204,6 +204,21 @@ public class Picking extends javax.swing.JPanel {
     }
     
    
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	empList.clear();
+    	matList.clear(); 
+    	
+    	empList.add("");
+    	matList.add(""); 
+    	
+    	//re-update data from db
+    	getIdtoCombolist();    	
+        employeeNum.setModel(new DefaultComboBoxModel(empArray));
+        materialNum.setModel(new DefaultComboBoxModel(matArray));  	
+    	
+    }
+    
+    
   //取得輸入資料
     protected boolean getSelect(){ 
     	boolean isRightData = false;
@@ -246,6 +261,7 @@ public class Picking extends javax.swing.JPanel {
     
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM picking");

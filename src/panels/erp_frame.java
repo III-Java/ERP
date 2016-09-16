@@ -89,7 +89,7 @@ public class erp_frame extends JFrame {
 	String[] productFields = { "產品編號", "品名", "單價", "類別", "備註" };
 
 	// 哲浩
-	String[] issueFields = { "客戶編號", "客訴內容", "金額", "備註" };
+	String[] issueFields = { "編號","客戶編號", "客訴內容", "金額", "備註" };	
 	String[] vendorFields = { "廠商編號", "廠商名稱", "電話", "地址", "統編", "聯絡人", "付款條件", "備註" };
 	String[] orderListFields = { "訂單編號", "客戶編號", "下單日期", "狀態", "配送方式", "備註" };
 	String[] orderItemFields = { "訂單編號", "產品編號", "數量", "備註" };
@@ -98,7 +98,7 @@ public class erp_frame extends JFrame {
 	String logId = null;
 	String[] adminFields = { "員工編號", "員工密碼", "員工資料表", "出缺勤表", "員工考績表", "薪資表", "產品資料表", "原料庫存資料表", "訂單資料表",
 			"訂購項目資料表", "資產管理表", "異常資料表", "客戶資料表", "廠商資料表", "進貨表", "應收帳款管理表", "帳號管理表", "公告管理表", "部門", 
-			"領料表","最新消息","銷售報表","營利報表","部門管理表","備註" };
+			"領料表","網站新聞","銷售報表","營利報表","部門管理表","備註" };
 	String[] purchaseFields = { "No.", "進貨單號", "原料編號", "進貨日期", "進貨廠商編號", "數量", "單位", "單價", "採購人員", "備註" };
 	String[] payableFields = { "應付帳款編號", "進貨廠商編號", "交易日期", "應付日期", "應付金額", "付款方式", "進貨單號", "沖帳日期", "沖帳金額",
 			"沖帳折讓金額", "結案Y/N", "備註" };
@@ -2241,7 +2241,7 @@ public class erp_frame extends JFrame {
 					break;
 				case "人事資料庫":case "採購資料庫":case "產品資料庫":
 		    	case "庫存資料庫":case "銷售資料庫":case "會計資料庫":
-		    	case "客戶資料庫":case "系統管理庫":case "ERP":  
+		    	case "客戶資料庫":case "系統管理庫":case "報表系統":case "ERP":  
 		    		disableBtn(); 
 					nowLayout.show(panel_dataInput, "empty");
 //					tableModel = new myTableModel(new String[]{""});

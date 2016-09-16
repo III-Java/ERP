@@ -462,6 +462,21 @@ public class PayableList extends javax.swing.JPanel {
     	return nowWhat;
     }
     
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	venList.clear();
+    	purList.clear(); 
+//    	paywithList.clear();
+    	
+    	venList.add("");
+    	purList.add(""); 
+//    	paywithList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	purchaseNum_Accn.setModel(new DefaultComboBoxModel(purArray));      
+        vendorNum_Accn.setModel(new DefaultComboBoxModel(venArray));	
+    	
+    }
     
     protected int editDB(){  
 		int isUpdate = 0;
@@ -566,6 +581,7 @@ public class PayableList extends javax.swing.JPanel {
     
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM payablelist");
@@ -687,6 +703,9 @@ public class PayableList extends javax.swing.JPanel {
     		payWith_Accn.setSelectedIndex(0);
     	}
     	repeatPurNum =false; editRepeat=true;
+    	paywithList.clear();
+    	paywithList.add("");
+    	paywithList = new ArrayList<String>();
     }
 
     // Variables declaration - do not modify                     

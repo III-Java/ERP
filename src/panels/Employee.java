@@ -353,6 +353,7 @@ public class Employee extends javax.swing.JPanel {
 		txtNote.setText("");
 		dateBirthday.setCalendar(null);
 	}
+	
 	protected LinkedList<String[]> queryData() {
 		LinkedList<String[]> data = new LinkedList<>();
 
@@ -378,7 +379,7 @@ public class Employee extends javax.swing.JPanel {
 		return data;
 	}
 	
-	protected  LinkedList<String[]> search(String value){
+	protected LinkedList<String[]> search(String value){
 		LinkedList<String[]> data = new LinkedList<>();
 		try {
 			pstmt = con.prepareStatement("SELECT * FROM employee WHERE employeeNum LIKE ? OR name LIKE? OR address LIKE ? OR tel LIKE ? or gender LIKE ? or birthday LIKE ? OR position LIKE ? OR department LIKE ? OR note LIKE ?");

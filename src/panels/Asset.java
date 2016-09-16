@@ -270,8 +270,19 @@ public class Asset extends javax.swing.JPanel {
 		return data;
 	}
     
+    private void updateInTime(){//combo box及時更新資料庫資料    	
+    	depList.clear();
+    	depList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	department_asset.setModel(new DefaultComboBoxModel(depArray));   	
+    	
+    }
+    
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM asset");

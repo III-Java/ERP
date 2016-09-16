@@ -293,7 +293,7 @@ public class Member extends javax.swing.JPanel {
 			pstmt = con.prepareStatement(
 					"SELECT * FROM member WHERE customerId LIKE? OR password LIKE ? OR memberName LIKE ? OR tel LIKE ? OR gender LIKE ?OR address LIKE ? OR note LIKE ?");
 			String query = "%" + value + "%";
-			for (int i = 1; i < 7; i++) {
+			for (int i = 1; i < 8; i++) {
 				pstmt.setString(i, query);
 			}
 			rs = pstmt.executeQuery();

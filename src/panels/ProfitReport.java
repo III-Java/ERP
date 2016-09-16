@@ -1,36 +1,26 @@
 package panels;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Properties;
-
-
 
 public class ProfitReport extends javax.swing.JPanel {
 	
-	private Properties prop;
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	
 	private String year;
 	private String month;
-    private String report;
-    
+    private String report;  
     private int sales;
     private int extend;
-    private int profit;
     public ProfitReport(Connection con) {
+    	this.con = con;
         initComponents();
-        setDBProp();
-        this.con = con;
     }
-    
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
@@ -84,7 +74,7 @@ public class ProfitReport extends javax.swing.JPanel {
            lbSales1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 
            cbReport.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-           cbReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "支出報表", "銷售報表" }));
+           cbReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"","支出報表", "銷售報表" }));
 
            jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
            jLabel3.setText("觀看");
@@ -151,21 +141,19 @@ public class ProfitReport extends javax.swing.JPanel {
                    .addGap(108, 108, 108))
            );
     }// </editor-fold>                        
+        
+    protected void clearInput(){
+    	cbMonth.setSelectedIndex(0);
+    	cbYear.setSelectedIndex(0);
+    	cbReport.setSelectedIndex(0);
+    	lbExpend.setText("");
+    	lbSales1.setText("");
+    	lbProfit.setText("");
+    }
     
-    private void setDBProp() {
-
-  		prop = new Properties();
-  		prop.setProperty("user", "root");
-  		prop.setProperty("password", "");
-  		prop.setProperty("characterEncoding", "UTF-8");
-  		prop.setProperty("useUnicode", "true");
-  		prop.setProperty("useSSL", "False");
-  		try {
-  			con = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
-  		} catch (SQLException e) {
-  			e.printStackTrace();
-  		}
-  	}
+    protected void setReportSelectFirst(){
+    	cbReport.setSelectedIndex(0);
+    }
     
     protected void setLableDetail(){
     	lbSales1.setText(Integer.toString(sales));
@@ -176,6 +164,7 @@ public class ProfitReport extends javax.swing.JPanel {
     protected void getYears(){
     	LinkedList<String> years = new LinkedList<>();
     	years.clear();
+    	years.addFirst("");
     	try{
     		pstmt = con.prepareStatement("SELECT orderDate FROM orderlist");
     		rs = pstmt.executeQuery();
@@ -185,12 +174,10 @@ public class ProfitReport extends javax.swing.JPanel {
     			if(!years.contains(year)){
     				years.add(year);
     			}	
-    		}
-    		
+    		}    		
     		String[] arrayYear = new String[years.size()];
     		years.toArray(arrayYear);
-    		Arrays.sort(arrayYear);
-    		
+    		Arrays.sort(arrayYear);  		
     		cbYear.removeAllItems();
     		for(int i = 0 ;i<arrayYear.length; i++){
     			cbYear.addItem(arrayYear[i]);
@@ -205,6 +192,7 @@ public class ProfitReport extends javax.swing.JPanel {
     	cbMonth.removeAllItems();
     	LinkedList<String> months = new LinkedList<>();
     	months.clear();
+    	months.addFirst("");
     	if(cbYear.getItemCount() >0){
     		String year = "%" + cbYear.getSelectedItem().toString() + "%";
         	try{
@@ -242,7 +230,7 @@ public class ProfitReport extends javax.swing.JPanel {
     	sales = 0;
 		LinkedList<String[]> data = new LinkedList<>();
 		year = cbYear.getSelectedItem().toString();
-		month = cbMonth.getSelectedItem().toString();
+		month = cbMonth.getSelectedItem().toString();	
 		try{
 			String QueryMonth = "%" + year + "-" + month + "%";
 			pstmt = con.prepareStatement("SELECT orderitem.orderNum, orderitem.productNum ,product.productName,orderitem.qty,product.price, (orderitem.qty * product.price) AS TOTAL FROM orderitem ,product WHERE orderNum IN(SELECT orderNum FROM orderlist WHERE orderDate LIKE ? AND status = ?) AND orderitem.productNum = (product.productNum)");
@@ -273,9 +261,8 @@ public class ProfitReport extends javax.swing.JPanel {
     	LinkedList<String[]> data = new LinkedList<>();
     	year = cbYear.getSelectedItem().toString();
 		month = cbMonth.getSelectedItem().toString();
-		int ExtendMoney = 0;
     	try{
-    		String QueryMonth = "%" + year + "-" + month + "%";
+    		String QueryMonth = "%" + year + "/" + month + "%";
 			pstmt = con.prepareStatement("SELECT purchaseDate, purchaseNum,materialNum,vendorNum,qty,price,(qty * price) AS TOTAL, employeeNum,note FROM purchase WHERE purchaseDate LIKE ?");
 			pstmt.setString(1, QueryMonth);
 			rs = pstmt.executeQuery();
@@ -304,10 +291,7 @@ public class ProfitReport extends javax.swing.JPanel {
     private void cbYearActionPerformed(java.awt.event.ActionEvent evt) {                                       
     	getMonths();
     }                               
-    
-                                     
-
-    // Variables declaration - do not modify                     
+                     
     private javax.swing.JComboBox<String> cbMonth;
     private javax.swing.JComboBox<String> cbReport;
     private javax.swing.JComboBox<String> cbYear;
@@ -320,6 +304,5 @@ public class ProfitReport extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lbExpend;
     private javax.swing.JLabel lbProfit;
-    private javax.swing.JLabel lbSales1;
-    // End of variables declaration                   
+    private javax.swing.JLabel lbSales1;                
 }

@@ -1,18 +1,13 @@
 package panels;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Properties;
-
-import javax.swing.JOptionPane;
 
 public class Material extends javax.swing.JPanel {
 
-	private Properties prop;
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -23,11 +18,9 @@ public class Material extends javax.swing.JPanel {
 	private String vendorNum;
 	private String note;
     public Material(Connection con) {
+    	this.con = con;
         initComponents();
-        setDBProp();
-        this.con = con;
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -154,21 +147,6 @@ public class Material extends javax.swing.JPanel {
          );
     }// </editor-fold>                        
     
-    private void setDBProp() {
-
-		prop = new Properties();
-		prop.setProperty("user", "root");
-		prop.setProperty("password", "");
-		prop.setProperty("characterEncoding", "UTF-8");
-		prop.setProperty("useUnicode", "true");
-		prop.setProperty("useSSL", "False");
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-    
     private void setVendorName() {
 		String vendorName = "";
 		try {
@@ -182,7 +160,6 @@ public class Material extends javax.swing.JPanel {
 		} catch (SQLException ee) {
 			System.out.println(ee.toString());
 		}
-
     }
     
     protected void setInputValue(HashMap<Integer, String> data) {
@@ -204,6 +181,7 @@ public class Material extends javax.swing.JPanel {
     	lbVendorName.setText("");
     	cbUnit.setSelectedIndex(0);
     }
+    
     private boolean getUserInputParm() {
     	boolean isRightData = false;
     	materialName = txtMaterialName.getText();
@@ -212,9 +190,6 @@ public class Material extends javax.swing.JPanel {
     	vendorNum = txtVendorNum.getText();
     	note = txtNote.getText();
     	if(materialName.equals("")||qty<=0||vendorNum.equals("")||unit.equals("")||lbVendorName.getText().equals("查無此廠商")){
-    		isRightData = false;
-    	}
-    	else if (isDuplicatedData() == true){
     		isRightData = false;
     	}
     	else{
@@ -256,7 +231,7 @@ public class Material extends javax.swing.JPanel {
     }
     protected int insertData() {
 		int isInsert = 0;
-		if(getUserInputParm() == true){
+		if(getUserInputParm() == true && isDuplicatedData() == false){
 			try {
 				pstmt = con.prepareStatement("INSERT INTO material(materialName,qty,unit,vendorNum,note)VALUES(?,?,?,?,?)");
 				pstmt.setString(1, materialName);
@@ -374,11 +349,10 @@ public class Material extends javax.swing.JPanel {
 			System.out.println(ee.toString());
 		}
 		if (vendorNum.equals("")) {
-			//JOptionPane.showMessageDialog(txtVendorNum, "查無此廠商");
 			lbVendorName.setText("查無此廠商");
 		}
     }       
-    // Variables declaration - do not modify                     
+   
     private javax.swing.JComboBox<String> cbUnit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -392,6 +366,5 @@ public class Material extends javax.swing.JPanel {
     private javax.swing.JSpinner spQty;
     private javax.swing.JTextField txtMaterialName;
     private javax.swing.JEditorPane txtNote;
-    private javax.swing.JTextField txtVendorNum;
-    // End of variables declaration                   
+    private javax.swing.JTextField txtVendorNum;      
 }

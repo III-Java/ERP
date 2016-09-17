@@ -1,4 +1,5 @@
 package panels;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -55,6 +56,7 @@ public class OrderItem extends javax.swing.JPanel {
        products.put("memberNum", prodNum);
        products.put("memberName", prodName);
        combo_productNum.setModel(new javax.swing.DefaultComboBoxModel<>(prodNum));
+       combo_orderNum.setModel(new javax.swing.DefaultComboBoxModel<>(getOrderList()));
     }
 	private void setDBProp() {
 
@@ -73,7 +75,7 @@ public class OrderItem extends javax.swing.JPanel {
 	//判斷input有無空白
 	private boolean getUserInputParm() {
 		boolean isRightData = false;
-		if (text_orderNum.getText().equals("") 
+		if (combo_orderNum.getSelectedItem().toString().equals("") 
 				|| combo_productNum.getSelectedItem().toString().equals("")
 				|| text_qty.getText().equals("")) {
 			isRightData = false;
@@ -89,7 +91,7 @@ public class OrderItem extends javax.swing.JPanel {
         try{
             pstmt = conn.prepareStatement(
                     "INSERT INTO orderitem(orderNum,productNum,qty,note) VALUES('"
-                            + ""+text_orderNum.getText()+"','"
+                            + ""+combo_orderNum.getSelectedItem().toString()+"','"
                             + ""+combo_productNum.getSelectedItem().toString()+"','"
                             + ""+text_qty.getText()+"','"
                             + ""+text_note.getText()+"')");
@@ -106,10 +108,10 @@ public class OrderItem extends javax.swing.JPanel {
 
 	protected int delData(){
 		int isDel = 0;
-		if(!text_orderNum.getText().equals("")){
+		if(!combo_orderNum.getSelectedItem().toString().equals("")){
 			try{
 				pstmt = conn.prepareStatement("DELETE FROM orderItem WHERE orderNum = ? AND productNum = ?");
-				pstmt.setString(1, text_orderNum.getText());
+				pstmt.setString(1, combo_orderNum.getSelectedItem().toString());
 				pstmt.setString(2, combo_productNum.getSelectedItem().toString());
 				isDel = pstmt.executeUpdate();
 				clearInput();
@@ -123,7 +125,7 @@ public class OrderItem extends javax.swing.JPanel {
 	}
     
 	protected int updateData() {
-		String strorderNum = text_orderNum.getText();
+		String strorderNum = combo_orderNum.getSelectedItem().toString();
 		String strproductNum = combo_productNum.getSelectedItem().toString();
 		int isUpdate = 0;
 		if (getUserInputParm() == true) {
@@ -197,7 +199,7 @@ public class OrderItem extends javax.swing.JPanel {
 	}
     
 	protected void setInputValue(HashMap<Integer, String> data) {
-		text_orderNum.setText(data.get(0));
+		combo_orderNum.setSelectedItem(data.get(0));
 		combo_productNum.setSelectedItem(data.get(1));
 		nowProductNum = data.get(1);
 		text_qty.setText(data.get(2));	
@@ -211,7 +213,7 @@ public class OrderItem extends javax.swing.JPanel {
     }
     
     protected void clearInput(){
-        text_orderNum.setText("");
+    	combo_orderNum.setSelectedItem("");
         combo_productNum.setSelectedIndex(0);
         text_qty.setText("");      
         text_note.setText("");
@@ -235,21 +237,40 @@ public class OrderItem extends javax.swing.JPanel {
             return null;
         }
     }
+    private  String[] getOrderList(){
+   	 LinkedList<String[]> rows = new LinkedList<String[]>();
+       try{
+           pstmt = conn.prepareStatement("SELECT * FROM orderlist");
+           rs =  pstmt.executeQuery();
+           while(rs.next()){
+               String[] row = new String[6];
+               row[0] = rs.getString("orderNum");
+               row[1] = rs.getString("customerId");
+               row[2] = rs.getString("orderDate");
+               row[3] = rs.getString("status");
+               row[4] = rs.getString("dispatch");
+               row[5] = rs.getString("note");
+               rows.add(row);
+           } 
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+       String [] list = new String[rows.size()+1];
+       list[0] = "";
+       for(int i = 1; i < list.length;i++){
+    	   list[i] = rows.get(i-1)[0];
+       }
+       return list;
+   }
+    
+    
+    
     
     private void text_qtyKeyTyped(java.awt.event.KeyEvent evt) {                                     
         String re = "[1-9]\\d*?";
         if(!text_qty.getText().matches(re))
         	 text_qty.setText("");
     }                                    
-
-    private void text_orderNumKeyTyped(java.awt.event.KeyEvent evt) {                                          
-         String re = "\\d*?";
-        if(!text_orderNum.getText().matches(re))
-        	 text_orderNum.setText("");
-    }     
-    
-    
-    
 
     @SuppressWarnings("unchecked")
  // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -259,12 +280,12 @@ public class OrderItem extends javax.swing.JPanel {
         label_productNum = new javax.swing.JLabel();
         label_qty = new javax.swing.JLabel();
         label_note = new javax.swing.JLabel();
-        text_orderNum = new javax.swing.JTextField();
         text_qty = new javax.swing.JTextField();
         scroll_note = new javax.swing.JScrollPane();
         text_note = new javax.swing.JTextArea();
         combo_productNum = new javax.swing.JComboBox<>();
         label_productName = new javax.swing.JLabel();
+        combo_orderNum = new javax.swing.JComboBox<>();
 
         setMinimumSize(new java.awt.Dimension(980, 470));
         setPreferredSize(new java.awt.Dimension(980, 470));
@@ -285,14 +306,6 @@ public class OrderItem extends javax.swing.JPanel {
         label_note.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_note.setText("備註");
         add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
-
-        text_orderNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        text_orderNum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                text_orderNumKeyTyped(evt);
-            }
-        });
-        add(text_orderNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 75, 200, 35));
 
         text_qty.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         text_qty.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -319,7 +332,13 @@ public class OrderItem extends javax.swing.JPanel {
 
         label_productName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(label_productName, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 75, 150, 40));
-    }// </editor-fold>           
+
+        combo_orderNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(combo_orderNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 200, 35));
+    }// </editor-fold>                        
+    
+    
+    
     private void combo_productNumActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         String slt = combo_productNum.getSelectedItem().toString();
         for(int i = 0; i < products.get("memberNum").length;i++){
@@ -330,6 +349,7 @@ public class OrderItem extends javax.swing.JPanel {
     }     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combo_orderNum;
     private javax.swing.JComboBox<String> combo_productNum;
     private javax.swing.JLabel label_note;
     private javax.swing.JLabel label_orderNum;
@@ -338,7 +358,6 @@ public class OrderItem extends javax.swing.JPanel {
     private javax.swing.JLabel label_qty;
     private javax.swing.JScrollPane scroll_note;
     private javax.swing.JTextArea text_note;
-    private javax.swing.JTextField text_orderNum;
     private javax.swing.JTextField text_qty;
     // End of variables declaration//GEN-END:variables
 }

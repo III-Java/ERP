@@ -135,10 +135,12 @@ public class PayableList extends javax.swing.JPanel {
         purchaseNum_Accn.setModel(new DefaultComboBoxModel(purArray));      
 //        purchaseNum_Accn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(purchaseNum_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 121, 180, 30));
-
+        
+        payDue_Accn.setDateFormatString("yyyy/MM/dd");
         payDue_Accn.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(payDue_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 255, 180, 30));
 
+        payDate_Accn.setDateFormatString("yyyy/MM/dd");
         payDate_Accn.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(payDate_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 51, 216, 30));
 
@@ -194,6 +196,7 @@ public class PayableList extends javax.swing.JPanel {
         });
         add(vendorNum_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 51, 180, 32));
 
+        transactionDate_Accn.setDateFormatString("yyyy/MM/dd");
         transactionDate_Accn.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(transactionDate_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 186, 180, 30));
     }// </editor-fold>    
@@ -459,6 +462,21 @@ public class PayableList extends javax.swing.JPanel {
     	return nowWhat;
     }
     
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	venList.clear();
+    	purList.clear(); 
+//    	paywithList.clear();
+    	
+    	venList.add("");
+    	purList.add(""); 
+//    	paywithList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	purchaseNum_Accn.setModel(new DefaultComboBoxModel(purArray));      
+        vendorNum_Accn.setModel(new DefaultComboBoxModel(venArray));	
+    	
+    }
     
     protected int editDB(){  
 		int isUpdate = 0;
@@ -563,6 +581,7 @@ public class PayableList extends javax.swing.JPanel {
     
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM payablelist");
@@ -684,6 +703,9 @@ public class PayableList extends javax.swing.JPanel {
     		payWith_Accn.setSelectedIndex(0);
     	}
     	repeatPurNum =false; editRepeat=true;
+    	paywithList.clear();
+    	paywithList.add("");
+    	paywithList = new ArrayList<String>();
     }
 
     // Variables declaration - do not modify                     

@@ -80,6 +80,7 @@ public class Asset extends javax.swing.JPanel {
         assetLabel04.setText("使用部門");
         add(assetLabel04, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 264, -1, 30));
 
+        buyDate_asset.setDateFormatString("yyyy/MM/dd");
         buyDate_asset.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
         add(buyDate_asset, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 194, 180, 30));
 
@@ -269,8 +270,19 @@ public class Asset extends javax.swing.JPanel {
 		return data;
 	}
     
+    private void updateInTime(){//combo box及時更新資料庫資料    	
+    	depList.clear();
+    	depList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	department_asset.setModel(new DefaultComboBoxModel(depArray));   	
+    	
+    }
+    
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM asset");
@@ -299,7 +311,7 @@ public class Asset extends javax.swing.JPanel {
     	assetName_asset.setText(data.get(1));
     	
     	try {
-			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.get(4));
+			java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(4));
 			buyDate_asset.setDate(date);
 		} catch (ParseException e) {
 			

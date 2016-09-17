@@ -175,7 +175,7 @@ public class Login extends javax.swing.JFrame {
     private void onduty_logActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	getInput();    	
     	if(!noInput){    
-    		checkRecord();
+    		checkRecord();//今天是否打過卡
 	    	dutyCheck();//check account passwd pwOk ok
 	    	if(idOk & pwOk & !hasOnDutyRecord){ //帳密正確
 	    		onduty = "on";
@@ -249,13 +249,15 @@ public class Login extends javax.swing.JFrame {
     }
     
     //抓到輸入欄位資料
-    private void getInput(){
+    private void getInput(){    	
     	logId = employID_login.getText();
     	logPW = new String(employPW_login.getPassword());
     	editPW = new String(employPwEdit_login.getPassword());
     	
     	if(logId.equals("") || logPW.equals("")){
     		noInput=true;
+    	}else{
+    		noInput=false;
     	}
     }
     

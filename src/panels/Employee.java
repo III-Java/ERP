@@ -21,7 +21,8 @@ public class Employee extends javax.swing.JPanel {
 	private String department;
 	private String note;
 	private String gender;
-	private Properties prop;
+	private String name_Org;
+	private String tel_Org;
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -36,7 +37,6 @@ public class Employee extends javax.swing.JPanel {
 	
 
 	private void initComponents() {
-
 		 bgGender = new javax.swing.ButtonGroup();
 	        jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
@@ -246,6 +246,43 @@ public class Employee extends javax.swing.JPanel {
 		return positions;
 	}
 	
+	private boolean isDuplicatedData(){
+		try{
+			pstmt = con.prepareStatement("SELECT name,tel FROM employee WHERE name = ? AND tel = ?");
+			pstmt.setString(1, name);
+			pstmt.setString(2,tel);	
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		}
+		catch(SQLException ee){
+			System.out.println(ee.toString());
+		}
+		return false;
+	}
+	
+	private boolean checkUpdateData(){
+		if(!name.equals(name_Org)||!tel.equals(tel_Org)){
+			try{
+				pstmt = con.prepareStatement("SELECT name,tel FROM employee WHERE name = ? AND tel = ?");
+				pstmt.setString(1, name);
+				pstmt.setString(2,tel);	
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			catch(SQLException ee){
+				System.out.println(ee.toString());
+			}
+		}
+		return true;
+	}
+	
 	private boolean getUserInputParm() {
 		boolean isRightData = false;
 
@@ -270,10 +307,9 @@ public class Employee extends javax.swing.JPanel {
 		return isRightData;
 	}
 	
-	protected int insertData() {
-		
+	protected int insertData() {	
 		int isInsert = 0;
-		if (getUserInputParm() == true) {
+		if (getUserInputParm() == true && isDuplicatedData() == false) {
 			try {
 				pstmt = con.prepareStatement(
 						"INSERT INTO employee(name,address,gender,birthday,position,department,tel,note) VALUES(?,?,?,?,?,?,?,?)");
@@ -288,7 +324,6 @@ public class Employee extends javax.swing.JPanel {
 				isInsert = pstmt.executeUpdate();
 
 			} catch (SQLException e) {
-
 				e.printStackTrace();
 			}
 		}
@@ -299,7 +334,7 @@ public class Employee extends javax.swing.JPanel {
 	protected int updateData() {
 		String strEmployeeNum = lbEmployeeNum.getText();
 		int isUpdate = 0;
-		if (getUserInputParm() == true) {
+		if (getUserInputParm() == true && checkUpdateData() == true) {
 			try {
 				pstmt = con.prepareStatement(
 						"UPDATE employee SET name=?,address=?,gender=?,birthday=?,position=?,department=?,tel=?,note=? WHERE employeeNum=?" );
@@ -353,6 +388,7 @@ public class Employee extends javax.swing.JPanel {
 		txtNote.setText("");
 		dateBirthday.setCalendar(null);
 	}
+	
 	protected LinkedList<String[]> queryData() {
 		LinkedList<String[]> data = new LinkedList<>();
 
@@ -378,7 +414,7 @@ public class Employee extends javax.swing.JPanel {
 		return data;
 	}
 	
-	protected  LinkedList<String[]> search(String value){
+	protected LinkedList<String[]> search(String value){
 		LinkedList<String[]> data = new LinkedList<>();
 		try {
 			pstmt = con.prepareStatement("SELECT * FROM employee WHERE employeeNum LIKE ? OR name LIKE? OR address LIKE ? OR tel LIKE ? or gender LIKE ? or birthday LIKE ? OR position LIKE ? OR department LIKE ? OR note LIKE ?");
@@ -409,8 +445,10 @@ public class Employee extends javax.swing.JPanel {
 	protected void setInputValue(HashMap<Integer, String> data) {
 		lbEmployeeNum.setText(data.get(0));
 		txtName.setText(data.get(1));
+		name_Org = data.get(1);
 		txtAddress.setText(data.get(2));
 		txtTel.setText(data.get(3));
+		tel_Org = data.get(3);
 		if (data.get(4).equals("男")) {
 			rbMale.setSelected(true);
 		} else {

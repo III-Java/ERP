@@ -96,6 +96,7 @@ public class Purchase extends javax.swing.JPanel {
         purchaseLabel04.setText("採購人員");
         add(purchaseLabel04, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 260, -1, 30));
 
+        purchaseDate_Purc.setDateFormatString("yyyy/MM/dd");
         purchaseDate_Purc.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(purchaseDate_Purc, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 195, 180, 30));
 
@@ -177,7 +178,7 @@ public class Purchase extends javax.swing.JPanel {
         vendorNum_Purc.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
 //        vendorNum_Purc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         vendorNum_Purc.setModel(new DefaultComboBoxModel(venArray));
-
+  
         vendorNum_Purc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vendorNum_PurcActionPerformed(evt);
@@ -382,8 +383,27 @@ public class Purchase extends javax.swing.JPanel {
 		return data;
 	}
   
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	empList.clear();
+    	venList.clear(); 
+    	matList.clear();
+    	
+    	empList.add("");
+    	venList.add(""); 
+    	matList.add("");
+    	
+    	//re-update data from db
+    	getIdtoCombolist();    	
+    	vendorNum_Purc.setModel(new DefaultComboBoxModel(venArray));
+        employNum_Purc.setModel(new DefaultComboBoxModel(empArray));
+        materialNum_Purc.setModel(new DefaultComboBoxModel(matArray));      	
+    	
+    }
+    
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();//re-update data from db
+
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM purchase");
@@ -522,7 +542,7 @@ public class Purchase extends javax.swing.JPanel {
     	
     	//get jdateChooser value
     	purDate  = ((JTextField)purchaseDate_Purc.getDateEditor().getUiComponent()).getText();
-    	
+    
     	//combobox get selected  & use combobox get empName-->in each listener
     	if (purid.equals("") || purQty.equals("") || purPrice.equals("") || vendorNo.equals("") || materilNo.equals("")
 			|| empNo.equals("")||purDate.equals("") || pUnit.equals("")) {

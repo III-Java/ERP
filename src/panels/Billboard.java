@@ -69,6 +69,7 @@ public class Billboard extends javax.swing.JPanel {
         billboardLabel03.setText("公告維護者");
         add(billboardLabel03, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 189, -1, 30));
 
+        issueDate_billboard.setDateFormatString("yyyy/MM/dd");
         issueDate_billboard.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(issueDate_billboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 123, 180, 30));
 
@@ -227,6 +228,16 @@ public class Billboard extends javax.swing.JPanel {
 		return isUpdate;
     }
     
+    private void updateInTime(){//combo box及時更新資料庫資料
+    	empList.clear();
+    	empList.add("");
+    	
+    	//re-update data from db
+    	getEmpIdlist();    	
+    	employeeNum_billboard.setModel(new DefaultComboBoxModel(empArray));    	
+    	
+    }
+    
     protected  LinkedList<String[]> search(String value){
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
@@ -256,6 +267,7 @@ public class Billboard extends javax.swing.JPanel {
     
     protected LinkedList<String[]> queryData() {
     	getDefault();
+    	updateInTime();
 		LinkedList<String[]> data = new LinkedList<>();
 		try{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM billboard");

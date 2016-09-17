@@ -80,11 +80,12 @@ public class WebNews extends javax.swing.JPanel {
 	        rbPublish.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        rbPublish.setText("是");
 	        add(rbPublish, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 58, -1, -1));
-
+	        bgPublish.add(rbPublish);
+	        
 	        rbPrivate.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        rbPrivate.setText("否");
 	        add(rbPrivate, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 58, -1, -1));
-
+	        bgPublish.add(rbPrivate);
 	        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
 	        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(543, 140, -1, -1));
 
@@ -149,7 +150,7 @@ public class WebNews extends javax.swing.JPanel {
 					System.out.println(e.toString());
 				}
 			} else {
-				lbFilePath.setText("檔案類型須為jpg");
+				lbFilePath.setText("檔案類型須為jpg或png");
 			}
 		}
 
@@ -311,7 +312,7 @@ public class WebNews extends javax.swing.JPanel {
 	private boolean isJPGFile() {
 		if (filePath != null) {
 			String fileType = filePath.substring(filePath.length() - 3, filePath.length()).toLowerCase();
-			if (fileType.equals("jpg")) {
+			if (fileType.equals("jpg")||fileType.equals("png")) {
 				return true;
 			}
 		}
@@ -346,7 +347,6 @@ public class WebNews extends javax.swing.JPanel {
 			JOptionPane.showMessageDialog(btnWatchFile, "未選擇一個檔案");
 		}
 	}
-
 	private javax.swing.ButtonGroup bgPublish;
 	private javax.swing.JButton btnChooseFile;
 	private javax.swing.JButton btnWatchFile;

@@ -280,7 +280,7 @@ public class Purchase extends javax.swing.JPanel {
     	}
     }
     
-    public boolean checkRepeatPurchase(){ //單號+料號+廠商編號+數量=pk來比對    
+    public boolean checkRepeatPurchase(){ //單號+料號+廠商編號+數量=pk來比對       	
     	getSelect();
     	try{	    		    		
 	    	PreparedStatement checkPur = conn.prepareStatement("select * from purchase"); 
@@ -434,14 +434,15 @@ public class Purchase extends javax.swing.JPanel {
 		materialNum_Purc.setSelectedItem(data.get(2));
 		materN();
 		
-		unit_Purc.setSelectedItem(data.get(6));
-		
+		unit_Purc.setSelectedItem(data.get(6));		
 
 		try {
-			java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(3));
-			purchaseDate_Purc.setDate(date);
+			if(data.get(3) != null || !data.get(3).equals("")){
+				java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(3));
+				purchaseDate_Purc.setDate(date);
+			}
 		} catch (ParseException e) {
-			
+			System.out.println("parse xx pur");
 			e.printStackTrace();
 		}
 		
@@ -456,6 +457,7 @@ public class Purchase extends javax.swing.JPanel {
 		note_Purc.setText(data.get(9));
 
 		SQLID.setText(data.get(0));		
+		
 	}
     
     
@@ -542,20 +544,22 @@ public class Purchase extends javax.swing.JPanel {
     	
     	//get jdateChooser value
     	purDate  = ((JTextField)purchaseDate_Purc.getDateEditor().getUiComponent()).getText();
-    
+    System.out.println("GET SELECT-01");
     	//combobox get selected  & use combobox get empName-->in each listener
     	if (purid.equals("") || purQty.equals("") || purPrice.equals("") || vendorNo.equals("") || materilNo.equals("")
 			|| empNo.equals("")||purDate.equals("") || pUnit.equals("")) {
 			isRightData = false;
+		
 		} else {
 			isRightData = true;
+
 		}
 		return isRightData;
     }
 
     protected int insertDB(){
     	int isInsert = 0;
-    	if (getSelect() == true) {
+    	if (getSelect() == true & !checkRepeatPurchase()) {
 	    	String sql = "insert into purchase(purchaseNum,materialNum,purchaseDate,vendorNum,qty,"
 	    			+ "price,employeeNum,note,unit) values(?,?,?,?,?,?,?,?,?)";    	
 	    	try{	    			    		

@@ -1348,10 +1348,10 @@ public class erp_frame extends JFrame {
 			case "進貨表":
 				ifrepeat = purchase.checkRepeatPurchase();
 				if(!ifrepeat){
-					isInsert = purchase.insertDB();
-					data = purchase.queryData();
-					tableModel.fireTableDataChanged();
+					isInsert = purchase.insertDB();					
 				}
+				data = purchase.queryData();
+				tableModel.fireTableDataChanged();
 				break;
 			case "應付帳款管理表":
 				ifPayOk = payableList.payCheck();

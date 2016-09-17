@@ -10,6 +10,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 
 public class Member extends javax.swing.JPanel {
 	private String customerId;
@@ -29,149 +30,119 @@ public class Member extends javax.swing.JPanel {
 		initComponents();
 	}
 
-	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">
+	@SuppressWarnings("unchecked")	
 	private void initComponents() {
+        gender_member = new javax.swing.ButtonGroup();
+        label_customerId = new javax.swing.JLabel();
+        label_password = new javax.swing.JLabel();
+        label_memberName = new javax.swing.JLabel();
+        label_note = new javax.swing.JLabel();
+        label_tel = new javax.swing.JLabel();
+        label_gender = new javax.swing.JLabel();
+        label_address = new javax.swing.JLabel();
+        text_customerId = new javax.swing.JTextField();
+        text_password = new javax.swing.JTextField();
+        text_memberName = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        text_note = new javax.swing.JTextArea();
+        text_tel = new javax.swing.JTextField();
+        radio_male = new javax.swing.JRadioButton();
+        radio_female = new javax.swing.JRadioButton();
+        text_address = new javax.swing.JTextField();
 
-		label_customerId = new javax.swing.JLabel();
-		label_password = new javax.swing.JLabel();
-		label_memberName = new javax.swing.JLabel();
-		label_tel = new javax.swing.JLabel();
-		label_note = new javax.swing.JLabel();
-		jScrollPane2 = new javax.swing.JScrollPane();
-		text_customerId = new javax.swing.JTextField();
-		text_password = new javax.swing.JTextField();
-		text_memberName = new javax.swing.JTextField();
-		text_tel = new javax.swing.JTextField();
-		label_gender = new javax.swing.JLabel();
-		text_gender = new javax.swing.JTextField();
-		label_address = new javax.swing.JLabel();
-		text_address = new javax.swing.JTextField();
+        setMaximumSize(new java.awt.Dimension(980, 470));
+        setMinimumSize(new java.awt.Dimension(980, 470));
+        setName(""); // NOI18N
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-		setPreferredSize(new java.awt.Dimension(980, 470));
+        label_customerId.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_customerId.setText("客戶編號");
+        add(label_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 63, -1, -1));
 
-		label_customerId.setFont(new Font("微軟正黑體", Font.PLAIN, 15)); // NOI18N
-		label_customerId.setText("客戶編號");
+        label_password.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_password.setText("客戶密碼");
+        add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 141, -1, -1));
 
-		label_password.setFont(new Font("微軟正黑體", Font.PLAIN, 15)); // NOI18N
-		label_password.setText("客戶密碼");
+        label_memberName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_memberName.setText("客戶名稱");
+        add(label_memberName, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 219, -1, -1));
 
-		label_memberName.setFont(new Font("微軟正黑體", Font.PLAIN, 15)); // NOI18N
-		label_memberName.setText("客戶名稱");
+        label_note.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_note.setText("備註");
+        add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 293, 60, -1));
 
-		label_tel.setFont(new Font("微軟正黑體", Font.PLAIN, 15)); // NOI18N
-		label_tel.setText("電話");
+        label_tel.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_tel.setText("電話");
+        add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 63, 60, -1));
 
-		label_note.setFont(new Font("微軟正黑體", Font.PLAIN, 14)); // NOI18N
-		label_note.setText("備註");
-		label_note.setToolTipText("");
+        label_gender.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_gender.setText("性別");
+        add(label_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 141, 60, -1));
 
-		text_customerId.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        label_address.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        label_address.setText("地址");
+        add(label_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 219, 60, -1));
 
-		text_password.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        text_customerId.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(text_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 60, 210, -1));
 
-		text_memberName.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        text_password.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(text_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 138, 210, -1));
 
-		text_tel.setFont(new java.awt.Font("微軟正黑體", 0, 14));
+        text_memberName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(text_memberName, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 216, 210, -1));
 
-		label_gender.setFont(new Font("微軟正黑體", Font.PLAIN, 15)); // NOI18N
-		label_gender.setText("性別");
+        text_note.setColumns(20);
+        text_note.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        text_note.setRows(5);
+        jScrollPane1.setViewportView(text_note);
 
-		text_gender.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 293, 687, -1));
 
-		label_address.setFont(new Font("微軟正黑體", Font.PLAIN, 15)); // NOI18N
-		label_address.setText("地址");
+        text_tel.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        text_tel.setToolTipText("格式：0212345678,0912345678");
+        text_tel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                text_telKeyTyped(evt);
+            }
+        });
+        add(text_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 60, 250, -1));
 
-		text_address.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
-		text_note = new javax.swing.JTextArea();
-		
-				text_note.setColumns(20);
-				text_note.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
-				text_note.setRows(5);
+        gender_member.add(radio_male);
+        radio_male.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        radio_male.setText("男");
+        add(radio_male, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 137, 98, -1));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addGap(66)
-					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(label_note)
-						.addComponent(label_customerId)
-						.addComponent(label_password)
-						.addComponent(label_memberName))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(text_memberName, Alignment.TRAILING)
-								.addComponent(text_password)
-								.addComponent(text_customerId, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_tel)
-								.addComponent(label_gender)
-								.addComponent(label_address))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(text_tel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-								.addComponent(text_address, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-								.addComponent(text_gender, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(text_note, GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(48, Short.MAX_VALUE))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addGap(53)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(layout.createSequentialGroup()
-									.addComponent(label_tel)
-									.addGap(13))
-								.addGroup(layout.createSequentialGroup()
-									.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(text_tel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(text_customerId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(label_gender)
-								.addComponent(text_gender, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(text_password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(label_address)
-								.addComponent(text_address, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(text_memberName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_memberName)))
-						.addGroup(layout.createSequentialGroup()
-							.addComponent(label_customerId)
-							.addGap(13)
-							.addComponent(label_password)))
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addGap(64)
-							.addGroup(layout.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_note)
-								.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(layout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(text_note, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(125, Short.MAX_VALUE))
-		);
-		this.setLayout(layout);
-	}// </editor-fold>
+        gender_member.add(radio_female);
+        radio_female.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        radio_female.setText("女");
+        add(radio_female, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 137, 83, -1));
+
+        text_address.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(text_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 216, 250, -1));
+    }// </editor-fold>                        
+
+    private void text_telKeyTyped(java.awt.event.KeyEvent evt) {                                  
+    	 char c = evt.getKeyChar();
+         if(!(Character.isDigit(c)) || (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+             getToolkit().beep();
+         	evt.consume();
+         }
+    }     
 
 	protected void setInputValue(HashMap<Integer, String> data) {
 		text_customerId.setText(data.get(0));
 		text_password.setText(data.get(1));
 		text_memberName.setText((data.get(2)));
 		text_tel.setText(data.get(3));
-		text_gender.setText(data.get(4));
 		text_address.setText(data.get(5));
 		text_note.setText(data.get(6));
+		
+		if (data.get(4).equals("男")) {
+			radio_male.setSelected(true);
+		} else if(data.get(4).equals("女")){
+			radio_female.setSelected(true);
+		}
 	}
 
 	protected void clearInput() {
@@ -179,9 +150,16 @@ public class Member extends javax.swing.JPanel {
 		text_password.setText("");
 		text_memberName.setText("");
 		text_tel.setText("");
-		text_gender.setText("");
 		text_address.setText("");
 		text_note.setText("");
+		gender_member.clearSelection();		
+		customerId ="";
+		password ="";
+		memberName ="";
+		tel ="";
+		gender ="";
+		address ="";
+		note ="";
 	}
 
 	private boolean getUserInputParm() {
@@ -190,15 +168,17 @@ public class Member extends javax.swing.JPanel {
 		password = text_password.getText();
 		memberName = text_memberName.getText();
 		tel = text_tel.getText();
-		gender = text_gender.getText();
 		address = text_address.getText();
 		note = text_note.getText();
-		if (customerId.equals("") || password.equals("")) {
+    	if(radio_male.isSelected()){gender = "男";}else if(radio_female.isSelected()){gender = "女";}   	
+    	
+		if (customerId.equals("") || password.equals("") ||memberName.equals("") ||tel.equals("") ||gender.equals("")) {
 			isRightData = false;
 		} else {
 			isRightData = true;
 		}
-		return isRightData;
+		return isRightData;		
+
 	}
 
 	protected int insertData() {
@@ -315,19 +295,21 @@ public class Member extends javax.swing.JPanel {
 		return data;
 	}
 
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JLabel label_address;
-	private javax.swing.JLabel label_customerId;
-	private javax.swing.JLabel label_gender;
-	private javax.swing.JLabel label_memberName;
-	private javax.swing.JLabel label_note;
-	private javax.swing.JLabel label_password;
-	private javax.swing.JLabel label_tel;
-	private javax.swing.JTextField text_address;
-	private javax.swing.JTextField text_customerId;
-	private javax.swing.JTextField text_gender;
-	private javax.swing.JTextField text_memberName;
-	private javax.swing.JTextArea text_note;
-	private javax.swing.JTextField text_password;
-	private javax.swing.JTextField text_tel;
+	private javax.swing.ButtonGroup gender_member;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_address;
+    private javax.swing.JLabel label_customerId;
+    private javax.swing.JLabel label_gender;
+    private javax.swing.JLabel label_memberName;
+    private javax.swing.JLabel label_note;
+    private javax.swing.JLabel label_password;
+    private javax.swing.JLabel label_tel;
+    private javax.swing.JRadioButton radio_female;
+    private javax.swing.JRadioButton radio_male;
+    private javax.swing.JTextField text_address;
+    private javax.swing.JTextField text_customerId;
+    private javax.swing.JTextField text_memberName;
+    private javax.swing.JTextArea text_note;
+    private javax.swing.JTextField text_password;
+    private javax.swing.JTextField text_tel;
 }

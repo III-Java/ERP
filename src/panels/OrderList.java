@@ -1,5 +1,6 @@
 package panels;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -51,22 +52,22 @@ public class OrderList extends javax.swing.JPanel {
     	setItem(combo_dispatch, dispatchfields);
         setItem(combo_status, statusfields);
         
-        
-        LinkedList<String[]> members = selectMember();
-        String[] memberNum = new String[members.size()+1];
-        String[] memberName  = new String[members.size()+1];
-
-        memberNum[0] = "";
-        memberName[0] = "";
-        
-        for(int i = 0; i < members.size();i++){
-            memberNum[i +1] = members.get(i)[0];
-            memberName[i +1] = members.get(i)[1];
-        }
-
-        member.put("memberNum", memberNum);
-        member.put("memberName", memberName);
-        combo_customerId.setModel(new javax.swing.DefaultComboBoxModel<>(memberNum));
+        setComboCustomer();
+//        LinkedList<String[]> members = selectMember();
+//        String[] memberNum = new String[members.size()+1];
+//        String[] memberName  = new String[members.size()+1];
+//
+//        memberNum[0] = "";
+//        memberName[0] = "";
+//        
+//        for(int i = 0; i < members.size();i++){
+//            memberNum[i +1] = members.get(i)[0];
+//            memberName[i +1] = members.get(i)[1];
+//        }
+//
+//        member.put("memberNum", memberNum);
+//        member.put("memberName", memberName);
+//        combo_customerId.setModel(new javax.swing.DefaultComboBoxModel<>(memberNum));
     }
 	private void setDBProp() {
 
@@ -79,7 +80,7 @@ public class OrderList extends javax.swing.JPanel {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 	}
 	//判斷input有無空白
@@ -111,7 +112,7 @@ public class OrderList extends javax.swing.JPanel {
             
             return rows;
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.toString());
             return null;
         }
     }
@@ -121,23 +122,24 @@ public class OrderList extends javax.swing.JPanel {
     	int isInsert = 0;	//紀錄資料有沒有insert成功
         java.util.Date date = date_orderDate.getDate();        
         String strDate =DateFormat.getDateInstance().format(date);      
-        try{
-            pstmt = conn.prepareStatement(
-                    "INSERT INTO orderlist(orderNum,customerId,orderDate,status,dispatch,note) VALUES('"
-                            + ""+text_orderNum.getText()+"','"
-                            + ""+combo_customerId.getSelectedItem().toString()+"','"
-                            + ""+strDate+"','"
-                            + ""+combo_status.getSelectedItem().toString()+"','"
-                            + ""+combo_dispatch.getSelectedItem().toString()+"','"
-                            + ""+text_note.getText()+"')");
-            isInsert = pstmt.executeUpdate();
-   
-            
-            clearInput();
-        }catch(Exception e){
-            e.printStackTrace();
+        if (getUserInputParm() == true) {
+	        try{
+	            pstmt = conn.prepareStatement(
+	                    "INSERT INTO orderlist(orderNum,customerId,orderDate,status,dispatch,note) VALUES('"
+	                            + ""+text_orderNum.getText()+"','"
+	                            + ""+combo_customerId.getSelectedItem().toString()+"','"
+	                            + ""+strDate+"','"
+	                            + ""+combo_status.getSelectedItem().toString()+"','"
+	                            + ""+combo_dispatch.getSelectedItem().toString()+"','"
+	                            + ""+text_note.getText()+"')");
+	            isInsert = pstmt.executeUpdate();
+	   
+	            
+	            clearInput();
+	        }catch(Exception e){
+	            System.out.println(e.toString());
+	        }
         }
-        
         return isInsert;
     }
 
@@ -188,6 +190,7 @@ public class OrderList extends javax.swing.JPanel {
     
     protected LinkedList<String[]> queryData(){
     	 LinkedList<String[]> rows = new LinkedList<String[]>();
+    	 setComboCustomer();
         try{
             pstmt = conn.prepareStatement("SELECT * FROM orderlist");
             rs =  pstmt.executeQuery();
@@ -207,7 +210,7 @@ public class OrderList extends javax.swing.JPanel {
             
             
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
         return rows;
     }
@@ -264,9 +267,28 @@ public class OrderList extends javax.swing.JPanel {
             	if(rs.getString("status").equals("已出貨")) return true;
             }
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     	return false;
+    }
+    
+    private void setComboCustomer(){
+    	member.clear();
+        LinkedList<String[]> members = selectMember();
+        String[] memberNum = new String[members.size()+1];
+        String[] memberName  = new String[members.size()+1];
+
+        memberNum[0] = "";
+        memberName[0] = "";
+        
+        for(int i = 0; i < members.size();i++){
+            memberNum[i +1] = members.get(i)[0];
+            memberName[i +1] = members.get(i)[1];
+        }
+
+        member.put("memberNum", memberNum);
+        member.put("memberName", memberName);
+        combo_customerId.setModel(new javax.swing.DefaultComboBoxModel<>(memberNum));
     }
     
     
@@ -280,7 +302,7 @@ public class OrderList extends javax.swing.JPanel {
 			date = new SimpleDateFormat("yyyy-MM-dd").parse(data.get(2));
 			date_orderDate.setDate(date);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 		combo_status.setSelectedItem(data.get(3));	
 		combo_dispatch.setSelectedItem(data.get(4));
@@ -295,9 +317,11 @@ public class OrderList extends javax.swing.JPanel {
         }
     }        
     private void text_orderNumKeyTyped(java.awt.event.KeyEvent evt) {                                          
-    	String re = "\\d*?";
-        if(!text_orderNum.getText().matches(re))
-        	 text_orderNum.setText("");
+    	char c = evt.getKeyChar();
+        if( (!(Character.isDigit(c))&&!(Character.isLetter(c))) || (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            evt.consume();
+        }
     }   
     
     

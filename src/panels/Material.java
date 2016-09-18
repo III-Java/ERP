@@ -189,7 +189,7 @@ public class Material extends javax.swing.JPanel {
     	unit = cbUnit.getSelectedItem().toString();
     	vendorNum = txtVendorNum.getText();
     	note = txtNote.getText();
-    	if(materialName.equals("")||qty<=0||vendorNum.equals("")||unit.equals("")||lbVendorName.getText().equals("查無此廠商")){
+    	if(materialName.equals("")||qty<=0||vendorNum.equals("")||unit.equals(" ")||lbVendorName.getText().equals("查無此廠商")){
     		isRightData = false;
     	}
     	else{

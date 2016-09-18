@@ -104,7 +104,7 @@ public class erp_frame extends JFrame {
 			"沖帳折讓金額", "結案Y/N", "備註" };
 	String[] assetFields = { "資產編號", "資產名稱", "數量", "購入金額", "採購日期", "使用部門", "折舊年限", "備註" };
 	String[] billboardFields = { "公告編號", "公告日期", "公告內容", "下架日期", "公告維護者", "備註" };
-	String[] departFields = { "部門ID", "部門名稱","職銜" };
+	String[] departFields = { "部門ID", "部門名稱","職銜","備註" };
     String[] pickingFields ={"領料單ID","原料編號","領料數量","單位","領料人員","領料日期","備註"};   
     String[] salesReporterFields = new String[]{"訂單編號","訂購日期","客戶編號","產品編號","產品數量","訂單狀態","配送方式","備註1","備註2"};
 	String userID=null;
@@ -131,7 +131,7 @@ public class erp_frame extends JFrame {
 		disableBtn();//權限未判定前按鈕失效(9/4)
 		table_firmData.setRowHeight(30);
 		// 宜宏
-		empty = new EmptyPanel();
+		empty = new EmptyPanel(conn);
 		employee = new Employee(conn);
 		attendance = new Attendance(conn);
 		payRoll = new PayRoll(conn);
@@ -193,7 +193,9 @@ public class erp_frame extends JFrame {
 	    //this.setExtendedState(JFrame.MAXIMIZED_BOTH); //最大化
 	    //this.setAlwaysOnTop(true); //總在最前面
 	    //this.setResizable(false); //不能改變大小
-	   
+		nowLayout.show(panel_dataInput, "empty");
+		empty.getBillboardContent();
+		empty.checkPublish();
 	}
 	
 	private void init() {
@@ -631,6 +633,7 @@ public class erp_frame extends JFrame {
 			btnNextData.setVisible(false);
 			btnInsert.setVisible(false);
 			btnModify.setVisible(false);
+			btnDelete.setVisible(false);
 			btnClear.setToolTipText("顯示報表");
 			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/table.png")));
 		} else {
@@ -641,6 +644,7 @@ public class erp_frame extends JFrame {
 			btnNextData.setVisible(true);
 			btnInsert.setVisible(true);
 			btnModify.setVisible(true);
+			btnDelete.setVisible(true);
 			btnClear.setToolTipText("清空輸入");
 			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png")));
 		}
@@ -1348,10 +1352,10 @@ public class erp_frame extends JFrame {
 			case "進貨表":
 				ifrepeat = purchase.checkRepeatPurchase();
 				if(!ifrepeat){
-					isInsert = purchase.insertDB();
-					data = purchase.queryData();
-					tableModel.fireTableDataChanged();
+					isInsert = purchase.insertDB();					
 				}
+				data = purchase.queryData();
+				tableModel.fireTableDataChanged();
 				break;
 			case "應付帳款管理表":
 				ifPayOk = payableList.payCheck();
@@ -2243,11 +2247,10 @@ public class erp_frame extends JFrame {
 		    	case "庫存資料庫":case "銷售資料庫":case "會計資料庫":
 		    	case "客戶資料庫":case "系統管理庫":case "報表系統":case "ERP":  
 		    		disableBtn(); 
+		    		panel_dataInput.setVisible(true);
 					nowLayout.show(panel_dataInput, "empty");
-//					tableModel = new myTableModel(new String[]{""});
-//					data.clear();
-//					table_firmData.setModel(tableModel);
-//					tableModel.fireTableDataChanged();
+					empty.getBillboardContent();
+					empty.checkPublish();
 		    		break;
 			}
 		}

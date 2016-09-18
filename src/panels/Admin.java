@@ -271,7 +271,7 @@ public class Admin extends javax.swing.JPanel {
         adminPanel.add(adminLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 236, -1, -1));
 
         adminLabel14.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        adminLabel14.setText("應收管理表");
+        adminLabel14.setText("應付管理表");
         adminPanel.add(adminLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 284, -1, -1));
 
         material_admin.add(materialY_admin);

@@ -9,11 +9,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -138,6 +140,7 @@ public class PayableList extends javax.swing.JPanel {
         
         payDue_Accn.setDateFormatString("yyyy/MM/dd");
         payDue_Accn.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        
         add(payDue_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 255, 180, 30));
 
         payDate_Accn.setDateFormatString("yyyy/MM/dd");
@@ -199,7 +202,43 @@ public class PayableList extends javax.swing.JPanel {
         transactionDate_Accn.setDateFormatString("yyyy/MM/dd");
         transactionDate_Accn.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         add(transactionDate_Accn, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 186, 180, 30));
-    }// </editor-fold>    
+    }// </editor-fold>  
+   
+    //date check  //增加日期判斷，應付不得小於交易日
+    private boolean dueCheck() {    
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    	try {
+			Date tradeDate = format.parse(((JTextField)transactionDate_Accn.getDateEditor().getUiComponent()).getText());
+			Date payDue = format.parse(((JTextField)payDue_Accn.getDateEditor().getUiComponent()).getText());
+			long day = (payDue.getTime()- tradeDate.getTime())/(24*60*60*1000);
+//			System.out.println("day: "+day);
+			if(day>=0){
+				return true;
+			}			
+    	} catch (ParseException e) {
+			System.out.println("date check-01 xx");
+			e.printStackTrace();
+		}    
+    	return false;
+    } 
+    
+    //date check  //增加日期判斷，沖帳不得小於交易日
+    private boolean payDateCheck() {   
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+    	try {
+			Date tradeDate = format.parse(((JTextField)transactionDate_Accn.getDateEditor().getUiComponent()).getText());
+			Date payDate = format.parse(((JTextField)payDate_Accn.getDateEditor().getUiComponent()).getText());
+			long day = (payDate.getTime()- tradeDate.getTime())/(24*60*60*1000);
+//			System.out.println("day: "+day);
+			if(day>=0){
+				return true;
+			}			
+    	} catch (ParseException e) {
+			System.out.println("date check-02 xx");
+			e.printStackTrace();
+		}    
+    	return false;
+    }
     //key in judge
     private void amount_AccnKeyTyped(java.awt.event.KeyEvent evt) {                                     
     	char c = evt.getKeyChar();
@@ -237,9 +276,7 @@ public class PayableList extends javax.swing.JPanel {
     		generateInfo();//帶出對應名稱
     	}
     }
-    
-    
-    
+        
     private void generateInfo(){ //帶出對應名稱
     	//select * from employee where employeeNum = employID
     	try {
@@ -352,14 +389,28 @@ public class PayableList extends javax.swing.JPanel {
     	payableListID = payableListID_Accn.getText();
     	
     	//結案的判斷要寫
-    	ifClose = ifClose_Accn.getText();      	
+    	ifClose = ifClose_Accn.getText();      
     	
-    	if (amount.equals("") || transactionDate.equals("") || payDue.equals("")
-			||purchaseNum.equals("")|| vendorNum.equals("")) {
-			isRightData = false;
-		} else {
-			isRightData = true;
-		}
+    	//date Check
+    	boolean payDueCheck = dueCheck();
+    	boolean payDateCheck = true;
+    	if(!payDate.equals("")){
+    		payDateCheck = payDateCheck();
+    	}
+    	if(!payDueCheck){
+//    		JOptionPane.showMessageDialog(jScrollPane4, "應付日期不得早於交易日");
+    		isRightData = false;
+    	}else if(!payDateCheck){
+//    		JOptionPane.showMessageDialog(jScrollPane4, "沖帳日期不得早於交易日");
+    		isRightData = false;
+    	}else{    	//輸入不得空白
+	    	if (amount.equals("") || transactionDate.equals("") || payDue.equals("")
+				||purchaseNum.equals("")|| vendorNum.equals("")) {
+				isRightData = false;
+			} else {
+				isRightData = true;
+			}
+    	}
 		return isRightData;
 }
     
@@ -624,15 +675,15 @@ public class PayableList extends javax.swing.JPanel {
 			java.util.Date date2 = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(3));
 			payDue_Accn.setDate(date2);	
 			
-			if(data.get(7) != null){
-			java.util.Date date3 = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(7));
-			payDate_Accn.setDate(date3);
+			if(data.get(7) != null || !data.get(7).equals("")){
+				java.util.Date date3 = new SimpleDateFormat("yyyy/MM/dd").parse(data.get(7));
+				payDate_Accn.setDate(date3);
 			}else{
 				payDate_Accn.setDate(null);
 			}
 			
-    	} catch (ParseException e) {
-			e.printStackTrace();
+    	} catch (Exception e) {
+    		System.out.println("parse xx payable");    		
 		}
     	
     	amount_Accn.setText(data.get(4));

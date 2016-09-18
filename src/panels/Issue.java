@@ -1,5 +1,6 @@
 package panels;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -49,6 +50,11 @@ public class Issue extends javax.swing.JPanel {
 	}
 
 	private void init() {
+		setComboCustomer();
+	}
+	//comboBox 即時更新 
+    private void setComboCustomer(){
+    	member.clear();
 		LinkedList<String[]> members = selectMember();
 		String[] memberNum = new String[members.size()+1];
 		String[] memberName = new String[members.size()+1];
@@ -57,15 +63,14 @@ public class Issue extends javax.swing.JPanel {
 		for (int i = 0; i < members.size(); i++) {
 			memberNum[i+1] = members.get(i)[0];
 			memberName[i+1] = members.get(i)[1];
-
 		}
 
 		member.put("memberNum", memberNum);
 		member.put("memberName", memberName);
 		combo_customerId.setModel(new javax.swing.DefaultComboBoxModel<>(memberNum));
 		label_customName.setText(member.get("memberName")[0]);
-	}
-
+    }
+	
 	// 判斷input有無空白
 	private boolean getUserInputParm() {
 		boolean isRightData = false;
@@ -142,6 +147,7 @@ public class Issue extends javax.swing.JPanel {
 
 	// 查
 	protected LinkedList<String[]> queryData() {
+		setComboCustomer();
 		LinkedList<String[]> rows = new LinkedList<String[]>();
 		try {
 			pstmt = conn.prepareStatement("SELECT * FROM issue");
@@ -240,10 +246,14 @@ public class Issue extends javax.swing.JPanel {
 	}
     
     private void text_priceKeyTyped(java.awt.event.KeyEvent evt) {                                       
-    	String re = "[1-9]\\d*?";
-        if(!text_price.getText().matches(re))
-            	text_price.setText(""); 
+    	char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            evt.consume();  
+        }
+        if(text_price.getText().indexOf("0") == 0){text_price.setText("");}
     }   
+    
 
 	@SuppressWarnings("unchecked")
     private void initComponents() {

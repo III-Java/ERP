@@ -1,5 +1,6 @@
 package panels;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,10 +41,16 @@ public class OrderItem extends javax.swing.JPanel {
         init();
     }
     private void init(){
+    	nowProductNum = new String();
+    	
+    	setComboBox();
+    }
+    
+    private void setComboBox(){
+    	products.clear();
         LinkedList<String[]> prods = selectProduct();
        String[] prodNum = new String[prods.size()+1];
        String[] prodName  = new String[prods.size()+1];
-       nowProductNum = new String();
        
        prodNum[0] = "";
        prodName[0] = "";
@@ -58,6 +65,9 @@ public class OrderItem extends javax.swing.JPanel {
        combo_productNum.setModel(new javax.swing.DefaultComboBoxModel<>(prodNum));
        combo_orderNum.setModel(new javax.swing.DefaultComboBoxModel<>(getOrderList()));
     }
+    
+    
+    
 	private void setDBProp() {
 
 		prop = new Properties();
@@ -69,7 +79,7 @@ public class OrderItem extends javax.swing.JPanel {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 	}
 	//判斷input有無空白
@@ -88,20 +98,22 @@ public class OrderItem extends javax.swing.JPanel {
         
     protected int insertData(){
     	int isInsert = 0;	//紀錄資料有沒有insert成功
-        try{
-            pstmt = conn.prepareStatement(
-                    "INSERT INTO orderitem(orderNum,productNum,qty,note) VALUES('"
-                            + ""+combo_orderNum.getSelectedItem().toString()+"','"
-                            + ""+combo_productNum.getSelectedItem().toString()+"','"
-                            + ""+text_qty.getText()+"','"
-                            + ""+text_note.getText()+"')");
-            isInsert = pstmt.executeUpdate();
-            
-            clearInput();
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    	if (getUserInputParm() == true) {
+	        try{
+	            pstmt = conn.prepareStatement(
+	                    "INSERT INTO orderitem(orderNum,productNum,qty,note) VALUES('"
+	                            + ""+combo_orderNum.getSelectedItem().toString()+"','"
+	                            + ""+combo_productNum.getSelectedItem().toString()+"','"
+	                            + ""+text_qty.getText()+"','"
+	                            + ""+text_note.getText()+"')");
+	            isInsert = pstmt.executeUpdate();
+	            
+	            clearInput();
+	            
+	        }catch(Exception e){
+	            System.out.println(e.toString());
+	        }
+    	}
         return isInsert;
         
     }
@@ -150,6 +162,7 @@ public class OrderItem extends javax.swing.JPanel {
     
     
     protected LinkedList<String[]> queryData(){
+    	setComboBox();
     	 LinkedList<String[]> rows = new LinkedList<String[]>();
         try{
             pstmt = conn.prepareStatement("SELECT * FROM orderitem");
@@ -168,7 +181,7 @@ public class OrderItem extends javax.swing.JPanel {
             
             
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.toString());
 
         }
         return rows;
@@ -233,7 +246,7 @@ public class OrderItem extends javax.swing.JPanel {
             
             return rows;
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.toString());
             return null;
         }
     }
@@ -253,7 +266,7 @@ public class OrderItem extends javax.swing.JPanel {
                rows.add(row);
            } 
        }catch(Exception e){
-           e.printStackTrace();
+           System.out.println(e.toString());
        }
        String [] list = new String[rows.size()+1];
        list[0] = "";
@@ -267,9 +280,12 @@ public class OrderItem extends javax.swing.JPanel {
     
     
     private void text_qtyKeyTyped(java.awt.event.KeyEvent evt) {                                     
-        String re = "[1-9]\\d*?";
-        if(!text_qty.getText().matches(re))
-        	 text_qty.setText("");
+    	char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            evt.consume();
+        }
+        if(text_qty.getText().indexOf("0") == 0){text_qty.setText("");}
     }                                    
 
     @SuppressWarnings("unchecked")

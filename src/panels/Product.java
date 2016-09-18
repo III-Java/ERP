@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
@@ -325,9 +327,12 @@ public class Product extends javax.swing.JPanel {
 	}
 	
 	private void text_priceKeyTyped(java.awt.event.KeyEvent evt) {                                    
-    	String re = "\\d*?";
-        if(!text_price.getText().matches(re))
-        	text_price.setText("");
+    	char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            evt.consume();
+        }
+        if(text_price.getText().indexOf("0") == 0){text_price.setText("");}
     } 
 
 	protected LinkedList<String[]> search(String value) {

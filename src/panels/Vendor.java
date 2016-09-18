@@ -1,5 +1,6 @@
 package panels;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,8 +25,9 @@ public class Vendor extends javax.swing.JPanel {
 	private Properties prop;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-
-    public Vendor() {
+	private String nowVendorNum = new String();
+    
+	public Vendor() {
         initComponents();
         setDBProp();
     }
@@ -44,7 +46,7 @@ public class Vendor extends javax.swing.JPanel {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/erp", prop);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 	}
 	//判斷input有無空白
@@ -72,24 +74,29 @@ public class Vendor extends javax.swing.JPanel {
     	String strContactPerson = text_contactPerson.getText();
     	String strPaymentTerm = text_paymentTerm.getText();
     	String strNote = text_note.getText();
-        try{
-	        	if(isNameCorrect(strVendorName) && isTaxIdCorrect(strTaxId) && checkTel()){
-			            pstmt = conn.prepareStatement(
-			                    "INSERT INTO vendor(vendorName,tel,address,taxId,contactPerson,paymentTerm,note)"
-			                    + " VALUES(?,?,?,?,?,?,?)");
-			            pstmt.setString(1, strVendorName);
-			            pstmt.setString(2, strVendorTel);
-			            pstmt.setString(3, strVendorAddr);
-			            pstmt.setString(4, strTaxId);
-			            pstmt.setString(5, strContactPerson);
-			            pstmt.setString(6, strPaymentTerm);
-			            pstmt.setString(7, strNote);
-			            isInsert = pstmt.executeUpdate();	
-						clearInput();
-	        	}
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    	if (getUserInputParm() == true) {
+	        try{
+		        	if(isNameCorrect(strVendorName) && isTaxIdCorrect(strTaxId) && checkTel(strVendorTel)){		        		
+				            pstmt = conn.prepareStatement(
+				                    "INSERT INTO vendor(vendorName,tel,address,taxId,contactPerson,paymentTerm,note)"
+				                    + " VALUES(?,?,?,?,?,?,?)");
+				            pstmt.setString(1, strVendorName);
+				            pstmt.setString(2, strVendorTel);
+				            pstmt.setString(3, strVendorAddr);
+				            pstmt.setString(4, strTaxId);
+				            pstmt.setString(5, strContactPerson);
+				            pstmt.setString(6, strPaymentTerm);
+				            pstmt.setString(7, strNote);
+				            isInsert = pstmt.executeUpdate();	
+				
+				            clearInput();
+
+		        	}
+	        }catch(Exception e){
+	            System.out.println(e.toString());
+	        }
+    	}
+//    	System.out.println("isInsert : " + isInsert);
         return isInsert;
     }
     
@@ -114,19 +121,22 @@ public class Vendor extends javax.swing.JPanel {
 	}
     
 	protected int updateData() {
-		String strVendorName = text_vendorName.getText();
+		String strVendorTel = text_vendorTel.getText();
 		int isUpdate = 0;
-		if (getUserInputParm() == true && checkTel()) {
+		
+		if (getUserInputParm() == true && checkTel(strVendorTel)) {
 			try {
 				pstmt = conn.prepareStatement(
-						"UPDATE vendor SET tel=?,address=?,taxId=?,contactPerson=?,paymentTerm=?,note=? WHERE vendorName=?" );
-				pstmt.setString(1, text_vendorTel.getText());
-				pstmt.setString(2, text_vendorAddr.getText());
-				pstmt.setString(3, text_taxId.getText());
-				pstmt.setString(4, text_contactPerson.getText());
-				pstmt.setString(5, text_paymentTerm.getText());
-				pstmt.setString(6, text_note.getText());
-				pstmt.setString(7, strVendorName);
+						"UPDATE vendor SET vendorName=?, tel=?,address=?,taxId=?,contactPerson=?,paymentTerm=?,note=? WHERE vendorNum=?" );
+				pstmt.setString(1, text_vendorName.getText());
+				pstmt.setString(2, strVendorTel);
+				pstmt.setString(3, text_vendorAddr.getText());
+				pstmt.setString(4, text_taxId.getText());
+				pstmt.setString(5, text_contactPerson.getText());
+				pstmt.setString(6, text_paymentTerm.getText());
+				pstmt.setString(7, text_note.getText());
+				pstmt.setString(8,nowVendorNum);
+
 				
 				isUpdate = pstmt.executeUpdate();
 				
@@ -167,7 +177,7 @@ public class Vendor extends javax.swing.JPanel {
             
             clearInput();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
         return rows;
     }
@@ -211,6 +221,7 @@ public class Vendor extends javax.swing.JPanel {
     
     
 	protected void setInputValue(HashMap<Integer, String> data) {
+		nowVendorNum = data.get(0);
 		text_vendorName.setText(data.get(1));
 		text_vendorTel.setText(data.get(2));
 		text_vendorAddr.setText(data.get(3));	
@@ -251,22 +262,25 @@ public class Vendor extends javax.swing.JPanel {
     }
     
     private void text_taxIdKeyTyped(java.awt.event.KeyEvent evt) {                                       
-        String re = "\\d*?";
-        if(!text_taxId.getText().matches(re))
-            text_taxId.setText("");
+    	char c = evt.getKeyChar();
+        if(!(Character.isDigit(c)) || (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            evt.consume();
+        }
     }       
     private void text_vendorTelKeyTyped(java.awt.event.KeyEvent evt) {                                           
-        String re = "[\\d*\\-]*?";
-        String phoneNum = "^\\d*?-\\d*?-\\d*?";
-        String cellPhone = "^\\d{4}-\\d{6}\\d*?";
-//        if(!text_vendorTel.getText().matches(phoneNum)&&!text_vendorTel.getText().matches(cellPhone)){text_vendorTel.setText("");}
-        if(!text_vendorTel.getText().matches(re)){text_vendorTel.setText("");}
+    	char c = evt.getKeyChar();
+        if((!(Character.isDigit(c)) && (c != KeyEvent.VK_MINUS) )|| (c == KeyEvent.VK_SPACE) || (c == KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            evt.consume();
+        }
     } 
     //檢查電話號碼格式
-    private boolean  checkTel(){
+    private boolean  checkTel(String tel){
         String phoneNum = "^\\d+?\\-\\d*?\\-\\d*?";
         String cellPhone = "^\\d{4}\\-\\d{6}\\d*?";
-    	if(!text_vendorTel.getText().matches(phoneNum)&&!text_vendorTel.getText().matches(cellPhone)) return false;
+//        System.out.println(tel);
+    	if(!tel.matches(phoneNum)&&!tel.matches(cellPhone)) return false;
     	return true;
     }
     

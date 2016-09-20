@@ -29,140 +29,84 @@ public class Attendance extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		jLabel1 = new javax.swing.JLabel();
-        txtEmployeeNum = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtNote = new javax.swing.JEditorPane();
-        cbLeaveSheet = new javax.swing.JComboBox<>();
-        txtOffWork = new javax.swing.JFormattedTextField();
-        txtOnWork1 = new javax.swing.JFormattedTextField();
-        lbDepartment = new javax.swing.JLabel();
-        lbName = new javax.swing.JLabel();
+		  jLabel1 = new javax.swing.JLabel();
+	        txtEmployeeNum = new javax.swing.JTextField();
+	        jLabel2 = new javax.swing.JLabel();
+	        jLabel3 = new javax.swing.JLabel();
+	        jLabel4 = new javax.swing.JLabel();
+	        jLabel7 = new javax.swing.JLabel();
+	        jLabel8 = new javax.swing.JLabel();
+	        jLabel10 = new javax.swing.JLabel();
+	        jScrollPane1 = new javax.swing.JScrollPane();
+	        txtNote = new javax.swing.JEditorPane();
+	        cbLeaveSheet = new javax.swing.JComboBox<>();
+	        txtOffWork = new javax.swing.JFormattedTextField();
+	        txtOnWork1 = new javax.swing.JFormattedTextField();
+	        lbDepartment = new javax.swing.JLabel();
+	        lbName = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(980, 470));
+	        setPreferredSize(new java.awt.Dimension(980, 470));
+	        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel1.setText("員工編號");
+	        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel1.setText("員工編號");
+	        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 62, -1, -1));
 
-        txtEmployeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
-        txtEmployeeNum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtEmployeeNumKeyReleased(evt);
-            }
-        });
+	        txtEmployeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+	        txtEmployeeNum.addKeyListener(new java.awt.event.KeyAdapter() {
+	            public void keyReleased(java.awt.event.KeyEvent evt) {
+	                txtEmployeeNumKeyReleased(evt);
+	            }
+	        });
+	        add(txtEmployeeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 225, -1));
 
-        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel2.setText("上班時間");
+	        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel2.setText("上班時間");
+	        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 150, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel3.setText("下班時間");
+	        jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel3.setText("下班時間");
+	        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 230, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel4.setText("假別");
+	        jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel4.setText("假別");
+	        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 298, 72, -1));
 
-        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 150, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel8.setText("部門");
+	        jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel8.setText("部門");
+	        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 62, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-        jLabel10.setText("備註");
+	        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        jLabel10.setText("備註");
+	        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 150, -1, -1));
 
-        txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        jScrollPane1.setViewportView(txtNote);
+	        txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        jScrollPane1.setViewportView(txtNote);
 
-        cbLeaveSheet.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        cbLeaveSheet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "無", "事假", "病假", "喪假", "生理假", "育嬰假" }));
+	        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 150, 317, 175));
 
-        txtOffWork.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
-        txtOffWork.setToolTipText("yyyy/MM/dd HH:mm:ss");
-        txtOffWork.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        cbLeaveSheet.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        cbLeaveSheet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "無", "事假", "病假", "喪假", "生理假", "育嬰假" }));
+	        add(cbLeaveSheet, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 298, 225, -1));
 
-        txtOnWork1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
-        txtOnWork1.setToolTipText("yyyy/MM/dd HH:mm:ss");
-        txtOnWork1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        txtOffWork.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
+	        txtOffWork.setToolTipText("yyyy/MM/dd HH:mm:ss");
+	        txtOffWork.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(txtOffWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 228, 225, -1));
 
-        lbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        txtOnWork1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
+	        txtOnWork1.setToolTipText("yyyy/MM/dd HH:mm:ss");
+	        txtOnWork1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(txtOnWork1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 150, 225, -1));
 
-        lbName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        lbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        add(lbDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 62, 302, 27));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtOnWork1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtOffWork, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                .addComponent(cbLeaveSheet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(txtEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbDepartment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(txtEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel2)
-                            .addComponent(txtOnWork1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtOffWork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(cbLeaveSheet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(145, Short.MAX_VALUE))
-        );
+	        lbName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(lbName, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 60, 89, 29));
 	}// </editor-fold>
 
 	private void setName() {

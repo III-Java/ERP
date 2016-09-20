@@ -27,6 +27,7 @@ public class EmptyPanel extends javax.swing.JPanel {
 		tbBillboard = new javax.swing.JTable();
 
 		setPreferredSize(new java.awt.Dimension(980, 470));
+		setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 		tbBillboard.getTableHeader().setReorderingAllowed(false);
 		tbBillboard.setRowHeight(30);
 		tbBillboard.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
@@ -35,23 +36,9 @@ public class EmptyPanel extends javax.swing.JPanel {
 						new Object[][] { { null, null, null, null }, { null, null, null, null },
 								{ null, null, null, null }, { null, null, null, null } },
 						new String[] { "Title 1", "Title 2", "Title 3", "Title 4" }));
-		//tbBillboard.setTableHeader(null);
 		
-
 		jScrollPane1.setViewportView(tbBillboard);
-
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup()
-				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jScrollPane1,
-						javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(14, 14, 14)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-						.addContainerGap()));
+		add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 13, 951, 444));
 
 	}// </editor-fold>
 

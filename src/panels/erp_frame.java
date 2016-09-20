@@ -193,6 +193,7 @@ public class erp_frame extends JFrame {
 	    //this.setExtendedState(JFrame.MAXIMIZED_BOTH); //最大化
 	    //this.setAlwaysOnTop(true); //總在最前面
 	    //this.setResizable(false); //不能改變大小
+		panel_dataInput.setVisible(true);
 		nowLayout.show(panel_dataInput, "empty");
 		empty.getBillboardContent();
 		empty.checkPublish();

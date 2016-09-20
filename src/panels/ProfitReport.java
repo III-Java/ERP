@@ -25,131 +25,74 @@ public class ProfitReport extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-    	  jLabel1 = new javax.swing.JLabel();
-          jLabel2 = new javax.swing.JLabel();
-          jLabel7 = new javax.swing.JLabel();
-          jLabel10 = new javax.swing.JLabel();
-          jLabel11 = new javax.swing.JLabel();
-          jLabel12 = new javax.swing.JLabel();
-          cbYear = new javax.swing.JComboBox<>();
-          cbMonth = new javax.swing.JComboBox<>();
-          lbProfit = new javax.swing.JLabel();
-          lbExpend = new javax.swing.JLabel();
-          lbSales1 = new javax.swing.JLabel();
-          cbReport = new javax.swing.JComboBox<>();
-          jLabel3 = new javax.swing.JLabel();
+    	 jLabel1 = new javax.swing.JLabel();
+         jLabel2 = new javax.swing.JLabel();
+         jLabel7 = new javax.swing.JLabel();
+         jLabel10 = new javax.swing.JLabel();
+         jLabel11 = new javax.swing.JLabel();
+         jLabel12 = new javax.swing.JLabel();
+         cbYear = new javax.swing.JComboBox<>();
+         cbMonth = new javax.swing.JComboBox<>();
+         lbProfit = new javax.swing.JLabel();
+         lbExpend = new javax.swing.JLabel();
+         lbSales1 = new javax.swing.JLabel();
+         cbReport = new javax.swing.JComboBox<>();
+         jLabel3 = new javax.swing.JLabel();
 
-          setPreferredSize(new java.awt.Dimension(980, 470));
+         setPreferredSize(new java.awt.Dimension(980, 470));
+         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-          jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          jLabel1.setText("年份");
+         jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jLabel1.setText("年份");
+         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 65, -1, -1));
 
-          jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          jLabel2.setText("月份");
+         jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jLabel2.setText("月份");
+         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 60, -1, 31));
 
-          jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(503, 241, -1, -1));
 
-          jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          jLabel10.setText("當月銷售");
+         jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jLabel10.setText("當月銷售");
+         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 220, -1, -1));
 
-          jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          jLabel11.setText("當月支出");
+         jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jLabel11.setText("當月支出");
+         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 153, -1, -1));
 
-          jLabel12.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          jLabel12.setText("當月盈餘");
+         jLabel12.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jLabel12.setText("當月盈餘");
+         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 292, -1, -1));
 
-          cbYear.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          cbYear.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
-                  cbYearActionPerformed(evt);
-              }
-          });
+         cbYear.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         cbYear.addActionListener(new java.awt.event.ActionListener() {
+             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 cbYearActionPerformed(evt);
+             }
+         });
+         add(cbYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 62, 210, -1));
 
-          cbMonth.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         cbMonth.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 62, 210, -1));
 
-          lbProfit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          lbProfit.setForeground(new java.awt.Color(255, 0, 0));
+         lbProfit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         lbProfit.setForeground(new java.awt.Color(255, 0, 0));
+         add(lbProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 292, 247, 27));
 
-          lbExpend.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         lbExpend.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(lbExpend, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 153, 247, 27));
 
-          lbSales1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         lbSales1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(lbSales1, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 220, 247, 27));
 
-          cbReport.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          cbReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "支出報表", "銷售報表" }));
+         cbReport.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         cbReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "支出報表", "銷售報表" }));
+         add(cbReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 62, 210, -1));
 
-          jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-          jLabel3.setText("觀看");
-
-          javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-          this.setLayout(layout);
-          layout.setHorizontalGroup(
-              layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                  .addGap(59, 59, 59)
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                      .addGroup(layout.createSequentialGroup()
-                          .addComponent(jLabel12)
-                          .addGap(18, 18, 18)
-                          .addComponent(lbProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                          .addGroup(layout.createSequentialGroup()
-                              .addComponent(jLabel10)
-                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                              .addComponent(lbSales1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                          .addGroup(layout.createSequentialGroup()
-                              .addComponent(jLabel1)
-                              .addGap(18, 18, 18)
-                              .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                              .addGap(37, 37, 37)
-                              .addComponent(jLabel2))
-                          .addGroup(layout.createSequentialGroup()
-                              .addComponent(jLabel11)
-                              .addGap(18, 18, 18)
-                              .addComponent(lbExpend, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(layout.createSequentialGroup()
-                          .addGap(119, 119, 119)
-                          .addComponent(jLabel7))
-                      .addGroup(layout.createSequentialGroup()
-                          .addGap(10, 10, 10)
-                          .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                          .addGap(31, 31, 31)
-                          .addComponent(jLabel3)
-                          .addGap(18, 18, 18)
-                          .addComponent(cbReport, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                  .addContainerGap(87, Short.MAX_VALUE))
-          );
-          layout.setVerticalGroup(
-              layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                  .addGap(60, 60, 60)
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                      .addComponent(jLabel1)
-                      .addComponent(cbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(cbMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(cbReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(layout.createSequentialGroup()
-                          .addGap(0, 0, Short.MAX_VALUE)
-                          .addComponent(jLabel7)
-                          .addGap(229, 229, 229))
-                      .addGroup(layout.createSequentialGroup()
-                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                              .addComponent(jLabel11)
-                              .addComponent(lbExpend, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                          .addGap(40, 40, 40)
-                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                              .addComponent(lbSales1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                              .addComponent(jLabel10))
-                          .addGap(45, 45, 45)
-                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                              .addComponent(jLabel12)
-                              .addComponent(lbProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                          .addGap(151, 151, 151))))
-          );
+         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jLabel3.setText("觀看");
+         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 60, -1, 31));
     }// </editor-fold>                        
         
     protected void clearInput(){
@@ -168,6 +111,12 @@ public class ProfitReport extends javax.swing.JPanel {
     protected void setLableDetail(){
     	lbSales1.setText(Integer.toString(sales));
     	lbExpend.setText(Integer.toString(extend));
+    	if(sales-extend < 0){
+    		lbProfit.setForeground(new java.awt.Color(255, 0, 0));
+    	}
+    	else{
+    		lbProfit.setForeground(new java.awt.Color(0,0,255));
+    	}
     	lbProfit.setText(Integer.toString(sales-extend));
     }
 

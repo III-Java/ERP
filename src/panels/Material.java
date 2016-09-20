@@ -42,27 +42,37 @@ public class Material extends javax.swing.JPanel {
          cbUnit = new javax.swing.JComboBox<>();
 
          setPreferredSize(new java.awt.Dimension(980, 470));
+         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
          jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel1.setText("原料編號");
+         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 65, 72, -1));
 
          jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel2.setText("數量");
+         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 278, 72, -1));
 
          jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 89, -1, -1));
 
          jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel10.setText("備註");
+         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 163, -1, -1));
 
          txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
          jScrollPane1.setViewportView(txtNote);
 
+         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 161, 225, 142));
+
          txtMaterialName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(txtMaterialName, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, 225, -1));
 
          jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel11.setText("進貨廠商編號");
+         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 65, -1, -1));
 
          spQty.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(spQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 275, 105, -1));
 
          txtVendorNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          txtVendorNum.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -70,81 +80,21 @@ public class Material extends javax.swing.JPanel {
                  txtVendorNumKeyReleased(evt);
              }
          });
+         add(txtVendorNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 62, 225, -1));
 
          jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel3.setText("原料名稱");
+         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 163, 72, -1));
 
          lbMaterialNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(lbMaterialNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 62, 225, 27));
 
          lbVendorName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         add(lbVendorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 107, 225, 28));
 
          cbUnit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          cbUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "公斤", "公升", "台斤", "包", "個", "組", "罐", "隻", "盒" }));
-
-         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-         this.setLayout(layout);
-         layout.setHorizontalGroup(
-             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-             .addGroup(layout.createSequentialGroup()
-                 .addGap(59, 59, 59)
-                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addGap(0, 18, Short.MAX_VALUE)))
-                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                     .addComponent(txtMaterialName, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                     .addComponent(lbMaterialNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addGroup(layout.createSequentialGroup()
-                         .addComponent(spQty, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addGap(18, 18, 18)
-                         .addComponent(cbUnit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                 .addGap(182, 182, 182)
-                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addComponent(jLabel11)
-                     .addGroup(layout.createSequentialGroup()
-                         .addGap(44, 44, 44)
-                         .addComponent(jLabel7))
-                     .addComponent(jLabel10))
-                 .addGap(18, 18, 18)
-                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                     .addComponent(txtVendorNum, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                     .addComponent(lbVendorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                 .addGap(634, 634, 634))
-         );
-         layout.setVerticalGroup(
-             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-             .addGroup(layout.createSequentialGroup()
-                 .addGap(62, 62, 62)
-                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                     .addComponent(jLabel1)
-                     .addComponent(jLabel11)
-                     .addComponent(txtVendorNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(lbMaterialNum, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(layout.createSequentialGroup()
-                         .addGap(0, 27, Short.MAX_VALUE)
-                         .addComponent(jLabel7)
-                         .addGap(71, 71, 71)
-                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                             .addComponent(jLabel3)
-                             .addComponent(txtMaterialName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                             .addComponent(jLabel10))
-                         .addGap(87, 87, 87)
-                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                             .addComponent(jLabel2)
-                             .addComponent(spQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                             .addComponent(cbUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                         .addGap(18, 18, 18)
-                         .addComponent(lbVendorName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                 .addGap(170, 170, 170))
-         );
+         add(cbUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 274, 102, 28));
     }// </editor-fold>                        
     
     private void setVendorName() {

@@ -61,53 +61,71 @@ public class Employee extends javax.swing.JPanel {
 	        lbEmployeeNum = new javax.swing.JLabel();
 
 	        setPreferredSize(new java.awt.Dimension(980, 470));
+	        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
 	        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel1.setText("員工編號");
+	        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 66, -1, -1));
 
 	        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel2.setText("姓名");
+	        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 108, -1, -1));
 
 	        jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel3.setText("住址");
+	        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 153, -1, -1));
 
 	        jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel4.setText("電話");
+	        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 218, -1, -1));
 
 	        jLabel5.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel5.setText("性別");
+	        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 277, -1, -1));
 
 	        txtTel.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 212, 225, -1));
 
 	        txtName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 105, 225, -1));
 
 	        txtAddress.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 150, 225, -1));
 
 	        bgGender.add(rbMale);
 	        rbMale.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        rbMale.setText("男");
+	        add(rbMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 273, -1, -1));
 
 	        bgGender.add(rbFemale);
 	        rbFemale.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        rbFemale.setText("女");
+	        add(rbFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 273, -1, -1));
 
 	        jLabel6.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel6.setText("出生年月日");
+	        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 62, -1, -1));
 
 	        dateBirthday.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-	        dateBirthday.setDateFormatString("yyyy/MM/dd");
+	        add(dateBirthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 62, 274, -1));
+
 	        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(501, 150, -1, -1));
 
 	        jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel8.setText("部門");
+	        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(567, 108, -1, -1));
 
 	        jLabel9.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel9.setText("職等");
+	        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(567, 153, -1, -1));
 
 	        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel10.setText("備註");
+	        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(567, 215, -1, -1));
 
 	        cbPosition.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(cbPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 150, 274, -1));
 
 	        cbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        cbDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "　　", " " }));
@@ -116,93 +134,15 @@ public class Employee extends javax.swing.JPanel {
 	                cbDepartmentActionPerformed(evt);
 	            }
 	        });
+	        add(cbDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 105, 274, -1));
 
 	        txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
 	        jScrollPane1.setViewportView(txtNote);
 
-	        lbEmployeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 212, 274, 90));
 
-	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-	        this.setLayout(layout);
-	        layout.setHorizontalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(layout.createSequentialGroup()
-	                .addGap(59, 59, 59)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addComponent(jLabel3)
-	                    .addComponent(jLabel5)
-	                    .addComponent(jLabel4)
-	                    .addComponent(jLabel2)
-	                    .addComponent(jLabel1))
-	                .addGap(30, 30, 30)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                            .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-	                            .addComponent(txtName)
-	                            .addComponent(txtTel, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-	                            .addComponent(lbEmployeeNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	                        .addGap(127, 127, 127)
-	                        .addComponent(jLabel7))
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addComponent(rbMale)
-	                        .addGap(18, 18, 18)
-	                        .addComponent(rbFemale)))
-	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-	                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-	                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-	                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-	                .addGap(18, 18, 18)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                    .addComponent(dateBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                    .addComponent(cbPosition, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                    .addComponent(cbDepartment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
-	                .addContainerGap(91, Short.MAX_VALUE))
-	        );
-	        layout.setVerticalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(layout.createSequentialGroup()
-	                .addGap(62, 62, 62)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                                .addComponent(jLabel6)
-	                                .addComponent(lbEmployeeNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-	                        .addGap(18, 18, 18)
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                            .addComponent(jLabel2)
-	                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addComponent(jLabel8)
-	                            .addComponent(cbDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                        .addGap(18, 18, 18)
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                            .addComponent(jLabel3)
-	                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addComponent(jLabel7)
-	                            .addComponent(jLabel9)
-	                            .addComponent(cbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-	                    .addComponent(dateBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addGap(35, 35, 35)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-	                            .addComponent(jLabel4)
-	                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                                .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                                .addComponent(jLabel10)))
-	                        .addGap(34, 34, 34)
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                            .addComponent(jLabel5)
-	                            .addComponent(rbMale)
-	                            .addComponent(rbFemale)))
-	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addContainerGap(168, Short.MAX_VALUE))
-	        );
+	        lbEmployeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(lbEmployeeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 62, 225, 25));
 	}// </editor-fold>
 	
 	private String[] getDepartments(){

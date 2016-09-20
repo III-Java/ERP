@@ -24,7 +24,7 @@ public class PayRoll extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		   jLabel1 = new javax.swing.JLabel();
+		 	jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel7 = new javax.swing.JLabel();
 	        jLabel10 = new javax.swing.JLabel();
@@ -35,23 +35,31 @@ public class PayRoll extends javax.swing.JPanel {
 	        lbName = new javax.swing.JLabel();
 
 	        setPreferredSize(new java.awt.Dimension(980, 470));
+	        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
 	        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel1.setText("員工編號");
+	        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 62, -1, -1));
 
 	        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel2.setText("薪資");
+	        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 247, 60, 30));
 
 	        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+	        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 160, -1, -1));
 
 	        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
 	        jLabel10.setText("備註");
+	        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 67, -1, -1));
 
 	        txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
 	        jScrollPane1.setViewportView(txtNote);
 
+	        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(618, 62, 254, 216));
+
 	        txtPay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
 	        txtPay.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+	        add(txtPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 248, 225, 30));
 
 	        txtEmpoyeeNum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 	        txtEmpoyeeNum.setToolTipText("");
@@ -61,56 +69,10 @@ public class PayRoll extends javax.swing.JPanel {
 	                txtEmpoyeeNumKeyReleased(evt);
 	            }
 	        });
+	        add(txtEmpoyeeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 62, 225, 31));
 
 	        lbName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-
-	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-	        this.setLayout(layout);
-	        layout.setHorizontalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(layout.createSequentialGroup()
-	                .addGap(59, 59, 59)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGap(376, 376, 376)
-	                        .addComponent(jLabel7))
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGap(28, 28, 28)
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                            .addComponent(lbName, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-	                            .addComponent(txtPay, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-	                            .addComponent(txtEmpoyeeNum))
-	                        .addGap(198, 198, 198)
-	                        .addComponent(jLabel10)))
-	                .addGap(18, 18, 18)
-	                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addContainerGap(108, Short.MAX_VALUE))
-	        );
-	        layout.setVerticalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-	                .addGap(62, 62, 62)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                            .addComponent(jLabel1)
-	                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                                .addComponent(txtEmpoyeeNum, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-	                                .addComponent(jLabel10)))
-	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                        .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-	                        .addComponent(jLabel7)
-	                        .addGap(87, 87, 87)
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-	                    .addComponent(jScrollPane1))
-	                .addGap(192, 192, 192))
-	        );
+	        add(lbName, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 106, 225, 29));
 	}// </editor-fold>
 
 	private void setName() {

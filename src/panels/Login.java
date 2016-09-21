@@ -1,5 +1,10 @@
 package panels;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +17,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -35,14 +44,34 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);//置中
         
         //title
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/drink.png")));
         setTitle("---ERP LOGIN---");
+        setSize(640,530);
+                
+        //set bg
+		
      }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-    	login = new javax.swing.JPanel();
+   //set background img    	
+    	login = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/login_BG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(640, 530, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
         jLabel1 = new javax.swing.JLabel();
         loginLabel02 = new javax.swing.JLabel();
         loginLabel01 = new javax.swing.JLabel();
@@ -58,22 +87,23 @@ public class Login extends javax.swing.JFrame {
         offduty_log = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(650, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         login.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("微軟正黑體", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(131,62,24)); //COLOR CHANGE
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ERP / 打卡系統");
         login.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 16, 325, 82));
 
-        loginLabel02.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+        loginLabel02.setFont(new java.awt.Font("微軟正黑體", 1, 26)); // NOI18N
+        loginLabel02.setForeground(new java.awt.Color(131,62,24));//COLOR CHANGE
         loginLabel02.setText("密碼");
         login.add(loginLabel02, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 206, 122, 53));
 
-        loginLabel01.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+        loginLabel01.setFont(new java.awt.Font("微軟正黑體", 1, 26)); // NOI18N
+        loginLabel01.setForeground(new java.awt.Color(131,62,24));//COLOR CHANGE 
         loginLabel01.setText("員工編號");
         login.add(loginLabel01, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 135, 122, 53));
         login.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 107, 516, 10));
@@ -91,7 +121,8 @@ public class Login extends javax.swing.JFrame {
         employPW_login.setFont(new java.awt.Font("微軟正黑體", 0, 16)); // NOI18N
         login.add(employPW_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 206, 320, 53));
 
-        loginLabel03.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+        loginLabel03.setFont(new java.awt.Font("微軟正黑體", 1, 26)); // NOI18N
+        loginLabel03.setForeground(new java.awt.Color(131,62,24));//COLOR CHANGE   
         loginLabel03.setText("修改密碼");
         login.add(loginLabel03, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 296, 122, 53));
 
@@ -105,7 +136,7 @@ public class Login extends javax.swing.JFrame {
         
         login.add(employPwEdit_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 297, 320, 53));
 
-        login_log.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+        login_log.setFont(new java.awt.Font("微軟正黑體", 1, 18)); // NOI18N
         login_log.setForeground(new java.awt.Color(0, 0, 204));
         login_log.setText("登入");
         login_log.setMinimumSize(new java.awt.Dimension(90, 30));
@@ -247,6 +278,8 @@ public class Login extends javax.swing.JFrame {
     		a.printStackTrace();
     	}
     }
+    
+   
     
     //抓到輸入欄位資料
     private void getInput(){    	
@@ -456,6 +489,8 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
+    
+    
     // Variables declaration - do not modify  
     private javax.swing.JTextField employID_login;
     private javax.swing.JPasswordField employPW_login;
@@ -473,3 +508,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel showResult_login;
     // End of variables declaration                   
 }
+
+

@@ -202,8 +202,7 @@ public class erp_frame extends JFrame {
 	private void init() {
 		setResizable(false);
 		setLocationRelativeTo(null);// 置中
-
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("./image/drink.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/drink.png")));
 		setTitle("公司名稱 : 心飲茗茶  使用者代碼 : "+userID);
 		
 		DefaultTableCellRenderer tableAlign = (DefaultTableCellRenderer) table_firmData.getTableHeader()
@@ -393,7 +392,7 @@ public class erp_frame extends JFrame {
 		JToolBar.setPreferredSize(new java.awt.Dimension(80, 50));
 
 		btnFirstData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnFirstData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/left-arrow-2.png"))); // NOI18N
+		btnFirstData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/left-arrow-2.png"))); // NOI18N
 		btnFirstData.setToolTipText("第一筆");
 		btnFirstData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnFirstData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -404,7 +403,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnFirstData);
 
 		btnPreData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnPreData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/left-arrow.png"))); // NOI18N
+		btnPreData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/left-arrow.png"))); // NOI18N
 		btnPreData.setToolTipText("上一筆");
 		btnPreData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnPreData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -415,7 +414,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnPreData);
 
 		btnNextData.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnNextData.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/right-arrow.png"))); // NOI18N
+		btnNextData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/right-arrow.png"))); // NOI18N
 		btnNextData.setToolTipText("下一筆");
 		btnNextData.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnNextData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -426,7 +425,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnNextData);
 
 		btnInsert.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/insert.png"))); // NOI18N
+		btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/insert.png"))); // NOI18N
 		btnInsert.setToolTipText("新增資料");
 		btnInsert.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnInsert.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -437,7 +436,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnInsert);
 
 		btnModify.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/edit.png"))); // NOI18N
+		btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edit.png"))); // NOI18N
 		btnModify.setToolTipText("修改資料");
 		btnModify.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnModify.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -449,7 +448,7 @@ public class erp_frame extends JFrame {
 		btnModify.getAccessibleContext().setAccessibleDescription("");
 
 		btnClear.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png"))); // NOI18N
+		btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clear.png"))); // NOI18N
 		btnClear.setToolTipText("清空輸入");
 		btnClear.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnClear.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -460,7 +459,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnClear);
 
 		btnExport.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/export.png"))); // NOI18N
+		btnExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/export.png"))); // NOI18N
 		btnExport.setToolTipText("匯出");
 		btnExport.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnExport.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -471,7 +470,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnExport);
 
 		btnDelete.setFont(new java.awt.Font("微軟正黑體", 0, 12)); // NOI18N
-		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/delete.png"))); // NOI18N
+		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
 		btnDelete.setToolTipText("刪除資料");
 		btnDelete.setPreferredSize(new java.awt.Dimension(80, 50));
 		btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -481,7 +480,7 @@ public class erp_frame extends JFrame {
 		});
 		JToolBar.add(btnDelete);
 
-		btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/Logout.png"))); // NOI18N
+		btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logout.png"))); // NOI18N
 		btnLogout.setToolTipText("登出");
 		btnLogout.setFocusable(false);
 		btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -636,7 +635,7 @@ public class erp_frame extends JFrame {
 			btnModify.setVisible(false);
 			btnDelete.setVisible(false);
 			btnClear.setToolTipText("顯示報表");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/table.png")));
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/table.png")));
 		} else {
 			text_search.setVisible(true);
 			label_search.setVisible(true);
@@ -647,7 +646,7 @@ public class erp_frame extends JFrame {
 			btnModify.setVisible(true);
 			btnDelete.setVisible(true);
 			btnClear.setToolTipText("清空輸入");
-			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("./image/clear.png")));
+			btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clear.png")));
 		}
 
 	}

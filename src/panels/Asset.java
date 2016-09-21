@@ -60,7 +60,7 @@ public class Asset extends javax.swing.JPanel {
         assetName_asset = new javax.swing.JTextField();
         qty_asset = new javax.swing.JTextField();
         testBtn = new javax.swing.JButton();
-
+        
         setMinimumSize(new java.awt.Dimension(980, 470));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

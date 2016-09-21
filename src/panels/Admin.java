@@ -1,4 +1,8 @@
 package panels;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +16,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,6 +49,7 @@ public class Admin extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">   
     private void initComponents() {
+//    	adminPanel = new javax.swing.JPanel();
     	employee_admin = new javax.swing.ButtonGroup();
         attendance_admin = new javax.swing.ButtonGroup();
         achievement_admin = new javax.swing.ButtonGroup();
@@ -63,7 +71,23 @@ public class Admin extends javax.swing.JPanel {
         picking_admin = new javax.swing.ButtonGroup();
         news_admin = new javax.swing.ButtonGroup();
         dep_admin1 = new javax.swing.ButtonGroup();
-        adminPanel = new javax.swing.JPanel();
+        
+        adminPanel = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
         adminLabel01 = new javax.swing.JLabel();
         adminLabel02 = new javax.swing.JLabel();
         adminLabel04 = new javax.swing.JLabel();

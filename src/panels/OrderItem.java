@@ -1,6 +1,10 @@
 package panels;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +14,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /*
@@ -29,6 +35,8 @@ public class OrderItem extends javax.swing.JPanel {
 	private ResultSet rs = null;
     HashMap <String,String[]> products = new HashMap<>();
     private String nowProductNum;
+    
+    ImageIcon newIcon;		
     
     public OrderItem() {
         initComponents();
@@ -66,6 +74,21 @@ public class OrderItem extends javax.swing.JPanel {
        combo_orderNum.setModel(new javax.swing.DefaultComboBoxModel<>(getOrderList()));
     }
     
+    @Override
+    protected void paintComponent(Graphics g) {    	
+		BufferedImage BIMG;
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+			Image image = newIcon.getImage();
+			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+		} catch (IOException e) {
+			System.out.println("login img xx");
+			e.printStackTrace();
+		}
+		    	
+    }
     
     
 	private void setDBProp() {
@@ -286,7 +309,22 @@ public class OrderItem extends javax.swing.JPanel {
             evt.consume();
         }
         if(text_qty.getText().indexOf("0") == 0){text_qty.setText("");}
-    }                                    
+    }                                
+    @Override
+    public void paintComponents(Graphics g) {
+    	ImageIcon newIcon;		
+		BufferedImage BIMG;
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+			Image image = newIcon.getImage();
+			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+		} catch (IOException e) {
+			System.out.println("login img xx");
+			e.printStackTrace();
+		}
+    }
 
     @SuppressWarnings("unchecked")
  // <editor-fold defaultstate="collapsed" desc="Generated Code">                          

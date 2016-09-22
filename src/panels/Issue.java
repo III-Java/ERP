@@ -1,6 +1,10 @@
 package panels;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +16,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 public class Issue extends javax.swing.JPanel {
@@ -253,6 +259,7 @@ public class Issue extends javax.swing.JPanel {
         }
         if(text_price.getText().indexOf("0") == 0){text_price.setText("");}
     }   
+   
     
 
 	@SuppressWarnings("unchecked")

@@ -1,5 +1,9 @@
 package panels;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +18,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -40,12 +47,12 @@ public class PayableList extends javax.swing.JPanel {
     	getEmpIdlist();
         initComponents();
     }    
-   
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	payableListPanel = new javax.swing.JPanel();
         purchaseLabel01 = new javax.swing.JLabel();
         purchaseLabel02 = new javax.swing.JLabel();
         purchaseLabel03 = new javax.swing.JLabel();
@@ -786,5 +793,6 @@ public class PayableList extends javax.swing.JPanel {
     private javax.swing.JButton testBtn;
     private javax.swing.JLabel vendorName_Accn;
     private javax.swing.JComboBox<String> vendorNum_Accn;
+    private javax.swing.JPanel payableListPanel;
     // End of variables declaration                   
 }

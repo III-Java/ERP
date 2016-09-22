@@ -1,4 +1,6 @@
 package panels;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -30,6 +33,22 @@ public class WebNews extends javax.swing.JPanel {
 	public WebNews(Connection con) {
 		this.con = con;
 		initComponents();	
+	}
+	
+	@Override
+	protected void paintChildren(Graphics g) {
+		ImageIcon newIcon;		
+		BufferedImage BIMG;
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+			Image image = newIcon.getImage();
+			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+		} catch (IOException e) {
+			System.out.println("login img xx");
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("unchecked")

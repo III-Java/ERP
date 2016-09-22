@@ -14,13 +14,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
 
@@ -35,7 +41,8 @@ public class Product extends javax.swing.JPanel {
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-
+	
+	
 	private List<String> checkRp;
 	public Product(Connection conn) {
 		this.con = conn;
@@ -43,6 +50,23 @@ public class Product extends javax.swing.JPanel {
 		checkRp = new ArrayList<String>(); //產生List裝key過的單
 
 	}
+	
+	 @Override
+	    protected void paintComponent(Graphics g) {
+	    	ImageIcon newIcon;		
+			BufferedImage BIMG;
+			try {
+				BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+				newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+				Image image = newIcon.getImage();
+				g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+			} catch (IOException e) {
+				System.out.println("login img xx");
+				e.printStackTrace();
+			}
+			    	
+	    }
 
 	private void initComponents() {
 		label_productNum = new javax.swing.JLabel();

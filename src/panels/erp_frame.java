@@ -1,6 +1,7 @@
 ﻿package panels;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -220,6 +221,10 @@ public class erp_frame extends JFrame {
 
 		nowLayout = new CardLayout();
 		panel_dataInput.setLayout(nowLayout);
+		
+		jScrollPane3.setOpaque(true);
+		jScrollPane3.getViewport().setBackground(Color.blue);
+		
 	}
 
 	private void initComponents() {

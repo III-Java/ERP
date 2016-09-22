@@ -48,7 +48,7 @@ public class Admin extends javax.swing.JPanel {
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">   
-    private void initComponents() {
+    private void initComponents() {    	
 //    	adminPanel = new javax.swing.JPanel();
     	employee_admin = new javax.swing.ButtonGroup();
         attendance_admin = new javax.swing.ButtonGroup();

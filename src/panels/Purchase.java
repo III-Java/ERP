@@ -1,5 +1,9 @@
 ﻿package panels;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +19,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 /**
 * @author Veronica.C
@@ -33,7 +39,8 @@ public class Purchase extends javax.swing.JPanel {
 	private String empArray[], venArray[], matArray[];
 	private String unitArray[] = {"","公斤", "台斤","包","個","組","公升","罐","支"};
 	private boolean repeat =false;
-
+	
+	
     public Purchase(Connection connection) {
     	this.conn = connection;
 //    	databaseConnect();
@@ -44,6 +51,23 @@ public class Purchase extends javax.swing.JPanel {
     	empList.add(""); venList.add(""); matList.add("");
     	getIdtoCombolist();//抓到資料庫id資料塞入list
         initComponents();
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+    	ImageIcon newIcon;		
+		BufferedImage BIMG;
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+			Image image = newIcon.getImage();
+			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+		} catch (IOException e) {
+			System.out.println("login img xx");
+			e.printStackTrace();
+		}
+		    	
     }
 
     @SuppressWarnings("unchecked")

@@ -43,23 +43,22 @@ public class Billboard extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-    	jPanel1 = new javax.swing.JPanel();
-//    	jPanel1 = new javax.swing.JPanel(){
-//    		ImageIcon newIcon;
-//    		public void paintComponent(Graphics g){
-//    			BufferedImage BIMG;
-//				try {
-//					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-//					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
-//	    			Image image = newIcon.getImage();
-//	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
-//
-//				} catch (IOException e) {
-//					System.out.println("login img xx");
-//					e.printStackTrace();
-//				}
-//    		}    		
-//    	};
+    	jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
         billboardLabel01 = new javax.swing.JLabel();
         billboardLabel02 = new javax.swing.JLabel();
         billboardLabel03 = new javax.swing.JLabel();

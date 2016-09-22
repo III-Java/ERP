@@ -1,10 +1,17 @@
 package panels;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Material extends javax.swing.JPanel {
 
@@ -25,77 +32,106 @@ public class Material extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+    	jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-    	 jLabel1 = new javax.swing.JLabel();
-         jLabel2 = new javax.swing.JLabel();
-         jLabel7 = new javax.swing.JLabel();
-         jLabel10 = new javax.swing.JLabel();
-         jScrollPane1 = new javax.swing.JScrollPane();
-         txtNote = new javax.swing.JEditorPane();
-         txtMaterialName = new javax.swing.JTextField();
-         jLabel11 = new javax.swing.JLabel();
-         spQty = new javax.swing.JSpinner();
-         txtVendorNum = new javax.swing.JTextField();
-         jLabel3 = new javax.swing.JLabel();
-         lbMaterialNum = new javax.swing.JLabel();
-         lbVendorName = new javax.swing.JLabel();
-         cbUnit = new javax.swing.JComboBox<>();
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtNote = new javax.swing.JEditorPane();
+        txtMaterialName = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        spQty = new javax.swing.JSpinner();
+        txtVendorNum = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        lbMaterialNum = new javax.swing.JLabel();
+        lbVendorName = new javax.swing.JLabel();
+        cbUnit = new javax.swing.JComboBox<>();
 
-         setPreferredSize(new java.awt.Dimension(980, 470));
-         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMaximumSize(new java.awt.Dimension(980, 470));
+        setMinimumSize(new java.awt.Dimension(980, 470));
+        setPreferredSize(new java.awt.Dimension(980, 470));
 
-         jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel1.setText("原料編號");
-         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 65, 72, -1));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-         jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel2.setText("數量");
-         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 278, 72, -1));
+        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel1.setText("原料編號");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 65, 72, -1));
 
-         jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 89, -1, -1));
+        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel2.setText("數量");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 278, 72, -1));
 
-         jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel10.setText("備註");
-         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 163, -1, -1));
+        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 89, -1, -1));
 
-         txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
-         jScrollPane1.setViewportView(txtNote);
+        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel10.setText("備註");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 163, -1, -1));
 
-         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 161, 225, 142));
+        txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(txtNote);
 
-         txtMaterialName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(txtMaterialName, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, 225, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 161, 225, 142));
 
-         jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel11.setText("進貨廠商編號");
-         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 65, -1, -1));
+        txtMaterialName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(txtMaterialName, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, 225, -1));
 
-         spQty.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(spQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 275, 105, -1));
+        jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel11.setText("進貨廠商編號");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 65, -1, -1));
 
-         txtVendorNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         txtVendorNum.addKeyListener(new java.awt.event.KeyAdapter() {
-             public void keyReleased(java.awt.event.KeyEvent evt) {
-                 txtVendorNumKeyReleased(evt);
-             }
-         });
-         add(txtVendorNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 62, 225, -1));
+        spQty.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(spQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 275, 105, -1));
 
-         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel3.setText("原料名稱");
-         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 163, 72, -1));
+        txtVendorNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        txtVendorNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtVendorNumKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtVendorNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 62, 225, -1));
 
-         lbMaterialNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(lbMaterialNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 62, 225, 27));
+        jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel3.setText("原料名稱");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 163, 72, -1));
 
-         lbVendorName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(lbVendorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 107, 225, 28));
+        lbMaterialNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(lbMaterialNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 62, 225, 27));
 
-         cbUnit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         cbUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "公斤", "公升", "台斤", "包", "個", "組", "罐", "隻", "盒" }));
-         add(cbUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 274, 102, 28));
-    }// </editor-fold>                        
+        lbVendorName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(lbVendorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 107, 225, 28));
+
+        cbUnit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        cbUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "公斤", "公升", "台斤", "包", "個", "組", "罐", "隻", "盒" }));
+        jPanel1.add(cbUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 274, 102, 28));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );    
+     }// </editor-fold>                        
     
     private void setVendorName() {
 		String vendorName = "";
@@ -310,11 +346,12 @@ public class Material extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbMaterialNum;
     private javax.swing.JLabel lbVendorName;
     private javax.swing.JSpinner spQty;
     private javax.swing.JTextField txtMaterialName;
     private javax.swing.JEditorPane txtNote;
-    private javax.swing.JTextField txtVendorNum;      
+    private javax.swing.JTextField txtVendorNum;   
 }

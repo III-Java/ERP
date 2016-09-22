@@ -1,5 +1,9 @@
 package panels;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +11,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class EmptyPanel extends javax.swing.JPanel {
@@ -22,12 +29,33 @@ public class EmptyPanel extends javax.swing.JPanel {
 	}
 
 	private void initComponents() {
+		jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
 		jScrollPane1 = new javax.swing.JScrollPane();
 		tbBillboard = new javax.swing.JTable();
+		
+		jPanel1.setMaximumSize(new java.awt.Dimension(980, 470));
+        jPanel1.setMinimumSize(new java.awt.Dimension(980, 470));
+        jPanel1.setPreferredSize(new java.awt.Dimension(980, 470));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        jScrollPane1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jScrollPane1.setOpaque(false);
 
-		setPreferredSize(new java.awt.Dimension(980, 470));
-		setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 		tbBillboard.getTableHeader().setReorderingAllowed(false);
 		tbBillboard.setRowHeight(30);
 		tbBillboard.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
@@ -38,8 +66,20 @@ public class EmptyPanel extends javax.swing.JPanel {
 						new String[] { "Title 1", "Title 2", "Title 3", "Title 4" }));
 		
 		jScrollPane1.setViewportView(tbBillboard);
-		add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 13, 951, 444));
+		  jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 13, 951, 444));
 
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	        this.setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(0, 0, Short.MAX_VALUE))
+	        );
 	}// </editor-fold>
 
 	protected void getBillboardContent() {
@@ -121,6 +161,7 @@ public class EmptyPanel extends javax.swing.JPanel {
 
 	}
 	
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable tbBillboard;
+	private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbBillboard;
 }

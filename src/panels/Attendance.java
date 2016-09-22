@@ -1,10 +1,17 @@
 package panels;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Attendance extends javax.swing.JPanel {
 	private String employeeNum;
@@ -28,85 +35,112 @@ public class Attendance extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
+		jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-		  jLabel1 = new javax.swing.JLabel();
-	        txtEmployeeNum = new javax.swing.JTextField();
-	        jLabel2 = new javax.swing.JLabel();
-	        jLabel3 = new javax.swing.JLabel();
-	        jLabel4 = new javax.swing.JLabel();
-	        jLabel7 = new javax.swing.JLabel();
-	        jLabel8 = new javax.swing.JLabel();
-	        jLabel10 = new javax.swing.JLabel();
-	        jScrollPane1 = new javax.swing.JScrollPane();
-	        txtNote = new javax.swing.JEditorPane();
-	        cbLeaveSheet = new javax.swing.JComboBox<>();
-	        txtOffWork = new javax.swing.JFormattedTextField();
-	        txtOnWork1 = new javax.swing.JFormattedTextField();
-	        lbDepartment = new javax.swing.JLabel();
-	        lbName = new javax.swing.JLabel();
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
+         jLabel1 = new javax.swing.JLabel();
+         txtEmployeeNum = new javax.swing.JTextField();
+         jLabel2 = new javax.swing.JLabel();
+         jLabel3 = new javax.swing.JLabel();
+         jLabel4 = new javax.swing.JLabel();
+         jLabel7 = new javax.swing.JLabel();
+         jLabel8 = new javax.swing.JLabel();
+         jLabel10 = new javax.swing.JLabel();
+         jScrollPane1 = new javax.swing.JScrollPane();
+         txtNote = new javax.swing.JEditorPane();
+         cbLeaveSheet = new javax.swing.JComboBox<>();
+         txtOffWork = new javax.swing.JFormattedTextField();
+         txtOnWork1 = new javax.swing.JFormattedTextField();
+         lbDepartment = new javax.swing.JLabel();
+         lbName = new javax.swing.JLabel();
 
-	        setPreferredSize(new java.awt.Dimension(980, 470));
-	        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+         setPreferredSize(new java.awt.Dimension(980, 470));
 
-	        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        jLabel1.setText("員工編號");
-	        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 62, -1, -1));
+         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-	        txtEmployeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
-	        txtEmployeeNum.addKeyListener(new java.awt.event.KeyAdapter() {
-	            public void keyReleased(java.awt.event.KeyEvent evt) {
-	                txtEmployeeNumKeyReleased(evt);
-	            }
-	        });
-	        add(txtEmployeeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 225, -1));
+         jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel1.setText("員工編號");
+         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 62, -1, -1));
 
-	        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        jLabel2.setText("上班時間");
-	        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 150, -1, -1));
+         txtEmployeeNum.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+         txtEmployeeNum.addKeyListener(new java.awt.event.KeyAdapter() {
+             public void keyReleased(java.awt.event.KeyEvent evt) {
+                 txtEmployeeNumKeyReleased(evt);
+             }
+         });
+         jPanel1.add(txtEmployeeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 225, -1));
 
-	        jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        jLabel3.setText("下班時間");
-	        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 230, -1, -1));
+         jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel2.setText("上班時間");
+         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 150, -1, -1));
 
-	        jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        jLabel4.setText("假別");
-	        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 298, 72, -1));
+         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel3.setText("下班時間");
+         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 230, -1, -1));
 
-	        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 150, -1, -1));
+         jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel4.setText("假別");
+         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 298, 72, -1));
 
-	        jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        jLabel8.setText("部門");
-	        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 62, -1, -1));
+         jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 150, -1, -1));
 
-	        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        jLabel10.setText("備註");
-	        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 150, -1, -1));
+         jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel8.setText("部門");
+         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 62, -1, -1));
 
-	        txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-	        jScrollPane1.setViewportView(txtNote);
+         jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel10.setText("備註");
+         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 150, -1, -1));
 
-	        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 150, 317, 175));
+         txtNote.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jScrollPane1.setViewportView(txtNote);
 
-	        cbLeaveSheet.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-	        cbLeaveSheet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "無", "事假", "病假", "喪假", "生理假", "育嬰假" }));
-	        add(cbLeaveSheet, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 298, 225, -1));
+         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 150, 317, 175));
 
-	        txtOffWork.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
-	        txtOffWork.setToolTipText("yyyy/MM/dd HH:mm:ss");
-	        txtOffWork.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-	        add(txtOffWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 228, 225, -1));
+         cbLeaveSheet.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         cbLeaveSheet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "無", "事假", "病假", "喪假", "生理假", "育嬰假" }));
+         jPanel1.add(cbLeaveSheet, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 298, 225, -1));
 
-	        txtOnWork1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
-	        txtOnWork1.setToolTipText("yyyy/MM/dd HH:mm:ss");
-	        txtOnWork1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-	        add(txtOnWork1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 150, 225, -1));
+         txtOffWork.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
+         txtOffWork.setToolTipText("yyyy/MM/dd HH:mm:ss");
+         txtOffWork.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jPanel1.add(txtOffWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 228, 225, -1));
 
-	        lbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-	        add(lbDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 62, 302, 27));
+         txtOnWork1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss"))));
+         txtOnWork1.setToolTipText("yyyy/MM/dd HH:mm:ss");
+         txtOnWork1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jPanel1.add(txtOnWork1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 150, 225, -1));
 
-	        lbName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-	        add(lbName, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 60, 89, 29));
+         lbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jPanel1.add(lbDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 62, 302, 27));
+
+         lbName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+         jPanel1.add(lbName, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 60, 89, 29));
+
+         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+         this.setLayout(layout);
+         layout.setHorizontalGroup(
+             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         );
+         layout.setVerticalGroup(
+             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+         );
 	}// </editor-fold>
 
 	private void setName() {
@@ -359,18 +393,19 @@ public class Attendance extends javax.swing.JPanel {
 	}
 	
 	private javax.swing.JComboBox<String> cbLeaveSheet;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel10;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel7;
-	private javax.swing.JLabel jLabel8;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JLabel lbDepartment;
-	private javax.swing.JLabel lbName;
-	private javax.swing.JTextField txtEmployeeNum;
-	private javax.swing.JEditorPane txtNote;
-	private javax.swing.JFormattedTextField txtOffWork;
-	private javax.swing.JFormattedTextField txtOnWork1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbDepartment;
+    private javax.swing.JLabel lbName;
+    private javax.swing.JTextField txtEmployeeNum;
+    private javax.swing.JEditorPane txtNote;
+    private javax.swing.JFormattedTextField txtOffWork;
+    private javax.swing.JFormattedTextField txtOnWork1;
 }

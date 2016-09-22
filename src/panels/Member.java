@@ -7,10 +7,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout.Alignment;
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Member extends javax.swing.JPanel {
 	private String customerId;
@@ -32,7 +38,23 @@ public class Member extends javax.swing.JPanel {
 
 	@SuppressWarnings("unchecked")	
 	private void initComponents() {
-        gender_member = new javax.swing.ButtonGroup();
+		gender_member = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
         label_customerId = new javax.swing.JLabel();
         label_password = new javax.swing.JLabel();
         label_memberName = new javax.swing.JLabel();
@@ -53,51 +75,56 @@ public class Member extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(980, 470));
         setMinimumSize(new java.awt.Dimension(980, 470));
         setName(""); // NOI18N
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(980, 470));
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(980, 470));
+        jPanel1.setMinimumSize(new java.awt.Dimension(980, 470));
+        jPanel1.setPreferredSize(new java.awt.Dimension(980, 470));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_customerId.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_customerId.setText("客戶編號");
-        add(label_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 63, -1, -1));
+        jPanel1.add(label_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 63, -1, -1));
 
         label_password.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_password.setText("客戶密碼");
-        add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 141, -1, -1));
+        jPanel1.add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 141, -1, -1));
 
         label_memberName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_memberName.setText("客戶名稱");
-        add(label_memberName, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 219, -1, -1));
+        jPanel1.add(label_memberName, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 219, -1, -1));
 
         label_note.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_note.setText("備註");
-        add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 293, 60, -1));
+        jPanel1.add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 293, 60, -1));
 
         label_tel.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_tel.setText("電話");
-        add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 63, 60, -1));
+        jPanel1.add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 63, 60, -1));
 
         label_gender.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_gender.setText("性別");
-        add(label_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 141, 60, -1));
+        jPanel1.add(label_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 141, 60, -1));
 
         label_address.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_address.setText("地址");
-        add(label_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 219, 60, -1));
+        jPanel1.add(label_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 219, 60, -1));
 
         text_customerId.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        add(text_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 60, 210, -1));
+        jPanel1.add(text_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 60, 210, -1));
 
         text_password.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        add(text_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 138, 210, -1));
+        jPanel1.add(text_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 138, 210, -1));
 
         text_memberName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        add(text_memberName, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 216, 210, -1));
+        jPanel1.add(text_memberName, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 216, 210, -1));
 
         text_note.setColumns(20);
         text_note.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
         text_note.setRows(5);
         jScrollPane1.setViewportView(text_note);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 293, 687, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 293, 687, -1));
 
         text_tel.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         text_tel.setToolTipText("格式：0212345678,0912345678");
@@ -106,21 +133,33 @@ public class Member extends javax.swing.JPanel {
                 text_telKeyTyped(evt);
             }
         });
-        add(text_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 60, 250, -1));
+        jPanel1.add(text_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 60, 250, -1));
 
         gender_member.add(radio_male);
         radio_male.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         radio_male.setText("男");
-        add(radio_male, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 137, 98, -1));
+        jPanel1.add(radio_male, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 137, 98, -1));
 
         gender_member.add(radio_female);
         radio_female.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         radio_female.setText("女");
-        add(radio_female, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 137, 83, -1));
+        jPanel1.add(radio_female, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 137, 83, -1));
 
         text_address.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        add(text_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 216, 250, -1));
-    }// </editor-fold>                        
+        jPanel1.add(text_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(623, 216, 250, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+	}// </editor-fold>                        
 
     private void text_telKeyTyped(java.awt.event.KeyEvent evt) {                                  
     	 char c = evt.getKeyChar();
@@ -296,6 +335,7 @@ public class Member extends javax.swing.JPanel {
 	}
 
 	private javax.swing.ButtonGroup gender_member;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_address;
     private javax.swing.JLabel label_customerId;

@@ -78,23 +78,32 @@ public class Product extends javax.swing.JPanel {
         label_category = new javax.swing.JLabel();
         CBcategory = new javax.swing.JComboBox<>();
         text_productName = new javax.swing.JTextField();
-        text_note = new javax.swing.JTextField();
+        text_note = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
 
+        setMinimumSize(new java.awt.Dimension(980, 470));
         setPreferredSize(new java.awt.Dimension(980, 470));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_productNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_productNum.setText("產品編號");
+        add(label_productNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
         label_pNum.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(label_pNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 35));
+
 
         label_productName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_productName.setText("品名");
+        add(label_productName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, 20));
 
         label_note.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_note.setText("備註");
+        add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         label_price.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_price.setText("單價");
+        add(label_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
 
         ((JFormattedTextField) text_price).setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         text_price.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
@@ -103,77 +112,30 @@ public class Product extends javax.swing.JPanel {
                 text_priceKeyTyped(evt);
             }
         });
-        
+        add(text_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 200, 35));
+
         
         label_category.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_category.setText("類別");
+        add(label_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
         CBcategory.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+      //change modle
         CBcategory.setModel(new DefaultComboBoxModel(new String[] {"","原味茶系列", "鮮奶茶系列", "拿鐵系列", "美味抹茶系列", "100%鮮果系列"}));
+        add(CBcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 200, 35));
 
         text_productName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        add(text_productName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 200, 35));
 
         text_note.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        text_note.setColumns(20);
+        text_note.setFont(new java.awt.Font("微軟正黑體", 0, 14)); // NOI18N
+        text_note.setRows(5);
+        jScrollPane2.setViewportView(text_note);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_productNum)
-                    .addComponent(label_productName)
-                    .addComponent(label_note))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_productName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label_pNum))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_category)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CBcategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label_price)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(text_price, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(315, 315, 315))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(text_note)
-                        .addGap(297, 297, 297))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label_productNum)
-                            .addComponent(label_pNum))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label_productName)
-                            .addComponent(text_productName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label_price)
-                            .addComponent(text_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label_category)
-                            .addComponent(CBcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(text_note, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_note))
-                .addContainerGap(56, Short.MAX_VALUE))
-		);
-		this.setLayout(layout);
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 630, -1));
+
+        
 	}// </editor-fold>
 
 	private boolean getUserInputParm() {
@@ -408,7 +370,7 @@ public class Product extends javax.swing.JPanel {
 	private javax.swing.JLabel label_price;
 	private javax.swing.JLabel label_productName;
 	private javax.swing.JLabel label_productNum;
-	private JTextField text_note;
+	private javax.swing.JTextArea text_note;
 	private javax.swing.JTextField text_price;
 	private javax.swing.JTextField text_productName;
 	private JComboBox CBcategory;

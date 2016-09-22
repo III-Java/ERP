@@ -71,7 +71,7 @@ public class Attendance extends javax.swing.JPanel {
 
          jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-         jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel1.setText("員工編號");
          jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 62, -1, -1));
 
@@ -83,26 +83,26 @@ public class Attendance extends javax.swing.JPanel {
          });
          jPanel1.add(txtEmployeeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 225, -1));
 
-         jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel2.setText("上班時間");
          jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 150, -1, -1));
 
-         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel3.setText("下班時間");
          jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 230, -1, -1));
 
-         jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel4.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel4.setText("假別");
          jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 298, 72, -1));
 
-         jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 150, -1, -1));
 
-         jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel8.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel8.setText("部門");
          jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 62, -1, -1));
 
-         jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jLabel10.setText("備註");
          jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(551, 150, -1, -1));
 
@@ -125,7 +125,7 @@ public class Attendance extends javax.swing.JPanel {
          txtOnWork1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jPanel1.add(txtOnWork1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 150, 225, -1));
 
-         lbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+         lbDepartment.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
          jPanel1.add(lbDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 62, 302, 27));
 
          lbName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N

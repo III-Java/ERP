@@ -28,94 +28,108 @@ public class ProfitReport extends javax.swing.JPanel {
         initComponents();
     }
     
-    @Override
-    protected void paintChildren(Graphics g) {
-    	ImageIcon newIcon;		
-		BufferedImage BIMG;
-		try {
-			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
-			Image image = newIcon.getImage();
-			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
-
-		} catch (IOException e) {
-			System.out.println("login img xx");
-			e.printStackTrace();
-		}
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+    	jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-    	 jLabel1 = new javax.swing.JLabel();
-         jLabel2 = new javax.swing.JLabel();
-         jLabel7 = new javax.swing.JLabel();
-         jLabel10 = new javax.swing.JLabel();
-         jLabel11 = new javax.swing.JLabel();
-         jLabel12 = new javax.swing.JLabel();
-         cbYear = new javax.swing.JComboBox<>();
-         cbMonth = new javax.swing.JComboBox<>();
-         lbProfit = new javax.swing.JLabel();
-         lbExpend = new javax.swing.JLabel();
-         lbSales1 = new javax.swing.JLabel();
-         cbReport = new javax.swing.JComboBox<>();
-         jLabel3 = new javax.swing.JLabel();
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
+        jLabel12 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cbReport = new javax.swing.JComboBox<>();
+        cbMonth = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        lbProfit = new javax.swing.JLabel();
+        lbSales1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cbYear = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbExpend = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
-         setPreferredSize(new java.awt.Dimension(980, 470));
-         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMaximumSize(new java.awt.Dimension(980, 470));
+        setMinimumSize(new java.awt.Dimension(980, 470));
+        setPreferredSize(new java.awt.Dimension(980, 470));
 
-         jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel1.setText("年份");
-         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 65, -1, -1));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-         jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel2.setText("月份");
-         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 60, -1, 31));
+        jLabel12.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel12.setText("當月盈餘");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, 20));
 
-         jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
-         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(503, 241, -1, -1));
+        jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel10.setText("當月銷售");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, 20));
 
-         jLabel10.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel10.setText("當月銷售");
-         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 220, -1, -1));
+        cbReport.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        cbReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "支出報表", "銷售報表" }));
+        jPanel1.add(cbReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 210, -1));
 
-         jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel11.setText("當月支出");
-         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 153, -1, -1));
+        cbMonth.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 210, -1));
 
-         jLabel12.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel12.setText("當月盈餘");
-         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 292, -1, -1));
+        jLabel11.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel11.setText("當月支出");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, 20));
 
-         cbYear.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         cbYear.addActionListener(new java.awt.event.ActionListener() {
-             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                 cbYearActionPerformed(evt);
-             }
-         });
-         add(cbYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 62, 210, -1));
+        lbProfit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        lbProfit.setForeground(new java.awt.Color(0, 0, 255));
+        jPanel1.add(lbProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 247, 30));
 
-         cbMonth.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 62, 210, -1));
+        lbSales1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(lbSales1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 247, 30));
 
-         lbProfit.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         lbProfit.setForeground(new java.awt.Color(255, 0, 0));
-         add(lbProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 292, 247, 27));
+        jLabel1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel1.setText("年份");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 60, 30));
 
-         lbExpend.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(lbExpend, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 153, 247, 27));
+        cbYear.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        cbYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbYearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 210, -1));
 
-         lbSales1.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         add(lbSales1, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 220, 247, 27));
+        jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel3.setText("觀看");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, -1, 31));
 
-         cbReport.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         cbReport.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "支出報表", "銷售報表" }));
-         add(cbReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 62, 210, -1));
+        jLabel2.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jLabel2.setText("月份");
+        jLabel2.setName(""); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, 31));
 
-         jLabel3.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-         jLabel3.setText("觀看");
-         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 60, -1, 31));
+        lbExpend.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
+        jPanel1.add(lbExpend, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 247, 30));
+
+        jLabel7.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(503, 241, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
     }// </editor-fold>                        
         
     protected void clearInput(){
@@ -286,5 +300,6 @@ public class ProfitReport extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lbExpend;
     private javax.swing.JLabel lbProfit;
-    private javax.swing.JLabel lbSales1;                
+    private javax.swing.JLabel lbSales1; 
+    private javax.swing.JPanel jPanel1;
 }

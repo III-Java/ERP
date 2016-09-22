@@ -264,7 +264,22 @@ public class Issue extends javax.swing.JPanel {
 
 	@SuppressWarnings("unchecked")
     private void initComponents() {
+		jPanel1 = new javax.swing.JPanel(){
+    		ImageIcon newIcon;
+    		public void paintComponent(Graphics g){
+    			BufferedImage BIMG;
+				try {
+					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	    			Image image = newIcon.getImage();
+	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
+				} catch (IOException e) {
+					System.out.println("login img xx");
+					e.printStackTrace();
+				}
+    		}    		
+    	};
         label_customerId = new javax.swing.JLabel();
         label_price = new javax.swing.JLabel();
         label_complaint = new javax.swing.JLabel();
@@ -277,25 +292,30 @@ public class Issue extends javax.swing.JPanel {
         combo_customerId = new javax.swing.JComboBox<>();
         label_customName = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(980, 470));
         setMinimumSize(new java.awt.Dimension(980, 470));
         setPreferredSize(new java.awt.Dimension(980, 470));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(980, 470));
+        jPanel1.setMinimumSize(new java.awt.Dimension(980, 470));
+        jPanel1.setPreferredSize(new java.awt.Dimension(980, 470));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_customerId.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_customerId.setText("客戶編號");
-        add(label_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+        jPanel1.add(label_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
         label_price.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_price.setText("金額");
-        add(label_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
+        jPanel1.add(label_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
 
         label_complaint.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_complaint.setText("客訴內容");
-        add(label_complaint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
+        jPanel1.add(label_complaint, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
 
         label_note.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         label_note.setText("備註");
-        add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+        jPanel1.add(label_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
         text_price.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         text_price.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -303,14 +323,14 @@ public class Issue extends javax.swing.JPanel {
                 text_priceKeyTyped(evt);
             }
         });
-        add(text_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 75, 200, 35));
+        jPanel1.add(text_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 75, 200, 35));
 
         text_complaint.setColumns(20);
         text_complaint.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
         text_complaint.setRows(5);
         scroll_complaint.setViewportView(text_complaint);
 
-        add(scroll_complaint, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 620, 150));
+        jPanel1.add(scroll_complaint, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 620, 150));
 
         scroll_note.setToolTipText("");
         scroll_note.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -320,18 +340,30 @@ public class Issue extends javax.swing.JPanel {
         text_note.setRows(5);
         scroll_note.setViewportView(text_note);
 
-        add(scroll_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 346, 620, 80));
+        jPanel1.add(scroll_note, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 346, 620, 80));
 
         combo_customerId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_customerIdActionPerformed(evt);
             }
         });
-        add(combo_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 75, 80, 35));
+        jPanel1.add(combo_customerId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 75, 80, 35));
 
         label_customName.setFont(new java.awt.Font("微軟正黑體", 0, 15)); // NOI18N
-        add(label_customName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 100, 40));
-    }// </editor-fold>                      
+        jPanel1.add(label_customName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 100, 40));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+	}// </editor-fold>                      
 
 	private javax.swing.JComboBox<String> combo_customerId;
 	private javax.swing.JLabel label_complaint;
@@ -344,5 +376,6 @@ public class Issue extends javax.swing.JPanel {
 	private javax.swing.JTextArea text_complaint;
 	private javax.swing.JTextArea text_note;
 	private javax.swing.JTextField text_price;
+	private javax.swing.JPanel jPanel1;
 
 }

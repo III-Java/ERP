@@ -1,4 +1,5 @@
 package panels;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -22,6 +23,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
+import org.w3c.dom.css.RGBColor;
+
 /**
 * @author Veronica.C
 */
@@ -42,14 +45,15 @@ public class Admin extends javax.swing.JPanel {
     	empList = new ArrayList<String>(); //產生List裝id
     	empList.add("");
     	getEmpIdlist(); //抓到員工資料庫人員id資料塞入list
-        initComponents();       
-      
+        initComponents();   
+        
+        Color bgcolor = Color.decode("#f2eeeb");
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">   
     private void initComponents() {    	
-//    	adminPanel = new javax.swing.JPanel();
+    	adminPanel = new javax.swing.JPanel();
     	employee_admin = new javax.swing.ButtonGroup();
         attendance_admin = new javax.swing.ButtonGroup();
         achievement_admin = new javax.swing.ButtonGroup();
@@ -72,22 +76,23 @@ public class Admin extends javax.swing.JPanel {
         news_admin = new javax.swing.ButtonGroup();
         dep_admin1 = new javax.swing.ButtonGroup();
         
-        adminPanel = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
-    		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
-				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
-	    			Image image = newIcon.getImage();
-	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
-
-				} catch (IOException e) {
-					System.out.println("login img xx");
-					e.printStackTrace();
-				}
-    		}    		
-    	};
+        adminPanel.setBackground(new java.awt.Color(245,240,243));
+//        adminPanel = new javax.swing.JPanel(){
+//    		ImageIcon newIcon;
+//    		public void paintComponent(Graphics g){
+//    			BufferedImage BIMG;
+//				try {
+//					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+//					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+//	    			Image image = newIcon.getImage();
+//	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+//
+//				} catch (IOException e) {
+//					System.out.println("login img xx");
+//					e.printStackTrace();
+//				}
+//    		}    		
+//    	};
         adminLabel01 = new javax.swing.JLabel();
         adminLabel02 = new javax.swing.JLabel();
         adminLabel04 = new javax.swing.JLabel();

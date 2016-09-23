@@ -223,7 +223,7 @@ public class erp_frame extends JFrame {
 		panel_dataInput.setLayout(nowLayout);
 		
 		jScrollPane3.setOpaque(true);
-		jScrollPane3.getViewport().setBackground(Color.blue);
+		jScrollPane3.getViewport().setBackground(new java.awt.Color(245,240,243));//TABLE COLOR
 		
 	}
 

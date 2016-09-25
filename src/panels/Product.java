@@ -208,6 +208,7 @@ public class Product extends javax.swing.JPanel {
 			break;
 		case "美味抹茶系列":
 			CBcategory.setSelectedIndex(4);
+			break;
 		case "100%鮮果系列":
 			CBcategory.setSelectedIndex(5);
 			break;

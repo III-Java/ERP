@@ -32,6 +32,8 @@ public class Login extends javax.swing.JFrame {
 	private String ondutyT =null, offdutyT =null, onduty=null;
 	private boolean idOk=false, pwOk=false, ifedit=false, repeatPW=false, noInput=false;
 	private boolean hasOnDutyRecord=false, hasOffDutyRecord=false;
+	ImageIcon newIcon;
+	BufferedImage BIMG;
 
     public Login() {
     	databaseConnect();
@@ -57,9 +59,7 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
    //set background img    	
     	login = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
 				try {
 					BIMG = ImageIO.read(Login.class.getResource("/login_BG.jpg"));
 					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(640, 530, Image.SCALE_DEFAULT));

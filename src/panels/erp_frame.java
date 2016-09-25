@@ -26,11 +26,15 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import model.ErpTreeCellRenderer;
+import model.TreeIcon;
 
 
 //import erp_frame.myTableModel;
@@ -75,6 +79,11 @@ public class erp_frame extends JFrame {
 	private Purchase purchase;
 	private Department department;
 	private Picking picking;
+	
+	//bg
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+ 
 
 	private myTableModel tableModel;
 	public LinkedList<String[]> data;
@@ -222,10 +231,25 @@ public class erp_frame extends JFrame {
 		nowLayout = new CardLayout();
 		panel_dataInput.setLayout(nowLayout);
 		
+		//table set background
 		jScrollPane3.setOpaque(true);
-		jScrollPane3.getViewport().setBackground(new java.awt.Color(245,240,243));//TABLE COLOR
+//		jScrollPane3.getViewport().setBackground(new java.awt.Color(245,240,243));//TABLE COLOR
+		
+		
 		
 	}
+	
+	@Override
+    public void paintComponents(Graphics g) {
+		try {
+			Image image = newIcon.getImage();
+			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
+
+		} catch (Exception e) {
+			System.out.println("login img xx");
+			e.printStackTrace();
+		}
+    }
 
 	private void initComponents() {
 
@@ -268,86 +292,191 @@ public class erp_frame extends JFrame {
 
 		treeFolder.setFont(new java.awt.Font("微軟正黑體", 0, 18)); // NOI18N
 		//create tree with root, category, sheet
-        javax.swing.tree.DefaultMutableTreeNode ERP = new javax.swing.tree.DefaultMutableTreeNode("ERP");
-        
-        javax.swing.tree.DefaultMutableTreeNode DB_hr = new javax.swing.tree.DefaultMutableTreeNode("人事資料庫");
-        javax.swing.tree.DefaultMutableTreeNode employee = new javax.swing.tree.DefaultMutableTreeNode("員工資料表");
-        DB_hr.add(employee);
-        javax.swing.tree.DefaultMutableTreeNode achievement = new javax.swing.tree.DefaultMutableTreeNode("員工考績表");
-        DB_hr.add(achievement);
-        javax.swing.tree.DefaultMutableTreeNode attendance = new javax.swing.tree.DefaultMutableTreeNode("出缺勤表");
-        DB_hr.add(attendance);
-        javax.swing.tree.DefaultMutableTreeNode payRoll = new javax.swing.tree.DefaultMutableTreeNode("薪資表");
-        DB_hr.add(payRoll);
-        ERP.add(DB_hr); 
-        
-        javax.swing.tree.DefaultMutableTreeNode DB_Purchase = new javax.swing.tree.DefaultMutableTreeNode("採購資料庫");
-        javax.swing.tree.DefaultMutableTreeNode purchaseSheet = new javax.swing.tree.DefaultMutableTreeNode("進貨表");
-        DB_Purchase.add(purchaseSheet);
-        ERP.add(DB_Purchase);
-        
-        javax.swing.tree.DefaultMutableTreeNode DB_Product = new javax.swing.tree.DefaultMutableTreeNode("產品資料庫");
-        javax.swing.tree.DefaultMutableTreeNode productSheet = new javax.swing.tree.DefaultMutableTreeNode("產品資料表");
-        DB_Product.add(productSheet);
-        ERP.add(DB_Product);
-   
-        javax.swing.tree.DefaultMutableTreeNode DB_Material = new javax.swing.tree.DefaultMutableTreeNode("庫存資料庫");
-        javax.swing.tree.DefaultMutableTreeNode MaterialSheet = new javax.swing.tree.DefaultMutableTreeNode("原料庫存資料表");
-        javax.swing.tree.DefaultMutableTreeNode pickingSheet = new javax.swing.tree.DefaultMutableTreeNode("領料記錄表");
-        DB_Material.add(MaterialSheet);
-        DB_Material.add(pickingSheet);//領料表
-        ERP.add(DB_Material);
+		javax.swing.tree.DefaultMutableTreeNode ERP = new javax.swing.tree.DefaultMutableTreeNode("ERP");
 
-        
-        javax.swing.tree.DefaultMutableTreeNode DB_Sales = new javax.swing.tree.DefaultMutableTreeNode("銷售資料庫");
-        javax.swing.tree.DefaultMutableTreeNode orderList = new javax.swing.tree.DefaultMutableTreeNode("訂單資料表");
-        javax.swing.tree.DefaultMutableTreeNode orderItem = new javax.swing.tree.DefaultMutableTreeNode("訂購項目資料表");
-        javax.swing.tree.DefaultMutableTreeNode issue = new javax.swing.tree.DefaultMutableTreeNode("異常紀錄表");
-        javax.swing.tree.DefaultMutableTreeNode vendor = new javax.swing.tree.DefaultMutableTreeNode("廠商資料表");
-        DB_Sales.add(orderList);
-        DB_Sales.add(orderItem);
-        DB_Sales.add(issue);
-        DB_Sales.add(vendor);
-        ERP.add(DB_Sales);
-        
-        javax.swing.tree.DefaultMutableTreeNode DB_Account = new javax.swing.tree.DefaultMutableTreeNode("會計資料庫");
-        javax.swing.tree.DefaultMutableTreeNode payableList = new javax.swing.tree.DefaultMutableTreeNode("應付帳款管理表");
-        javax.swing.tree.DefaultMutableTreeNode Asset = new javax.swing.tree.DefaultMutableTreeNode("資產管理表");
-        DB_Account.add(payableList);
-        DB_Account.add(Asset); 
-        ERP.add(DB_Account);
-  
-        javax.swing.tree.DefaultMutableTreeNode DB_Customer = new javax.swing.tree.DefaultMutableTreeNode("客戶資料庫");
-        javax.swing.tree.DefaultMutableTreeNode CustomerList = new javax.swing.tree.DefaultMutableTreeNode("客戶資料表");
-        DB_Customer.add(CustomerList);
-        ERP.add(DB_Customer);
-        //(9/4)add
-        javax.swing.tree.DefaultMutableTreeNode DB_System = new javax.swing.tree.DefaultMutableTreeNode("系統管理庫");
-        javax.swing.tree.DefaultMutableTreeNode admin = new javax.swing.tree.DefaultMutableTreeNode("帳號管理表");
-        javax.swing.tree.DefaultMutableTreeNode billboard = new javax.swing.tree.DefaultMutableTreeNode("公告管理表");
-        javax.swing.tree.DefaultMutableTreeNode department = new javax.swing.tree.DefaultMutableTreeNode("部門管理表");
-        javax.swing.tree.DefaultMutableTreeNode webnews = new javax.swing.tree.DefaultMutableTreeNode("網站新聞表");
-        DB_System.add(admin);
-        DB_System.add(billboard);  
-        DB_System.add(department);
-        DB_System.add(webnews);
-        //報表系統
-        javax.swing.tree.DefaultMutableTreeNode DB_Report = new javax.swing.tree.DefaultMutableTreeNode("報表系統");
-        javax.swing.tree.DefaultMutableTreeNode salesSheet = new javax.swing.tree.DefaultMutableTreeNode("銷售報表");
-        javax.swing.tree.DefaultMutableTreeNode profitSheet = new javax.swing.tree.DefaultMutableTreeNode("營利報表");
-        DB_Report.add(salesSheet);
-        DB_Report.add(profitSheet);
-        ERP.add(DB_Report);
-        
-        ERP.add(DB_System);
-        treeFolder.setModel(new javax.swing.tree.DefaultTreeModel(ERP));
-        treeFolder.setRowHeight(30);
-        treeFolder.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                treeFolderValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(treeFolder);
+		javax.swing.tree.DefaultMutableTreeNode DB_hr = new DefaultMutableTreeNode(new TreeIcon("人事資料庫", "/icon/erp.png"));
+		DefaultMutableTreeNode node = new DefaultMutableTreeNode();
+		
+
+		TreeIcon[] icons_DbHr = new TreeIcon[] { new TreeIcon("員工資料表", "/icon/employee.png"),
+				new TreeIcon("員工考績表", "/icon/attendance.png"), new TreeIcon("出缺勤表", "/icon/archievement.png"),
+				new TreeIcon("薪資表", "/icon/payroll.png"), };
+		
+		for (TreeIcon icon : icons_DbHr) {
+			node = new DefaultMutableTreeNode(icon);
+			DB_hr.add(node);
+		}
+		
+		ERP.add(DB_hr);
+		
+		javax.swing.tree.DefaultMutableTreeNode DB_Purchase = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("採購資料庫", "/icon/erp.png"));
+		TreeIcon icons_DBPurchase = new TreeIcon("進貨表", "/icon/purchase.png");
+		node = new DefaultMutableTreeNode(icons_DBPurchase);
+		DB_Purchase.add(node);
+		ERP.add(DB_Purchase);
+		
+		javax.swing.tree.DefaultMutableTreeNode DB_Product = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("產品資料庫", "/icon/erp.png"));
+		TreeIcon icons_Product = new TreeIcon("產品資料表","/icon/product.png");
+		node = new DefaultMutableTreeNode(icons_Product);
+		DB_Product.add(node);
+		ERP.add(DB_Product);
+
+		javax.swing.tree.DefaultMutableTreeNode DB_Material = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("庫存資料庫", "/icon/erp.png"));
+		TreeIcon[] icon_Material = new TreeIcon[]{
+				new TreeIcon("原料庫存資料表","/icon/material.png"),
+				new TreeIcon("領料記錄表","/icon/picking.png"),
+		};
+		for(TreeIcon icon : icon_Material){
+			node = new DefaultMutableTreeNode(icon);
+			DB_Material.add(node);
+		}
+		ERP.add(DB_Material);
+
+		javax.swing.tree.DefaultMutableTreeNode DB_Sales = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("銷售資料庫", "/icon/erp.png"));
+		TreeIcon[] icon_Sales = new TreeIcon[]{
+				new TreeIcon("訂單資料表","/icon/orderlist.png"),
+				new TreeIcon("訂購項目資料表","/icon/orderitem.png"),
+				new TreeIcon("異常紀錄表","/icon/issue.png"),
+				new TreeIcon("廠商資料表","/icon/vendor.png"),
+		};
+		for(TreeIcon icon : icon_Sales){
+			node = new DefaultMutableTreeNode(icon);
+			DB_Sales.add(node);
+		}
+		ERP.add(DB_Sales);
+
+		javax.swing.tree.DefaultMutableTreeNode DB_Account = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("會計資料庫", "/icon/erp.png"));
+		TreeIcon[] icon_Account = new TreeIcon[]{
+				new TreeIcon("應付帳款管理表","/icon/payablelist.png"),
+				new TreeIcon("資產管理表","/icon/asset.png"),
+		};
+		for(TreeIcon icon : icon_Account){
+			node = new DefaultMutableTreeNode(icon);
+			DB_Account.add(node);
+		}
+		ERP.add(DB_Account);
+
+		javax.swing.tree.DefaultMutableTreeNode DB_Customer = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("客戶資料庫", "/icon/erp.png"));
+		TreeIcon icons_Customer = new TreeIcon("客戶資料表","/icon/member.png");
+		node = new DefaultMutableTreeNode(icons_Customer);
+		DB_Customer.add(node);
+		ERP.add(DB_Customer);
+		
+		// 報表系統
+		javax.swing.tree.DefaultMutableTreeNode DB_Report = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("報表系統", "/icon/erp.png"));
+		TreeIcon[] icon_Report = new TreeIcon[]{
+				new TreeIcon("銷售報表","/icon/sales.png"),
+				new TreeIcon("營利報表","/icon/profit.png"),
+		};
+		for(TreeIcon icon : icon_Report){
+			node = new DefaultMutableTreeNode(icon);
+			DB_Report.add(node);
+		}
+		ERP.add(DB_Report);
+		
+		// (9/4)add
+		javax.swing.tree.DefaultMutableTreeNode DB_System = new javax.swing.tree.DefaultMutableTreeNode(new TreeIcon("系統管理庫", "/icon/erp.png"));
+		TreeIcon[] icon_System = new TreeIcon[]{
+				new TreeIcon("帳號管理表","/icon/admin.png"),
+				new TreeIcon("公告管理表","/icon/billboard.png"),
+				new TreeIcon("部門管理表","/icon/department.png"),
+				new TreeIcon("網站新聞表","/icon/webnews.png"),
+		};
+		for(TreeIcon icon : icon_System){
+			node = new DefaultMutableTreeNode(icon);
+			DB_System.add(node);
+		}
+		ERP.add(DB_System);
+
+		treeFolder.setModel(new javax.swing.tree.DefaultTreeModel(ERP));
+		treeFolder.setRowHeight(30);
+		treeFolder.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+			public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+				treeFolderValueChanged(evt);
+			}
+		});
+		jScrollPane1.setViewportView(treeFolder);
+		
+//        javax.swing.tree.DefaultMutableTreeNode ERP = new javax.swing.tree.DefaultMutableTreeNode("ERP");
+//        
+//        javax.swing.tree.DefaultMutableTreeNode DB_hr = new javax.swing.tree.DefaultMutableTreeNode("人事資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode employee = new javax.swing.tree.DefaultMutableTreeNode("員工資料表");
+//        DB_hr.add(employee);
+//        javax.swing.tree.DefaultMutableTreeNode achievement = new javax.swing.tree.DefaultMutableTreeNode("員工考績表");
+//        DB_hr.add(achievement);
+//        javax.swing.tree.DefaultMutableTreeNode attendance = new javax.swing.tree.DefaultMutableTreeNode("出缺勤表");
+//        DB_hr.add(attendance);
+//        javax.swing.tree.DefaultMutableTreeNode payRoll = new javax.swing.tree.DefaultMutableTreeNode("薪資表");
+//        DB_hr.add(payRoll);
+//        ERP.add(DB_hr); 
+//        
+//        javax.swing.tree.DefaultMutableTreeNode DB_Purchase = new javax.swing.tree.DefaultMutableTreeNode("採購資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode purchaseSheet = new javax.swing.tree.DefaultMutableTreeNode("進貨表");
+//        DB_Purchase.add(purchaseSheet);
+//        ERP.add(DB_Purchase);
+//        
+//        javax.swing.tree.DefaultMutableTreeNode DB_Product = new javax.swing.tree.DefaultMutableTreeNode("產品資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode productSheet = new javax.swing.tree.DefaultMutableTreeNode("產品資料表");
+//        DB_Product.add(productSheet);
+//        ERP.add(DB_Product);
+//   
+//        javax.swing.tree.DefaultMutableTreeNode DB_Material = new javax.swing.tree.DefaultMutableTreeNode("庫存資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode MaterialSheet = new javax.swing.tree.DefaultMutableTreeNode("原料庫存資料表");
+//        javax.swing.tree.DefaultMutableTreeNode pickingSheet = new javax.swing.tree.DefaultMutableTreeNode("領料記錄表");
+//        DB_Material.add(MaterialSheet);
+//        DB_Material.add(pickingSheet);//領料表
+//        ERP.add(DB_Material);
+//
+//        
+//        javax.swing.tree.DefaultMutableTreeNode DB_Sales = new javax.swing.tree.DefaultMutableTreeNode("銷售資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode orderList = new javax.swing.tree.DefaultMutableTreeNode("訂單資料表");
+//        javax.swing.tree.DefaultMutableTreeNode orderItem = new javax.swing.tree.DefaultMutableTreeNode("訂購項目資料表");
+//        javax.swing.tree.DefaultMutableTreeNode issue = new javax.swing.tree.DefaultMutableTreeNode("異常紀錄表");
+//        javax.swing.tree.DefaultMutableTreeNode vendor = new javax.swing.tree.DefaultMutableTreeNode("廠商資料表");
+//        DB_Sales.add(orderList);
+//        DB_Sales.add(orderItem);
+//        DB_Sales.add(issue);
+//        DB_Sales.add(vendor);
+//        ERP.add(DB_Sales);
+//        
+//        javax.swing.tree.DefaultMutableTreeNode DB_Account = new javax.swing.tree.DefaultMutableTreeNode("會計資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode payableList = new javax.swing.tree.DefaultMutableTreeNode("應付帳款管理表");
+//        javax.swing.tree.DefaultMutableTreeNode Asset = new javax.swing.tree.DefaultMutableTreeNode("資產管理表");
+//        DB_Account.add(payableList);
+//        DB_Account.add(Asset); 
+//        ERP.add(DB_Account);
+//  
+//        javax.swing.tree.DefaultMutableTreeNode DB_Customer = new javax.swing.tree.DefaultMutableTreeNode("客戶資料庫");
+//        javax.swing.tree.DefaultMutableTreeNode CustomerList = new javax.swing.tree.DefaultMutableTreeNode("客戶資料表");
+//        DB_Customer.add(CustomerList);
+//        ERP.add(DB_Customer);
+//        //(9/4)add
+//        javax.swing.tree.DefaultMutableTreeNode DB_System = new javax.swing.tree.DefaultMutableTreeNode("系統管理庫");
+//        javax.swing.tree.DefaultMutableTreeNode admin = new javax.swing.tree.DefaultMutableTreeNode("帳號管理表");
+//        javax.swing.tree.DefaultMutableTreeNode billboard = new javax.swing.tree.DefaultMutableTreeNode("公告管理表");
+//        javax.swing.tree.DefaultMutableTreeNode department = new javax.swing.tree.DefaultMutableTreeNode("部門管理表");
+//        javax.swing.tree.DefaultMutableTreeNode webnews = new javax.swing.tree.DefaultMutableTreeNode("網站新聞表");
+//        DB_System.add(admin);
+//        DB_System.add(billboard);  
+//        DB_System.add(department);
+//        DB_System.add(webnews);
+//        //報表系統
+//        javax.swing.tree.DefaultMutableTreeNode DB_Report = new javax.swing.tree.DefaultMutableTreeNode("報表系統");
+//        javax.swing.tree.DefaultMutableTreeNode salesSheet = new javax.swing.tree.DefaultMutableTreeNode("銷售報表");
+//        javax.swing.tree.DefaultMutableTreeNode profitSheet = new javax.swing.tree.DefaultMutableTreeNode("營利報表");
+//        DB_Report.add(salesSheet);
+//        DB_Report.add(profitSheet);
+//        ERP.add(DB_Report);
+//        
+//        ERP.add(DB_System);
+//        treeFolder.setModel(new javax.swing.tree.DefaultTreeModel(ERP));
+//        treeFolder.setRowHeight(30);
+//        treeFolder.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+//            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+//                treeFolderValueChanged(evt);
+//            }
+//        });
+//        jScrollPane1.setViewportView(treeFolder);
 
 		javax.swing.GroupLayout panel_folderLayout = new javax.swing.GroupLayout(panel_folder);
 		panel_folder.setLayout(panel_folderLayout);
@@ -521,6 +650,7 @@ public class erp_frame extends JFrame {
 		JToolBar.add(btnLogout);
 
 		getContentPane().add(JToolBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 980, 50));
+		treeFolder.setCellRenderer(new ErpTreeCellRenderer());
 
 		pack();
 		setLocationRelativeTo(null);

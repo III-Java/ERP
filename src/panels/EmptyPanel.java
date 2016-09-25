@@ -29,6 +29,7 @@ public class EmptyPanel extends javax.swing.JPanel {
 	public EmptyPanel(Connection con) {
 		this.con = con;
 		initComponents();
+//		init();
 		data = new LinkedList<>();
 		
 		try {
@@ -41,8 +42,16 @@ public class EmptyPanel extends javax.swing.JPanel {
 		}
 
 	}
+	
+//	private void init(){
+//		//table set background
+//		jScrollPane1.setOpaque(true);
+//		jScrollPane1.getViewport().setBackground(new java.awt.Color(245,240,243));//TABLE COLOR
+//	
+//	}
 
 	private void initComponents() {
+//		jPanel1 = new javax.swing.JPanel();
 		jPanel1 = new javax.swing.JPanel(){
     		public void paintComponent(Graphics g){
 				try {

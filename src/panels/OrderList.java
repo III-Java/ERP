@@ -40,14 +40,27 @@ public class OrderList extends javax.swing.JPanel {
     HashMap <String,String[]> member = new HashMap<>();
     private String[] statusfields = new String[]{"","新訂單","製作中","已出貨"};
     private String[] dispatchfields = new String[]{"","外送","店取"};
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+
     
-    public OrderList() {
-        initComponents();
-        setDBProp();
-        init();
-    }
+//    public OrderList() {
+//        initComponents();        
+//        setDBProp();
+//        init();
+//    }
     public OrderList(Connection conn) {
         initComponents();
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        
         this.conn = conn;
         init();
     }
@@ -332,15 +345,11 @@ public class OrderList extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
-    	ImageIcon newIcon;		
-		BufferedImage BIMG;
-		try {
-			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+ 		try {
 			Image image = newIcon.getImage();
 			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("login img xx");
 			e.printStackTrace();
 		}

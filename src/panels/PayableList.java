@@ -36,6 +36,10 @@ public class PayableList extends javax.swing.JPanel {
 			       note=null, purchaseNum=null, payDate=null, actualPayAmount=null, discount="0", payWith=null, ifClose="N";
 	private String vendorName=null, payListId=null;
 	private boolean repeatPurNum =false, editRepeat=true;
+	
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+
 
     public PayableList(Connection connection) {
     	this.conn = connection;
@@ -46,6 +50,16 @@ public class PayableList extends javax.swing.JPanel {
     	venList.add("");  purList.add(""); paywithList.add("");
     	getEmpIdlist();
         initComponents();
+        
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }    
     
 
@@ -53,17 +67,12 @@ public class PayableList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
     	jPanel1 = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			System.out.println("paint");
-    			BufferedImage BIMG;
-				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+  				try {
 	    			Image image = newIcon.getImage();
 	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("login img xx");
 					e.printStackTrace();
 				}

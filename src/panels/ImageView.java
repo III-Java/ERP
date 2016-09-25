@@ -13,6 +13,7 @@ public class ImageView extends javax.swing.JFrame {
 	private String path;
 	private static File imgFile;
 	private static BufferedImage image;
+	
     
     public ImageView(String path) {
         initComponents();

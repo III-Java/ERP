@@ -28,6 +28,9 @@ public class Issue extends javax.swing.JPanel {
 	HashMap<String, String[]> member = new HashMap<>();
 	private String issueId = new String();
 	
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+	
 	public Issue() {
 		initComponents();
 		setDBProp();
@@ -36,6 +39,16 @@ public class Issue extends javax.swing.JPanel {
 
 	public Issue(Connection conn) {
 		initComponents();
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		this.conn = conn;
 		init();
 	}
@@ -265,16 +278,12 @@ public class Issue extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
     private void initComponents() {
 		jPanel1 = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
 				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 	    			Image image = newIcon.getImage();
 	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("login img xx");
 					e.printStackTrace();
 				}

@@ -30,6 +30,8 @@ public class Billboard extends javax.swing.JPanel {
 	private String empArray[];
 	private String boardId=null, issueDate=null, announce=null, deadline=null, remark=null, 
 				   employeeNum=null, employeeName=null;
+   	private ImageIcon newIcon;
+	private BufferedImage BIMG;
 
     public Billboard(Connection connection) {
     	this.conn = connection;
@@ -38,22 +40,28 @@ public class Billboard extends javax.swing.JPanel {
     	empList.add("");
     	getEmpIdlist();
         initComponents();
+ 
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
     	jPanel1 = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
 				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 	    			Image image = newIcon.getImage();
 	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("login img xx");
 					e.printStackTrace();
 				}

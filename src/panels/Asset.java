@@ -35,6 +35,10 @@ public class Asset extends javax.swing.JPanel {
 	private String assetId =null, assetName=null, qty=null, value=null, buyDate=null,
 			       note=null, depAsset=null, lifespan=null;
 	
+	private ImageIcon newIcon;
+	private BufferedImage BIMG;
+
+	
     public Asset(Connection connection) {
     	this.conn = connection;
 //    	databaseConnect();
@@ -42,6 +46,15 @@ public class Asset extends javax.swing.JPanel {
     	depList.add("");
     	getEmpIdlist();
         initComponents();
+        
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
 
     @SuppressWarnings("unchecked")
@@ -49,16 +62,12 @@ public class Asset extends javax.swing.JPanel {
     private void initComponents() {
     	//add bg
     	jPanel2 = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
 				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 	    			Image image = newIcon.getImage();
 	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("login img xx");
 					e.printStackTrace();
 				}

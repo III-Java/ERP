@@ -22,24 +22,34 @@ public class EmptyPanel extends javax.swing.JPanel {
 	private String[] billboardFields = { "公告日期", "內容"};
 	private LinkedList<String[]> data;
 	private myTableModel tableModel;
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+
+	
 	public EmptyPanel(Connection con) {
 		this.con = con;
 		initComponents();
 		data = new LinkedList<>();
+		
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	private void initComponents() {
 		jPanel1 = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
 				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 	    			Image image = newIcon.getImage();
 	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("login img xx");
 					e.printStackTrace();
 				}

@@ -250,6 +250,10 @@ public class erp_frame extends JFrame {
 		btnDelete = new javax.swing.JButton();
 		btnLogout = new javax.swing.JButton();
 		
+		//treefolder set color
+		treeFolder.setOpaque(true);
+		treeFolder.setBackground(new java.awt.Color(240,226,218));
+		
 		//不可換欄位9/4
 		table_firmData.getTableHeader().setReorderingAllowed(false);
 		// 9/4後面其它欄位寬度不隨著調整，出現水平卷軸

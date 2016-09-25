@@ -58,20 +58,33 @@ public class SalesReport extends javax.swing.JPanel {
     private LinkedList<String[]> data = new LinkedList<String[]>();
     private String[] datas = new String[5];
     
-    public SalesReport() {
-        initComponents();
-        init();
-        setDBProp();
-        orderList = selectOrderList(); 
-        setDefault();
-        selectAttendance();
-    }
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+
+    
+//    public SalesReport() {
+//        initComponents();
+//
+//        init();
+//        setDBProp();
+//        orderList = selectOrderList(); 
+//        setDefault();
+//        selectAttendance();
+//    }
     
     public SalesReport(Connection conn) {
         initComponents();
+        try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         init();
         this.conn = conn;
-        setDBProp();
+//        setDBProp();
         orderList = selectOrderList(); 
         setDefault();
         selectAttendance();
@@ -364,16 +377,12 @@ public class SalesReport extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
     	jPanel1 = new javax.swing.JPanel(){
-    		ImageIcon newIcon;
     		public void paintComponent(Graphics g){
-    			BufferedImage BIMG;
 				try {
-					BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-					newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 	    			Image image = newIcon.getImage();
 	    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("login img xx");
 					e.printStackTrace();
 				}

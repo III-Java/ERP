@@ -33,25 +33,34 @@ public class Employee extends javax.swing.JPanel {
 	private Connection con;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	private ImageIcon newIcon;
+	private BufferedImage BIMG;
+
 	
 	public Employee(Connection con) {
 		this.con = con;
 		initComponents();
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		getDepartments();
 		cbDepartment.setModel(new DefaultComboBoxModel(getDepartments()));
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		ImageIcon newIcon;
-		BufferedImage BIMG;
 		try {
-			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 			Image image = newIcon.getImage();
 			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("login img xx");
 			e.printStackTrace();
 		}	    		

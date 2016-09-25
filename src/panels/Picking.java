@@ -34,6 +34,10 @@ public class Picking extends javax.swing.JPanel {
 	private String employeeN=null, materialN=null;
 	private boolean noStock =false;
 	private int editchangeQty=0, editQty=0;
+	
+	ImageIcon newIcon;
+	BufferedImage BIMG;
+
 		
     public Picking(Connection connection) {
     	this.conn = connection;
@@ -44,6 +48,15 @@ public class Picking extends javax.swing.JPanel {
     	matList.add("");
     	getIdtoCombolist();//抓到資料庫id資料塞入list
         initComponents();
+		try {
+			BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
+			newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
     //領料記錄表
     
@@ -51,16 +64,12 @@ public class Picking extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 		 jPanel1 = new javax.swing.JPanel(){
-	    		ImageIcon newIcon;
 	    		public void paintComponent(Graphics g){
-	    			BufferedImage BIMG;
 					try {
-						BIMG = ImageIO.read(Login.class.getResource("/panelBG.jpg"));
-						newIcon = new ImageIcon(new ImageIcon(BIMG).getImage().getScaledInstance(980, 470, Image.SCALE_DEFAULT));
 		    			Image image = newIcon.getImage();
 		    			g.drawImage(image, 0, 0, this.getSize().width, this.getSize().height, this);
 
-					} catch (IOException e) {
+					} catch (Exception e) {
 						System.out.println("login img xx");
 						e.printStackTrace();
 					}
